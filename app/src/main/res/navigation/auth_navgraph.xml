@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_navgraph"
+    app:startDestination="@id/authFragment">
+
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.neocafe.neocafe.fragments.AuthFragment"
+        android:label="fragment_auth"
+        tools:layout="@layout/fragment_auth" >
+        <action
+            android:id="@+id/action_authFragment_to_phoneNumberFragment"
+            app:destination="@id/phoneNumberFragment" />
+        <action
+            android:id="@+id/action_authFragment_to_birthDateFragment"
+            app:destination="@id/birthDateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/phoneNumberFragment"
+        android:name="com.neocafe.neocafe.fragments.login.PhoneNumberFragment"
+        android:label="fragment_phone_number"
+        tools:layout="@layout/fragment_phone_number" >
+        <action
+            android:id="@+id/action_phoneNumberFragment_to_otpLoginFragment"
+            app:destination="@id/otpLoginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/otpLoginFragment"
+        android:name="com.neocafe.neocafe.fragments.login.OTPLoginFragment"
+        android:label="fragment_otp_login"
+        tools:layout="@layout/fragment_otp_login" />
+    <fragment
+        android:id="@+id/birthDateFragment"
+        android:name="com.neocafe.neocafe.fragments.registration.BirthDateFragment"
+        android:label="fragment_birth_date"
+        tools:layout="@layout/fragment_birth_date" >
+        <action
+            android:id="@+id/action_birthDateFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.neocafe.neocafe.fragments.registration.RegistrationFragment"
+        android:label="fragment_registration"
+        tools:layout="@layout/fragment_registration" >
+        <action
+            android:id="@+id/action_registrationFragment_to_otpLoginFragment"
+            app:destination="@id/otpLoginFragment" />
+    </fragment>
+
+</navigation>
