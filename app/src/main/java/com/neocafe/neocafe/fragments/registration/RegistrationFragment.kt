@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.databinding.FragmentRegistrationBinding
+import com.neocafe.neocafe.utils.Countries
+import com.neocafe.neocafe.utils.SpinnerAdapter
 
 class RegistrationFragment : Fragment() {
 
@@ -24,12 +26,16 @@ class RegistrationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        spinnerCountryCode()
         binding.getCodeBtn.setOnClickListener {
             findNavController().navigate(R.id.action_registrationFragment_to_otpLoginFragment)
         }
         binding.arrowBack.setOnClickListener { findNavController().navigateUp() }
     }
 
-
+    private fun spinnerCountryCode() {
+        val spinnerAdapter = SpinnerAdapter(requireContext(), Countries.countries)
+        binding.countryCode.adapter = spinnerAdapter
+    }
 
 }

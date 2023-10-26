@@ -71,7 +71,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout3"
+        android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -79,22 +79,34 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/edit_text_rounded"
         android:backgroundTint="@color/empty_field"
-        android:textColorHint="@color/hint_color"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp"
-        app:hintEnabled="false"
+        app:hintTextColor="@color/hint_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phoneNumber"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/phone_icon"
-            android:drawablePadding="15dp"
-            android:hint="555 555 555"
-            android:inputType="phone|number" />
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/countryCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="-20dp"
+                android:background="#00000000" />
+
+            <com.vicmikhailau.maskededittext.MaskedEditText
+                android:id="@+id/phoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="555 555 555"
+                android:inputType="phone|number"
+                app:mask="### ### ###" />
+
+        </LinearLayout>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -112,7 +124,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
 
 

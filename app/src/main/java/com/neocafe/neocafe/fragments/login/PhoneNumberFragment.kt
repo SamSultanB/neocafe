@@ -27,9 +27,7 @@ class PhoneNumberFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val spinnerAdapter = SpinnerAdapter(requireContext(), Countries.countries)
-        binding.countryCode.adapter = spinnerAdapter
+        spinnerCountryCode()
         binding.arrowBack.setOnClickListener {
             findNavController().navigateUp()
         }
@@ -37,6 +35,11 @@ class PhoneNumberFragment : Fragment() {
         binding.getCodeBtn.setOnClickListener {
             findNavController().navigate(R.id.action_phoneNumberFragment_to_otpLoginFragment)
         }
+    }
+
+    private fun spinnerCountryCode() {
+        val spinnerAdapter = SpinnerAdapter(requireContext(), Countries.countries)
+        binding.countryCode.adapter = spinnerAdapter
     }
 
 }
