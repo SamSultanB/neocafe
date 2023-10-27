@@ -5,4 +5,5 @@
     <color name="button_background">#FF8B5C</color>
     <color name="empty_field">#EDEDED</color>
     <color name="hint_color">#C2C1C3</color>
+    <color name="error">#FF4D4C</color>
 </resources>
