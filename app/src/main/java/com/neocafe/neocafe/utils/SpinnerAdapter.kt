@@ -11,6 +11,7 @@ import com.neocafe.neocafe.R
 
 class SpinnerAdapter(val context: Context, val items: Array<SpinnerItem>) : BaseAdapter() {
 
+    private var opened = false;
 
     override fun getCount(): Int {
         return items.size
@@ -28,12 +29,12 @@ class SpinnerAdapter(val context: Context, val items: Array<SpinnerItem>) : Base
         val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.spinner_item, parent, false)
 
         val iconImageView: ImageView = view.findViewById(R.id.countryFlag)
-        val textTextView: TextView = view.findViewById(R.id.countryCode)
 
         val item = items[position]
         iconImageView.setImageResource(item.iconResourceId)
-        textTextView.text = item.text
 
         return view
     }
+
+
 }

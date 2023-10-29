@@ -67,7 +67,6 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/edit_text_rounded"
         android:backgroundTint="@color/empty_field"
-        app:hintTextColor="@color/hint_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/errorText">
@@ -83,13 +82,21 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="15dp"
-                android:layout_marginEnd="-20dp"
                 android:background="#00000000" />
+
+            <TextView
+                android:id="@+id/chosen_country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+996"
+                android:layout_marginEnd="-10dp"
+                android:textSize="17sp"/>
 
             <com.vicmikhailau.maskededittext.MaskedEditText
                 android:id="@+id/phoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/hint_color"
                 android:hint="555 555 555"
                 android:inputType="phone|number"
                 app:mask="### ### ###" />

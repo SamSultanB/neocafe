@@ -68,7 +68,6 @@
         app:hintEnabled="false"
         android:background="@drawable/edit_text_rounded"
         android:backgroundTint="@color/empty_field"
-        android:textColorHint="@color/hint_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instruction">
@@ -81,7 +80,8 @@
             android:drawablePadding="15dp"
             android:inputType="date"
             android:hint="01.01.1991"
-            app:mask="##*##*####" />
+            android:textColorHint="@color/hint_color"
+            app:mask="##.##.####" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
