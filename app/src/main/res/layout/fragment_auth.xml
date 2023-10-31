@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.AuthFragment">
+    tools:context=".fragments.auth.AuthFragment">
 
     <ImageView
         android:id="@+id/imageView"
@@ -41,7 +41,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/empty_field"
+        android:backgroundTint="@color/edit_text_background"
         android:paddingVertical="20dp"
         android:text="Регистрация"
         android:textColor="@color/black"

@@ -1,4 +1,4 @@
-package com.neocafe.neocafe.fragments.registration
+package com.neocafe.neocafe.fragments.auth.registration
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

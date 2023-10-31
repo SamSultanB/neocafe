@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.registration.RegistrationFragment">
+    tools:context=".fragments.auth.registration.RegistrationFragment">
 
     <ImageButton
         android:id="@+id/arrowBack"
@@ -49,8 +49,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/edit_text_rounded"
-        android:backgroundTint="@color/empty_field"
+        android:background="@drawable/rounded_edit_text"
+        android:backgroundTint="@color/edit_text_background"
         android:textColorHint="@color/hint_color"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
@@ -77,8 +77,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/edit_text_rounded"
-        android:backgroundTint="@color/empty_field"
+        android:background="@drawable/rounded_edit_text"
+        android:backgroundTint="@color/edit_text_background"
         app:hintTextColor="@color/hint_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

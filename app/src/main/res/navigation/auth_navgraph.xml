@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/authFragment"
-        android:name="com.neocafe.neocafe.fragments.AuthFragment"
+        android:name="com.neocafe.neocafe.fragments.auth.AuthFragment"
         android:label="fragment_auth"
         tools:layout="@layout/fragment_auth" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/phoneNumberFragment"
-        android:name="com.neocafe.neocafe.fragments.login.PhoneNumberFragment"
+        android:name="com.neocafe.neocafe.fragments.auth.login.PhoneNumberFragment"
         android:label="fragment_phone_number"
         tools:layout="@layout/fragment_phone_number" >
         <action
@@ -28,12 +28,12 @@
     </fragment>
     <fragment
         android:id="@+id/otpLoginFragment"
-        android:name="com.neocafe.neocafe.fragments.login.OTPLoginFragment"
+        android:name="com.neocafe.neocafe.fragments.auth.login.OTPLoginFragment"
         android:label="fragment_otp_login"
         tools:layout="@layout/fragment_otp_login" />
     <fragment
         android:id="@+id/birthDateFragment"
-        android:name="com.neocafe.neocafe.fragments.registration.BirthDateFragment"
+        android:name="com.neocafe.neocafe.fragments.auth.registration.BirthDateFragment"
         android:label="fragment_birth_date"
         tools:layout="@layout/fragment_birth_date" >
         <action
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.neocafe.neocafe.fragments.registration.RegistrationFragment"
+        android:name="com.neocafe.neocafe.fragments.auth.registration.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" >
         <action

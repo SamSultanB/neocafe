@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_navgraph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navgraph"
+    app:startDestination="@id/mainPageFragment">
 
+    <fragment
+        android:id="@+id/mainPageFragment"
+        android:name="com.neocafe.neocafe.fragments.main.MainPageFragment"
+        android:label="fragment_main_page"
+        tools:layout="@layout/fragment_main_page" />
+    <fragment
+        android:id="@+id/basketFragment"
+        android:name="com.neocafe.neocafe.fragments.basket.BasketFragment"
+        android:label="fragment_basket"
+        tools:layout="@layout/fragment_basket" />
+    <fragment
+        android:id="@+id/filialsFragment"
+        android:name="com.neocafe.neocafe.fragments.filial.FilialsFragment"
+        android:label="fragment_filials"
+        tools:layout="@layout/fragment_filials" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.neocafe.neocafe.fragments.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
