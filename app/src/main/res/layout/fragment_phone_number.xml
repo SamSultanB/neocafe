@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/arrowBack"
+        android:id="@+id/arrowBackBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -29,12 +29,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/todo"
+        android:id="@+id/toDoTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:text="Вход"
-        android:textColor="@color/black"
+        android:text="@string/entrance"
+        android:textColor="@color/client_main"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/appIcon" />
 
     <TextView
-        android:id="@+id/errorText"
+        android:id="@+id/errorTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -56,7 +56,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/todo" />
+        app:layout_constraintTop_toBottomOf="@+id/toDoTxt" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -69,7 +69,7 @@
         android:backgroundTint="@color/edit_text_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/errorText">
+        app:layout_constraintTop_toBottomOf="@+id/errorTxt">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -88,16 +88,18 @@
                 android:id="@+id/chosen_country"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+996"
+                android:text="@string/initial_country_code"
+                android:textColor="@color/client_main"
                 android:layout_marginEnd="-10dp"
                 android:textSize="17sp"/>
 
             <com.vicmikhailau.maskededittext.MaskedEditText
-                android:id="@+id/phoneNumber"
+                android:id="@+id/phoneNumberEditTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/hint_color"
-                android:hint="555 555 555"
+                android:hint="@string/initial_phone_hint"
+                android:textColor="@color/client_main"
                 android:inputType="phone|number"
                 app:mask="### ### ###" />
 
@@ -106,7 +108,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/get_code_btn"
+        android:id="@+id/getCodeBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

@@ -35,7 +35,7 @@ class RegistrationFragment : Fragment() {
         binding.getCodeBtn.setOnClickListener {
             findNavController().navigate(R.id.action_registrationFragment_to_otpLoginFragment)
         }
-        binding.arrowBack.setOnClickListener { findNavController().navigateUp() }
+        binding.arrowBackBtn.setOnClickListener { findNavController().navigateUp() }
 
 
     }
@@ -45,8 +45,8 @@ class RegistrationFragment : Fragment() {
             override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
                 val selectedValue: SpinnerItem = parentView?.getItemAtPosition(position) as SpinnerItem
                 binding.chosenCountry.text = selectedValue.countryCode
-                binding.phoneNumber.hint = selectedValue.hint
-                binding.phoneNumber.setMask(selectedValue.mask)
+                binding.phoneNumberEditTxt.hint = selectedValue.hint
+                binding.phoneNumberEditTxt.setMask(selectedValue.mask)
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 binding.chosenCountry.text = "+996"

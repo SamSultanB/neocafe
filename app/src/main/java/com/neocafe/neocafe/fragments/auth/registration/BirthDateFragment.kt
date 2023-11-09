@@ -27,7 +27,7 @@ class BirthDateFragment : Fragment() {
         binding.continueBtn.setOnClickListener {
             findNavController().navigate(R.id.action_birthDateFragment_to_registrationFragment)
         }
-        binding.arrowBack.setOnClickListener { findNavController().navigateUp() }
+        binding.arrowBackBtn.setOnClickListener { findNavController().navigateUp() }
     }
 
 }

@@ -9,7 +9,11 @@
         android:id="@+id/mainPageFragment"
         android:name="com.neocafe.neocafe.fragments.main.MainPageFragment"
         android:label="fragment_main_page"
-        tools:layout="@layout/fragment_main_page" />
+        tools:layout="@layout/fragment_main_page" >
+        <action
+            android:id="@+id/action_mainPageFragment_to_menuPageFragment"
+            app:destination="@id/menuPageFragment" />
+    </fragment>
     <fragment
         android:id="@+id/basketFragment"
         android:name="com.neocafe.neocafe.fragments.basket.BasketFragment"
@@ -25,4 +29,18 @@
         android:name="com.neocafe.neocafe.fragments.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/menuPageFragment"
+        android:name="com.neocafe.neocafe.fragments.main.MenuPageFragment"
+        android:label="fragment_menu_page"
+        tools:layout="@layout/fragment_menu_page" >
+        <action
+            android:id="@+id/action_menuPageFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.neocafe.neocafe.fragments.main.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" />
 </navigation>

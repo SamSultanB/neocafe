@@ -7,7 +7,7 @@
     tools:context=".fragments.auth.registration.RegistrationFragment">
 
     <ImageButton
-        android:id="@+id/arrowBack"
+        android:id="@+id/arrowBackBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -28,13 +28,13 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/registrationText"
+        android:id="@+id/registrationTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
-        android:text="Регистрация"
-        android:textColor="@color/black"
+        android:text="@string/registration"
+        android:textColor="@color/client_main"
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,15 +57,15 @@
         app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registrationText">
+        app:layout_constraintTop_toBottomOf="@+id/registrationTxt">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/userName"
+            android:id="@+id/userNameEditTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/phone_icon"
+            android:drawableStart="@drawable/phone_icon"
             android:drawablePadding="15dp"
-            android:hint="Name"
+            android:hint="@string/name"
             android:inputType="text"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -102,14 +102,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="-10dp"
-                android:text="+996"
+                android:text="@string/initial_country_code"
+                android:textColor="@color/client_main"
                 android:textSize="17sp" />
 
             <com.vicmikhailau.maskededittext.MaskedEditText
-                android:id="@+id/phoneNumber"
+                android:id="@+id/phoneNumberEditTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="555 555 555"
+                android:hint="@string/initial_phone_hint"
+                android:textColor="@color/client_main"
                 android:inputType="phone|number"
                 app:mask="### ### ###" />
 
@@ -119,7 +121,7 @@
 
 
     <Button
-        android:id="@+id/get_code_btn"
+        android:id="@+id/getCodeBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

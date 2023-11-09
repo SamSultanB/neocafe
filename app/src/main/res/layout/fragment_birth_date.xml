@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/arrowBack"
+        android:id="@+id/arrowBackBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -29,13 +29,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/registrationText"
+        android:id="@+id/registrationTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
-        android:text="Регистрация"
-        android:textColor="@color/black"
+        android:text="@string/registration"
+        android:textColor="@color/client_main"
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,17 +44,18 @@
         app:layout_constraintTop_toBottomOf="@+id/appIcon" />
 
     <TextView
-        android:id="@+id/instruction"
+        android:id="@+id/instructionTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:text="Введите дату рождения для последующих персональных скидок"
+        android:text="@string/help_text"
+        android:textColor="@color/client_main"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registrationText" />
+        app:layout_constraintTop_toBottomOf="@+id/registrationTxt" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
@@ -70,23 +71,23 @@
         android:backgroundTint="@color/edit_text_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/instruction">
+        app:layout_constraintTop_toBottomOf="@+id/instructionTxt">
 
         <com.vicmikhailau.maskededittext.MaskedEditText
-            android:id="@+id/birthdate"
+            android:id="@+id/birthdateEditTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/calendar_icon"
             android:drawablePadding="15dp"
             android:inputType="date"
-            android:hint="01.01.1991"
+            android:hint="@string/hint_date"
             android:textColorHint="@color/hint_color"
             app:mask="##.##.####" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/continue_btn"
+        android:id="@+id/continueBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -100,19 +101,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
-    <TextView
-        android:id="@+id/dismiss_btn"
+    <Button
+        android:id="@+id/dismissBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="124dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="124dp"
-        android:text="Пропустить"
+        android:text="@string/miss"
         android:textSize="14sp"
         android:textColor="@color/hint_color"
+        android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/continue_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/continueBtn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

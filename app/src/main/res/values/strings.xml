@@ -5,6 +5,32 @@
     <string name="sign_in">Войти</string>
     <string name="get_code">Получить код</string>
     <string name="numberNotFound">Номер телефона введён неверно, попробуйте еще раз</string>
+    <string name="registration">Регистрация</string>
+    <string name="help_text">Введите дату рождения для последующих персональных скидок</string>
+    <string name="hint_date">01.01.1991</string>
+    <string name="miss">Пропустить</string>
+    <string name="welcome">Добро пожаловать!</string>
+    <string name="our_menu">Наше меню</string>
+    <string name="popular">Популярное</string>
+    <string name="otp_help_text">Введите 4-х значный код, отправленный на номер</string>
+    <string name="resend">Отправить еще раз</string>
+    <string name="initial_phone_hint">555 555 555</string>
+    <string name="initial_country_code">+996</string>
+    <string name="name">Name</string>
+    <string name="menu">Меню</string>
+    <string name="entrance">Вход</string>
+    <string name="example_type">Капучино</string>
+    <string name="example_description">Капучи́но — кофейный напиток итальянской кухни на основе эспрессо с добавлением в него подогретого вспененного молока</string>
+    <string name="add">Добавить</string>
+    <string name="_140_c">140 c</string>
+    <string name="additions_text">Приятное дополнение</string>
+    <string name="caramel">Карамельный</string>
+    <string name="sirops">Сиропы</string>
+    <string name="SoyaMilk">Соевое молоко</string>
+    <string name="sheepMilk">Овсяное молоко</string>
+    <string name="cowMilk">Коровье молоко</string>
+    <string name="milk">Молоко</string>
+    <string name="category">Category</string>
     <string-array name="country">
         <item>KG</item>
         <item>USA</item>

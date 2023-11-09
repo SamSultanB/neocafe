@@ -25,7 +25,7 @@ class OTPLoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.arrowBack.setOnClickListener { findNavController().navigateUp() }
+        binding.arrowBackBtn.setOnClickListener { findNavController().navigateUp() }
         binding.signInBtn.setOnClickListener {
             val intent = Intent(this.activity, MainActivity::class.java)
             startActivity(intent)

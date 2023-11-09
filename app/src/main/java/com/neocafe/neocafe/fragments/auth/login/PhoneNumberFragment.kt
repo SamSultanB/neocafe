@@ -32,7 +32,7 @@ class PhoneNumberFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         spinnerCountryCode()
         setCountryCode()
-        binding.arrowBack.setOnClickListener {
+        binding.arrowBackBtn.setOnClickListener {
             findNavController().navigateUp()
         }
         binding.getCodeBtn.setOnClickListener {
@@ -47,8 +47,8 @@ class PhoneNumberFragment : Fragment() {
             override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
                 val selectedValue: SpinnerItem = parentView?.getItemAtPosition(position) as SpinnerItem
                 binding.chosenCountry.text = selectedValue.countryCode
-                binding.phoneNumber.hint = selectedValue.hint
-                binding.phoneNumber.setMask(selectedValue.mask)
+                binding.phoneNumberEditTxt.hint = selectedValue.hint
+                binding.phoneNumberEditTxt.setMask(selectedValue.mask)
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 binding.chosenCountry.text = "+996"

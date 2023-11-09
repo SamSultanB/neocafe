@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/arrowBack"
+        android:id="@+id/arrowBackBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -29,15 +29,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/todo"
+        android:id="@+id/todoTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="34dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="34dp"
-        android:text="Введите 4-х значный код, отправленный на номер"
+        android:text="@string/otp_help_text"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/client_main"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/todo"
+        app:layout_constraintTop_toBottomOf="@+id/todoTxt"
         app:layout_constraintVertical_bias="0.0">
 
         <EditText
@@ -102,7 +102,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/sign_in_btn"
+        android:id="@+id/signInBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -116,19 +116,20 @@
         app:layout_constraintStart_toStartOf="@+id/otp_container"
         app:layout_constraintTop_toBottomOf="@+id/otp_container" />
 
-    <TextView
-        android:id="@+id/resend_code"
+    <Button
+        android:id="@+id/resendCodeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="99dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="99dp"
-        android:text="Отправить еще раз"
+        android:text="@string/resend"
+        android:backgroundTint="@color/white"
         android:textSize="14sp"
         android:textColor="@color/hint_color"
-        app:layout_constraintEnd_toEndOf="@+id/sign_in_btn"
-        app:layout_constraintStart_toStartOf="@+id/sign_in_btn"
-        app:layout_constraintTop_toBottomOf="@+id/sign_in_btn" />
+        app:layout_constraintEnd_toEndOf="@+id/signInBtn"
+        app:layout_constraintStart_toStartOf="@+id/signInBtn"
+        app:layout_constraintTop_toBottomOf="@+id/signInBtn" />
 
 
 

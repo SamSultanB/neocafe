@@ -5,27 +5,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import com.neocafe.neocafe.R
-import com.neocafe.neocafe.databinding.FragmentMainPageBinding
+import com.neocafe.neocafe.databinding.FragmentDetailsBinding
 
-class MainPageFragment : Fragment() {
+class DetailsFragment : Fragment() {
 
-    private lateinit var binding: FragmentMainPageBinding
+    private lateinit var binding: FragmentDetailsBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentMainPageBinding.inflate(layoutInflater, container, false)
+        binding = FragmentDetailsBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.moreBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_mainPageFragment_to_menuPageFragment)
-        }
     }
 
 }
