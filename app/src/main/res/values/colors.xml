@@ -9,4 +9,5 @@
     <color name="searchbar_background">#F2F2F2</color>
     <color name="menu_item_price">#FF8B5C</color>
     <color name="client_main">#283952</color>
+    <color name="client_second">#FFE074</color>
 </resources>
