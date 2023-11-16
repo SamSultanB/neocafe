@@ -1,8 +1,7 @@
 package com.neocafe.neocafe.models.api.retrofit
 
-import com.neocafe.neocafe.models.api.api.AuthApi
+import com.neocafe.neocafe.models.api.connections.AuthApi
 import com.neocafe.neocafe.utils.Constants
-import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -20,12 +19,11 @@ class RetrofitInstance {
             Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
-//                .client(okHttpClient)
                 .build()
 
         }
 
-        val apiAuth by lazy {
+        val authApi by lazy {
             retrofit.create(AuthApi::class.java)
         }
 

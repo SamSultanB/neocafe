@@ -1,13 +1,18 @@
 package com.neocafe.neocafe.fragments.auth.registration
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.databinding.FragmentBirthDateBinding
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class BirthDateFragment : Fragment() {
 
@@ -25,9 +30,27 @@ class BirthDateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.continueBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_birthDateFragment_to_registrationFragment)
+            val birthdate = binding.birthdateEditTxt.text.toString()
+            Toast.makeText(requireContext(), birthdate, Toast.LENGTH_SHORT).show()
+            if(!isValidDate(birthdate) && !birthdate.isEmpty()){
+                binding.instructionTxt.text = "Неправильная дата рождения"
+                binding.instructionTxt.setTextColor(Color.RED)
+            }else{
+                findNavController().navigate(R.id.action_birthDateFragment_to_registrationFragment)
+            }
         }
         binding.arrowBackBtn.setOnClickListener { findNavController().navigateUp() }
+    }
+
+    private fun isValidDate(date: String): Boolean {
+        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        return try {
+            dateFormat.isLenient = false
+            dateFormat.parse(date)
+            true
+        } catch (e: ParseException) {
+            false
+        }
     }
 
 }

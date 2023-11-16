@@ -18,6 +18,7 @@ import com.neocafe.neocafe.viewModels.AuthViewModel
 class OTPLoginFragment : Fragment() {
 
     private lateinit var binding: FragmentOtpLoginBinding
+    private val viewModel = AuthViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,28 +32,17 @@ class OTPLoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val type = arguments?.getString("key")
-        val viewModel = AuthViewModel()
 
         binding.arrowBackBtn.setOnClickListener { findNavController().navigateUp() }
         binding.signInBtn.setOnClickListener {
-            val otpCode = (binding.inputCode1.text.toString() + binding.inputCode2.text.toString() + binding.inputCode3.text.toString() + binding.inputCode4.text.toString()).toInt()
-            if(type == "register"){
-                viewModel.otpCheck(OTPForm(otpCode))
-            }else if(type == "login"){
-                viewModel.otpLoginCheck(OTPForm(otpCode))
-            }
+            otpCheckRequest(type!!)
         }
+        otpLoginResponse()
+        otpResponse()
+    }
 
-        viewModel.otpResponse.observe(viewLifecycleOwner, Observer {
-            if(it is Resource.Success){
-                val intent = Intent(this.activity, MainActivity::class.java)
-                startActivity(intent)
-                activity?.finish()
-            }else if(it is Resource.Error){
-                Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-            }
-        })
 
+    private fun otpLoginResponse(){
         viewModel.otpLoginResponse.observe(viewLifecycleOwner, Observer{
             if(it is Resource.Success){
                 val intent = Intent(this.activity, MainActivity::class.java)
@@ -62,7 +52,27 @@ class OTPLoginFragment : Fragment() {
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
             }
         })
+    }
 
+    private fun otpResponse(){
+        viewModel.otpResponse.observe(viewLifecycleOwner, Observer {
+            if(it is Resource.Success){
+                val intent = Intent(this.activity, MainActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
+            }else if(it is Resource.Error){
+                Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun otpCheckRequest(type: String){
+        val otpCode = (binding.inputCode1.text.toString() + binding.inputCode2.text.toString() + binding.inputCode3.text.toString() + binding.inputCode4.text.toString()).toInt()
+        if(type == "register"){
+            viewModel.otpCheck(OTPForm(otpCode))
+        }else if(type == "login"){
+            viewModel.otpLoginCheck(OTPForm(otpCode))
+        }
     }
 
 }

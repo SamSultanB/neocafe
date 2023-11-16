@@ -1,4 +1,4 @@
-package com.neocafe.neocafe.models.api.api
+package com.neocafe.neocafe.models.api.connections
 
 import com.neocafe.neocafe.models.entities.LoginForm
 import com.neocafe.neocafe.models.entities.OTPForm
@@ -16,10 +16,10 @@ interface AuthApi {
     @POST("/api-customers/otp-check")
     suspend fun otpCheck(@Body otpForm: OTPForm): Response<TokenRefresh>
 
-    @POST("/api-customers/login")
+    @POST("api-customers/login")
     suspend fun login(@Body loginForm: LoginForm): Response<LoginForm>
 
-    @POST("/api-customers/login-otp-check")
+    @POST("api-customers/login-otp-check")
     suspend fun otpLoginCheck(@Body otpForm: OTPForm): Response<TokenRefresh>
 
 }

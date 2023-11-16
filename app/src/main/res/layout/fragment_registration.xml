@@ -128,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/initial_phone_hint"
                 android:textColor="@color/client_main"
-                android:inputType="phone|number"
+                android:inputType="number"
                 app:mask="### ### ###" />
 
         </LinearLayout>

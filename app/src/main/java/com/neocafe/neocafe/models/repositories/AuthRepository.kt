@@ -7,7 +7,7 @@ import com.neocafe.neocafe.models.entities.RegistrationForm
 
 class AuthRepository {
 
-    val authApi = RetrofitInstance.apiAuth
+    private val authApi = RetrofitInstance.authApi
 
     suspend fun register(registrationForm: RegistrationForm) = authApi.register(registrationForm)
 

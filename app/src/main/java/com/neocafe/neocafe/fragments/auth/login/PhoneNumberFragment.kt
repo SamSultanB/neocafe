@@ -23,6 +23,7 @@ class PhoneNumberFragment : Fragment() {
 
     private lateinit var binding: FragmentPhoneNumberBinding
     private lateinit var spinnerAdapter: SpinnerAdapter
+    private val viewModel = AuthViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,25 +36,28 @@ class PhoneNumberFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewModel = AuthViewModel()
         spinnerCountryCode()
         setCountryCode()
         binding.arrowBackBtn.setOnClickListener {
             findNavController().navigateUp()
         }
         binding.getCodeBtn.setOnClickListener {
-            val editText = binding.phoneNumberEditTxt.text.toString()
-            val maskText = binding.phoneNumberEditTxt.maskString.toString()
-            if (viewModel.validPhoneNumber(editText.length, maskText.length) == null){
-                findNavController().navigate(R.id.action_phoneNumberFragment_to_otpLoginFragment)
-            }else{
-                binding.errorTxt.visibility = View.VISIBLE
-                binding.phoneNumberEditTxt.setTextColor(Color.RED)
-                binding.chosenCountry.setTextColor(Color.RED)
-                binding.errorTxt.text = viewModel.validPhoneNumber(editText.length, maskText.length)
-            }
+            loginRequest()
         }
 
+    }
+
+    private fun loginRequest(){
+        val editText = binding.phoneNumberEditTxt.text.toString()
+        val maskText = binding.phoneNumberEditTxt.maskString.toString()
+        if (viewModel.validPhoneNumber(editText.length, maskText.length) == null){
+            findNavController().navigate(R.id.action_phoneNumberFragment_to_otpLoginFragment)
+        }else{
+            binding.errorTxt.visibility = View.VISIBLE
+            binding.phoneNumberEditTxt.setTextColor(Color.RED)
+            binding.chosenCountry.setTextColor(Color.RED)
+            binding.errorTxt.text = viewModel.validPhoneNumber(editText.length, maskText.length)
+        }
     }
 
 

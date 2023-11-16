@@ -1,5 +1,6 @@
 package com.neocafe.neocafe.fragments.auth.registration
 
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,6 +23,7 @@ class RegistrationFragment : Fragment() {
 
     private lateinit var binding: FragmentRegistrationBinding
     private lateinit var spinnerAdapter: SpinnerAdapter
+    val viewModel = AuthViewModel()
 
 
     override fun onCreateView(
@@ -35,37 +37,42 @@ class RegistrationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewModel = AuthViewModel()
         spinnerCountryCode()
         setCountryCode()
         binding.getCodeBtn.setOnClickListener {
-            val number = binding.phoneNumberEditTxt.text.toString()
-            val maskNumber = binding.phoneNumberEditTxt.maskString.toString()
-            val userName = binding.userNameEditTxt.text.toString()
-            if(viewModel.validPhoneNumber(number.length, maskNumber.length) == null && !userName.isEmpty()){
-                val userNumber = (binding.chosenCountry.text.toString()+number).replace(" ".toRegex(), "")
-                val registrationForm = RegistrationForm(userName, userNumber, null)
-                viewModel.registration(registrationForm)
-                Toast.makeText(requireContext(), userNumber, Toast.LENGTH_SHORT).show()
-            }else{
-                binding.errorTxt.visibility = View.VISIBLE
-            }
+            registrationRequest()
         }
-
-       viewModel.registrationResponse.observe(viewLifecycleOwner, Observer {
-           if(it is Resource.Success){
-               val bundle = Bundle()
-               bundle.putString("key", "register")
-               findNavController().navigate(R.id.action_registrationFragment_to_otpLoginFragment, bundle)
-           }else if(it is Resource.Error){
-               Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-           }
-       })
+        registrationResponse()
         binding.arrowBackBtn.setOnClickListener { findNavController().navigateUp() }
-
-
     }
 
+    fun registrationResponse(){
+        viewModel.registrationResponse.observe(viewLifecycleOwner, Observer {
+            if(it is Resource.Success){
+                val bundle = Bundle()
+                bundle.putString("key", "register")
+                findNavController().navigate(R.id.action_registrationFragment_to_otpLoginFragment, bundle)
+            }else if(it is Resource.Error){
+                println(it.message)
+                Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
+    fun registrationRequest(){
+        val number = binding.phoneNumberEditTxt.text.toString()
+        val maskNumber = binding.phoneNumberEditTxt.maskString.toString()
+        val userName = binding.userNameEditTxt.text.toString()
+        if(viewModel.validPhoneNumber(number.length, maskNumber.length) == null && !userName.isEmpty()){
+            val userNumber = (binding.chosenCountry.text.toString()+number).replace(" ".toRegex(), "")
+            val registrationForm = RegistrationForm(userName, userNumber, "2021-11-11")
+            viewModel.registration(registrationForm)
+        }else{
+            binding.errorTxt.visibility = View.VISIBLE
+        }
+    }
+
+    //spinner logic
     private fun setCountryCode(){
         binding.countryCode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
