@@ -10,4 +10,6 @@
     <color name="menu_item_price">#FF8B5C</color>
     <color name="client_main">#283952</color>
     <color name="client_second">#FFE074</color>
+    <color name="client_main_background">#F8F8F8</color>
+    <color name="category_text_rv">#5B5B70</color>
 </resources>

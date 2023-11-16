@@ -13,12 +13,19 @@
         <action
             android:id="@+id/action_mainPageFragment_to_menuPageFragment"
             app:destination="@id/menuPageFragment" />
+        <action
+            android:id="@+id/action_mainPageFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/basketFragment"
         android:name="com.neocafe.neocafe.fragments.basket.BasketFragment"
         android:label="fragment_basket"
-        tools:layout="@layout/fragment_basket" />
+        tools:layout="@layout/fragment_basket" >
+        <action
+            android:id="@+id/action_basketFragment_to_historyOfOrdersFragment"
+            app:destination="@id/historyOfOrdersFragment" />
+    </fragment>
     <fragment
         android:id="@+id/filialsFragment"
         android:name="com.neocafe.neocafe.fragments.filial.FilialsFragment"
@@ -42,5 +49,11 @@
         android:id="@+id/detailsFragment"
         android:name="com.neocafe.neocafe.fragments.main.DetailsFragment"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details">
+    </fragment>
+    <fragment
+        android:id="@+id/historyOfOrdersFragment"
+        android:name="com.neocafe.neocafe.fragments.basket.HistoryOfOrdersFragment"
+        android:label="fragment_history_of_orders"
+        tools:layout="@layout/fragment_history_of_orders" />
 </navigation>

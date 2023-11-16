@@ -6,12 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.databinding.FragmentRegistrationBinding
+import com.neocafe.neocafe.models.api.retrofit.Resource
+import com.neocafe.neocafe.models.entities.RegistrationForm
 import com.neocafe.neocafe.utils.Countries
 import com.neocafe.neocafe.utils.SpinnerAdapter
 import com.neocafe.neocafe.utils.SpinnerItem
+import com.neocafe.neocafe.viewModels.AuthViewModel
 
 class RegistrationFragment : Fragment() {
 
@@ -30,11 +35,32 @@ class RegistrationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val viewModel = AuthViewModel()
         spinnerCountryCode()
         setCountryCode()
         binding.getCodeBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_registrationFragment_to_otpLoginFragment)
+            val number = binding.phoneNumberEditTxt.text.toString()
+            val maskNumber = binding.phoneNumberEditTxt.maskString.toString()
+            val userName = binding.userNameEditTxt.text.toString()
+            if(viewModel.validPhoneNumber(number.length, maskNumber.length) == null && !userName.isEmpty()){
+                val userNumber = (binding.chosenCountry.text.toString()+number).replace(" ".toRegex(), "")
+                val registrationForm = RegistrationForm(userName, userNumber, null)
+                viewModel.registration(registrationForm)
+                Toast.makeText(requireContext(), userNumber, Toast.LENGTH_SHORT).show()
+            }else{
+                binding.errorTxt.visibility = View.VISIBLE
+            }
         }
+
+       viewModel.registrationResponse.observe(viewLifecycleOwner, Observer {
+           if(it is Resource.Success){
+               val bundle = Bundle()
+               bundle.putString("key", "register")
+               findNavController().navigate(R.id.action_registrationFragment_to_otpLoginFragment, bundle)
+           }else if(it is Resource.Error){
+               Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+           }
+       })
         binding.arrowBackBtn.setOnClickListener { findNavController().navigateUp() }
 
 

@@ -9,7 +9,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.databinding.FragmentMenuPageBinding
-import com.neocafe.neocafe.utils.MenuVpAdapter
+import com.neocafe.neocafe.adapters.MenuVpAdapter
+import com.neocafe.neocafe.utils.TestData
 
 class MenuPageFragment : Fragment() {
 
@@ -25,19 +26,19 @@ class MenuPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.notificationBtn.setOnClickListener {
+        binding.toNotificationsBtn.setOnClickListener {
             findNavController().navigate(R.id.action_menuPageFragment_to_detailsFragment)
         }
+        binding.arrowBackBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
         val tablayout = binding.categoriesTab
-        binding.viewPager.adapter = MenuVpAdapter(parentFragmentManager, lifecycle)
+        val items = TestData.list
+        val adapter = MenuVpAdapter(childFragmentManager, lifecycle)
+        adapter.setData(items)
+        binding.viewPager.adapter = adapter
         TabLayoutMediator(tablayout, binding.viewPager){tab, position ->
-            when(position){
-                0 -> tab.text = "Кофе"
-                1 -> tab.text = "Десерты"
-                2 -> tab.text = "Выпечка"
-                3 -> tab.text = "Коктейли"
-                4 -> tab.text = "Чай"
-            }
+            tab.text = items[position].name
         }.attach()
     }
 

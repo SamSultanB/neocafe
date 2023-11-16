@@ -21,7 +21,7 @@
                 android:id="@+id/imageImg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:src="@drawable/empty_image_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +49,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/typeTxt"
+                android:id="@+id/nameTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/example_type"
@@ -167,7 +167,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/additionsRv"
                     android:layout_width="match_parent"
-                    android:layout_height="303dp"/>
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 
@@ -205,7 +205,7 @@
                         android:id="@+id/lessItemBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/menu_less_item_icon"
+                        android:src="@drawable/menu_less_item_details_icon"
                         android:background="@color/white"/>
 
                     <TextView

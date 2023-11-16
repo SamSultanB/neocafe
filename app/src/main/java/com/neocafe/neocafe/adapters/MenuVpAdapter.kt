@@ -1,18 +1,30 @@
-package com.neocafe.neocafe.utils
+package com.neocafe.neocafe.adapters
 
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.neocafe.neocafe.fragments.main.CategoryListFragment
+import com.neocafe.neocafe.utils.TestCategory
 
 class MenuVpAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle): FragmentStateAdapter(fragmentManager, lifecycle){
+
+    var items: List<TestCategory> = emptyList()
     override fun getItemCount(): Int {
-        return 5
+        return items.size
     }
 
     override fun createFragment(position: Int): Fragment {
-        return CategoryListFragment()
+        val bundle = Bundle()
+        bundle.putSerializable("key", items[position])
+        val fragment = CategoryListFragment()
+        fragment.arguments = bundle
+        return fragment
+    }
+
+    fun setData(new: List<TestCategory>){
+        items = new
     }
 
 }

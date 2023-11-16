@@ -42,6 +42,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appIcon" />
 
+    <TextView
+        android:id="@+id/errorTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/registrationError"
+        android:textSize="16sp"
+        android:textColor="@color/error"
+        android:textAlignment="center"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/registrationTxt"
+        app:layout_constraintEnd_toEndOf="@+id/registrationTxt"
+        app:layout_constraintTop_toBottomOf="@+id/registrationTxt"/>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
         android:layout_width="match_parent"
@@ -57,7 +73,7 @@
         app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registrationTxt">
+        app:layout_constraintTop_toBottomOf="@+id/errorTxt">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/userNameEditTxt"

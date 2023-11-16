@@ -31,6 +31,7 @@
     <string name="cowMilk">Коровье молоко</string>
     <string name="milk">Молоко</string>
     <string name="category">Category</string>
+    <string name="registrationError">Имя пользователя или номер телефона указаны неверно</string>
     <string-array name="country">
         <item>KG</item>
         <item>USA</item>

@@ -2,6 +2,9 @@ package com.neocafe.neocafe
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.neocafe.neocafe.databinding.ActivityMainBinding
@@ -18,4 +21,5 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setupWithNavController(navHostFragment.navController)
 
     }
+
 }
