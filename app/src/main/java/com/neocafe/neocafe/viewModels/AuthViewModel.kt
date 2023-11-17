@@ -33,6 +33,8 @@ class AuthViewModel: ViewModel() {
                 }
             }else{
                 registrationResponse.postValue(Resource.Error(response.message()))
+//                registrationResponse.postValue(response.errorBody()
+//                    ?.let { Resource.Error(it.string()) })
             }
         }
     }
