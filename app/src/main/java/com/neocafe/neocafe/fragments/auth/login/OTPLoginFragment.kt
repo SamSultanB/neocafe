@@ -1,6 +1,7 @@
 package com.neocafe.neocafe.fragments.auth.login
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,11 +15,12 @@ import com.neocafe.neocafe.databinding.FragmentOtpLoginBinding
 import com.neocafe.neocafe.models.api.retrofit.Resource
 import com.neocafe.neocafe.models.entities.OTPForm
 import com.neocafe.neocafe.viewModels.AuthViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OTPLoginFragment : Fragment() {
 
     private lateinit var binding: FragmentOtpLoginBinding
-    private val viewModel = AuthViewModel()
+    private val viewModel by viewModel<AuthViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +51,8 @@ class OTPLoginFragment : Fragment() {
                 startActivity(intent)
                 activity?.finish()
             }else if(it is Resource.Error){
+                binding.todoTxt.text = "Код введен неверно, попробуйте еще раз"
+                binding.todoTxt.setTextColor(Color.RED)
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
             }
         })
@@ -61,6 +65,8 @@ class OTPLoginFragment : Fragment() {
                 startActivity(intent)
                 activity?.finish()
             }else if(it is Resource.Error){
+                binding.todoTxt.text = "Код введен неверно, попробуйте еще раз"
+                binding.todoTxt.setTextColor(Color.RED)
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
             }
         })

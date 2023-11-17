@@ -18,12 +18,13 @@ import com.neocafe.neocafe.utils.Countries
 import com.neocafe.neocafe.utils.SpinnerAdapter
 import com.neocafe.neocafe.utils.SpinnerItem
 import com.neocafe.neocafe.viewModels.AuthViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegistrationFragment : Fragment() {
 
     private lateinit var binding: FragmentRegistrationBinding
     private lateinit var spinnerAdapter: SpinnerAdapter
-    val viewModel = AuthViewModel()
+    private val viewModel by viewModel<AuthViewModel>()
 
 
     override fun onCreateView(
@@ -53,7 +54,6 @@ class RegistrationFragment : Fragment() {
                 bundle.putString("key", "register")
                 findNavController().navigate(R.id.action_registrationFragment_to_otpLoginFragment, bundle)
             }else if(it is Resource.Error){
-                println(it.message)
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
             }
         })

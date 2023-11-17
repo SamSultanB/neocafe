@@ -18,13 +18,14 @@ import com.neocafe.neocafe.utils.Countries
 import com.neocafe.neocafe.utils.SpinnerAdapter
 import com.neocafe.neocafe.utils.SpinnerItem
 import com.neocafe.neocafe.viewModels.AuthViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class PhoneNumberFragment : Fragment() {
 
     private lateinit var binding: FragmentPhoneNumberBinding
     private lateinit var spinnerAdapter: SpinnerAdapter
-    private val viewModel = AuthViewModel()
+    private val viewModel by viewModel<AuthViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +56,10 @@ class PhoneNumberFragment : Fragment() {
                 bundle.putString("key", "login")
                 findNavController().navigate(R.id.action_phoneNumberFragment_to_otpLoginFragment, bundle)
             }else if(it is Resource.Error){
+                binding.errorTxt.visibility = View.VISIBLE
+                binding.phoneNumberEditTxt.setTextColor(Color.RED)
+                binding.chosenCountry.setTextColor(Color.RED)
+                binding.errorTxt.text = "Номер телефона введён неверно, попробуйте еще раз"
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
             }
         })

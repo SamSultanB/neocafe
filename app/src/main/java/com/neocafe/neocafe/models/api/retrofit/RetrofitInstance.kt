@@ -14,7 +14,7 @@ class RetrofitInstance {
 //            .addInterceptor(tokenInterceptor)
 //            .build()
 
-        private val retrofit by lazy {
+        val retrofit by lazy {
 
             Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)

@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.databinding.FragmentBirthDateBinding
+import com.neocafe.neocafe.viewModels.AuthViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -17,6 +19,7 @@ import java.util.Locale
 class BirthDateFragment : Fragment() {
 
     private lateinit var binding: FragmentBirthDateBinding
+    private val viewModel by viewModel<AuthViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

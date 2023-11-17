@@ -1,13 +1,14 @@
 package com.neocafe.neocafe.models.repositories
 
+import com.neocafe.neocafe.models.api.connections.AuthApi
 import com.neocafe.neocafe.models.api.retrofit.RetrofitInstance
 import com.neocafe.neocafe.models.entities.LoginForm
 import com.neocafe.neocafe.models.entities.OTPForm
 import com.neocafe.neocafe.models.entities.RegistrationForm
 
-class AuthRepository {
+class AuthRepository(private val authApi: AuthApi) {
 
-    private val authApi = RetrofitInstance.authApi
+//    private val authApi = RetrofitInstance.authApi
 
     suspend fun register(registrationForm: RegistrationForm) = authApi.register(registrationForm)
 

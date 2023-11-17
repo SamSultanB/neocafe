@@ -11,9 +11,8 @@ import com.neocafe.neocafe.models.entities.TokenRefresh
 import com.neocafe.neocafe.models.repositories.AuthRepository
 import kotlinx.coroutines.launch
 
-class AuthViewModel: ViewModel() {
+class AuthViewModel(private  val repository: AuthRepository): ViewModel() {
 
-    val repository = AuthRepository()
 
     val registrationResponse: MutableLiveData<Resource<RegistrationForm>> = MutableLiveData()
 
@@ -33,8 +32,6 @@ class AuthViewModel: ViewModel() {
                 }
             }else{
                 registrationResponse.postValue(Resource.Error(response.message()))
-//                registrationResponse.postValue(response.errorBody()
-//                    ?.let { Resource.Error(it.string()) })
             }
         }
     }
@@ -85,7 +82,7 @@ class AuthViewModel: ViewModel() {
     //validations
     fun validPhoneNumber(actualLength: Int, expectedLength: Int): String?{
         if (actualLength != expectedLength){
-            return "Номер телефона введён неверно, попробуйте еще раз"
+            return "Номер телефона введён неверно"
         }
         return null
     }
