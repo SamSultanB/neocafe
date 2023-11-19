@@ -37,10 +37,12 @@ class OTPLoginFragment : Fragment() {
 
         binding.arrowBackBtn.setOnClickListener { findNavController().navigateUp() }
         binding.signInBtn.setOnClickListener {
-            otpCheckRequest(type!!)
+            val intent = Intent(this.activity, MainActivity::class.java)
+            startActivity(intent)
+            activity?.finish()
         }
-        otpLoginResponse()
-        otpResponse()
+//        otpLoginResponse()
+//        otpResponse()
     }
 
 

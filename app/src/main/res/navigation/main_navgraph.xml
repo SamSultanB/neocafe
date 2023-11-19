@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_mainPageFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_mainPageFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
     </fragment>
     <fragment
         android:id="@+id/basketFragment"
@@ -25,17 +28,31 @@
         <action
             android:id="@+id/action_basketFragment_to_historyOfOrdersFragment"
             app:destination="@id/historyOfOrdersFragment" />
+        <action
+            android:id="@+id/action_basketFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
     </fragment>
     <fragment
         android:id="@+id/filialsFragment"
         android:name="com.neocafe.neocafe.fragments.filial.FilialsFragment"
         android:label="fragment_filials"
-        tools:layout="@layout/fragment_filials" />
+        tools:layout="@layout/fragment_filials" >
+        <action
+            android:id="@+id/action_filialsFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.neocafe.neocafe.fragments.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_profileEditFragment"
+            app:destination="@id/profileEditFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/menuPageFragment"
         android:name="com.neocafe.neocafe.fragments.main.MenuPageFragment"
@@ -44,6 +61,9 @@
         <action
             android:id="@+id/action_menuPageFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_menuPageFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
@@ -55,5 +75,35 @@
         android:id="@+id/historyOfOrdersFragment"
         android:name="com.neocafe.neocafe.fragments.basket.HistoryOfOrdersFragment"
         android:label="fragment_history_of_orders"
-        tools:layout="@layout/fragment_history_of_orders" />
+        tools:layout="@layout/fragment_history_of_orders" >
+        <action
+            android:id="@+id/action_historyOfOrdersFragment_to_historyDetailsFragment"
+            app:destination="@id/historyDetailsFragment" />
+        <action
+            android:id="@+id/action_historyOfOrdersFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/historyDetailsFragment"
+        android:name="com.neocafe.neocafe.fragments.basket.HistoryDetailsFragment"
+        android:label="fragment_history_details"
+        tools:layout="@layout/fragment_history_details" >
+        <action
+            android:id="@+id/action_historyDetailsFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileEditFragment"
+        android:name="com.neocafe.neocafe.fragments.profile.ProfileEditFragment"
+        android:label="fragment_profile_edit"
+        tools:layout="@layout/fragment_profile_edit" >
+        <action
+            android:id="@+id/action_profileEditFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.neocafe.neocafe.fragments.notification.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" />
 </navigation>

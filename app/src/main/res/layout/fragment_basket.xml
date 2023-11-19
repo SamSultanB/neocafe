@@ -23,7 +23,7 @@
             android:textColor="@color/client_main"/>
 
         <ImageButton
-            android:id="@+id/toHistoryBtn"
+            android:id="@+id/notificationsBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#00000000"
@@ -35,11 +35,11 @@
 
     <include
         android:id="@+id/emptyScreen"
-        layout="@layout/basket_empty_screen" />
+        layout="@layout/basket_empty_screen"
+        android:visibility="gone"/>
     <include
         android:id="@+id/ordersListScreen"
-        layout="@layout/basket_orders_list_screen"
-        android:visibility="gone"/>
+        layout="@layout/basket_orders_list_screen" />
 
 
 </LinearLayout>

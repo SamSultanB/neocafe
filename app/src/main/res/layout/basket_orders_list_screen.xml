@@ -15,6 +15,7 @@
         android:layout_weight="1"/>
 
     <Button
+        android:id="@+id/addMoreBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#00000000"
@@ -45,6 +46,7 @@
             android:textStyle="bold"
             android:textColor="@color/client_main"/>
         <TextView
+            android:id="@+id/fullPriceTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="4dp"
@@ -53,6 +55,7 @@
             android:textColor="@color/hint_color"
             android:textStyle="normal"/>
         <TextView
+            android:id="@+id/priceWithDiscountTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="730 c"
@@ -70,6 +73,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/takeAwayBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
@@ -80,6 +84,7 @@
             android:layout_weight="1"/>
 
         <Button
+            android:id="@+id/inShopBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
@@ -92,6 +97,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/orderBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"

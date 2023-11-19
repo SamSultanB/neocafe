@@ -32,6 +32,19 @@
     <string name="milk">Молоко</string>
     <string name="category">Category</string>
     <string name="registrationError">Имя пользователя или номер телефона указаны неверно</string>
+    <string name="transer_to_maps">Мы переведем вас в 2ГИС</string>
+    <string name="transfer_text">Вы сможете быстро сориентироваться и найти быстрый маршрут к нам! Ждем вас!</string>
+    <string name="editing">Редактирование</string>
+    <string name="notifications">Уведомления</string>
+    <string name="bonus">Бонусы</string>
+    <string name="about_bonus">Накапливайте бонусы и совершайте выгодные для Вас заказы! 1 бонус = 1 сом</string>
+    <string name="ok">Хорошо</string>
+    <string name="aboutChanging">Изменения не сохранены</string>
+    <string name="wantToLeave">Хотите покинуть страницу редактирования?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="bonus_helper_txt">У вас есть 100 бонусов, хотите использовать их?</string>
+    <string name="using_bonus">Списание бонусов</string>
     <string-array name="country">
         <item>KG</item>
         <item>USA</item>

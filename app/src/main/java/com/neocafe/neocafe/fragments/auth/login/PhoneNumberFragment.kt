@@ -44,9 +44,12 @@ class PhoneNumberFragment : Fragment() {
             findNavController().navigateUp()
         }
         binding.getCodeBtn.setOnClickListener {
-            loginRequest()
+            val bundle = Bundle()
+            bundle.putString("key", "login")
+            findNavController().navigate(R.id.action_phoneNumberFragment_to_otpLoginFragment, bundle)
+//            loginRequest()
         }
-        loginResponse()
+//        loginResponse()
     }
 
     private fun loginResponse(){
