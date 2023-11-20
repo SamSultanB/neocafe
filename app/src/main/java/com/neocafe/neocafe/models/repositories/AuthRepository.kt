@@ -1,10 +1,9 @@
 package com.neocafe.neocafe.models.repositories
 
 import com.neocafe.neocafe.models.api.connections.AuthApi
-import com.neocafe.neocafe.models.api.retrofit.RetrofitInstance
-import com.neocafe.neocafe.models.entities.LoginForm
-import com.neocafe.neocafe.models.entities.OTPForm
-import com.neocafe.neocafe.models.entities.RegistrationForm
+import com.neocafe.neocafe.entities.login.LoginForm
+import com.neocafe.neocafe.entities.login.OTPForm
+import com.neocafe.neocafe.entities.registration.RegistrationForm
 
 class AuthRepository(private val authApi: AuthApi) {
 

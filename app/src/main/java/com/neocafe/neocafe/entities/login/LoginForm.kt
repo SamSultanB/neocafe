@@ -1,4 +1,4 @@
-package com.neocafe.neocafe.models.entities
+package com.neocafe.neocafe.entities.login
 
 import java.io.Serializable
 

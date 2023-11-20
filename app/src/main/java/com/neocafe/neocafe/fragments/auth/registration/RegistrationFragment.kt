@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.databinding.FragmentRegistrationBinding
 import com.neocafe.neocafe.models.api.retrofit.Resource
-import com.neocafe.neocafe.models.entities.RegistrationForm
+import com.neocafe.neocafe.entities.registration.RegistrationForm
 import com.neocafe.neocafe.utils.Countries
 import com.neocafe.neocafe.utils.SpinnerAdapter
 import com.neocafe.neocafe.utils.SpinnerItem

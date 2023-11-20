@@ -4,10 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neocafe.neocafe.models.api.retrofit.Resource
-import com.neocafe.neocafe.models.entities.LoginForm
-import com.neocafe.neocafe.models.entities.OTPForm
-import com.neocafe.neocafe.models.entities.RegistrationForm
-import com.neocafe.neocafe.models.entities.TokenRefresh
+import com.neocafe.neocafe.entities.login.LoginForm
+import com.neocafe.neocafe.entities.login.OTPForm
+import com.neocafe.neocafe.entities.registration.RegistrationForm
+import com.neocafe.neocafe.entities.login.TokenRefresh
 import com.neocafe.neocafe.models.repositories.AuthRepository
 import kotlinx.coroutines.launch
 

@@ -1,9 +1,9 @@
 package com.neocafe.neocafe.models.api.connections
 
-import com.neocafe.neocafe.models.entities.LoginForm
-import com.neocafe.neocafe.models.entities.OTPForm
-import com.neocafe.neocafe.models.entities.RegistrationForm
-import com.neocafe.neocafe.models.entities.TokenRefresh
+import com.neocafe.neocafe.entities.login.LoginForm
+import com.neocafe.neocafe.entities.login.OTPForm
+import com.neocafe.neocafe.entities.registration.RegistrationForm
+import com.neocafe.neocafe.entities.login.TokenRefresh
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST

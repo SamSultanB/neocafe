@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.neocafe.neocafe.MainActivity
 import com.neocafe.neocafe.databinding.FragmentOtpLoginBinding
 import com.neocafe.neocafe.models.api.retrofit.Resource
-import com.neocafe.neocafe.models.entities.OTPForm
+import com.neocafe.neocafe.entities.login.OTPForm
 import com.neocafe.neocafe.viewModels.AuthViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

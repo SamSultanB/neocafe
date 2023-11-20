@@ -1,15 +1,24 @@
 package com.neocafe.neocafe.models.api.retrofit
 
-class SessionManager {
+import android.content.Context
+import android.content.SharedPreferences
+import com.neocafe.neocafe.R
+
+class SessionManager(context: Context) {
+
+    private var prefs: SharedPreferences = context.getSharedPreferences(context.getString(R.string.neocafe), Context.MODE_PRIVATE)
+
     companion object {
-        var USER_TOKEN = ""
+        const val USER_TOKEN = "user_token"
     }
 
     fun saveAuthToken(token: String) {
-        USER_TOKEN = token
+        val editor = prefs.edit()
+        editor.putString(USER_TOKEN, token)
+        editor.apply()
     }
 
     fun fetchAuthToken(): String? {
-        return USER_TOKEN
+        return prefs.getString(USER_TOKEN, null)
     }
 }
