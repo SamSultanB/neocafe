@@ -38,6 +38,9 @@ class ProfileEditFragment : Fragment() {
         binding.arrowBackBtn.setOnClickListener {
             findNavController().navigateUp()
         }
+        binding.toNotificationsBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_profileEditFragment_to_notificationsFragment)
+        }
 
         binding.saveBtn.setOnClickListener {
             callAlertDialog()

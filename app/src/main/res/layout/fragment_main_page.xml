@@ -46,6 +46,8 @@
             android:background="@drawable/rounded_searchbar"
             android:backgroundTint="@color/searchbar_background"
             app:queryHint="Поиск"
+            android:theme="@style/SearchQueryTextStyle"
+            app:searchIcon="@drawable/search_view_icon"
             app:iconifiedByDefault="false"
             app:queryBackground="@color/searchbar_background"
             android:layout_marginHorizontal="16dp"/>
@@ -132,6 +134,8 @@
                                 android:layout_width="69dp"
                                 android:layout_height="68dp"
                                 android:src="@drawable/testcofe"
+                                android:layout_marginHorizontal="44dp"
+                                android:layout_marginVertical="20dp"
                                 android:layout_gravity="center"/>
                             
                         </androidx.cardview.widget.CardView>

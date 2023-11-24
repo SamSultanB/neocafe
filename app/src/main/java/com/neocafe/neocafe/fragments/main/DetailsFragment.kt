@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.databinding.FragmentDetailsBinding
-import com.neocafe.neocafe.utils.Test
+import com.neocafe.neocafe.utils.Menu
 
 class DetailsFragment : Fragment() {
 
@@ -29,11 +29,20 @@ class DetailsFragment : Fragment() {
         val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView?.visibility = View.GONE
 
-        val test = arguments?.getSerializable("key") as Test
-        binding.imageImg.setImageResource(test.image)
-        binding.nameTxt.text = test.name
-        binding.descriptionTxt.text = test.description
+        val menu = arguments?.getSerializable("key") as Menu
+        binding.imageImg.setImageResource(menu.image)
+        binding.nameTxt.text = menu.name
+        binding.descriptionTxt.text = menu.description
+        binding.amountTxt.text = menu.amount.toString()
 
+        binding.addItemBtn.setOnClickListener {
+            menu.amount++
+            binding.amountTxt.text = menu.amount.toString()
+        }
+        binding.lessItemBtn.setOnClickListener {
+            menu.amount--;
+            binding.amountTxt.text = menu.amount.toString()
+        }
 
         binding.arrowBackBtn.setOnClickListener {
             findNavController().navigateUp()

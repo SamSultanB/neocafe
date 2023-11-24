@@ -27,7 +27,7 @@ class MenuPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.toNotificationsBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_menuPageFragment_to_detailsFragment)
+            findNavController().navigate(R.id.action_menuPageFragment_to_notificationsFragment)
         }
         binding.arrowBackBtn.setOnClickListener {
             findNavController().navigateUp()

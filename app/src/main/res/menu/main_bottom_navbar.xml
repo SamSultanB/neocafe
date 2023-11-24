@@ -14,7 +14,7 @@
     <item
         android:id="@+id/filialsFragment"
         android:title=""
-        android:icon="@drawable/bottom_location_icon"/>
+        android:icon="@drawable/bottom_location_icon" />
 
     <item
         android:id="@+id/profileFragment"

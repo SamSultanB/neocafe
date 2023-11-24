@@ -16,4 +16,10 @@
         <item name="tabRippleColor">@null</item>
     </style>
 
+    <style name="SearchQueryTextStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColor">@color/hint_color</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
 </resources>

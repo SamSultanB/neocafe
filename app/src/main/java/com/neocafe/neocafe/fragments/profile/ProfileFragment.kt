@@ -11,8 +11,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.neocafe.neocafe.R
+import com.neocafe.neocafe.adapters.LastOrdersRv
 import com.neocafe.neocafe.databinding.FragmentProfileBinding
+import com.neocafe.neocafe.utils.HistoryOfOrdersItem
+import com.neocafe.neocafe.utils.TestData
 
 class ProfileFragment : Fragment() {
 
@@ -35,6 +39,27 @@ class ProfileFragment : Fragment() {
         binding.editProfileBtn.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_profileEditFragment)
         }
+        binding.notificationsBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_notificationsFragment)
+        }
+        binding.logoutBtn.setOnClickListener {
+            activity?.finish()
+        }
+
+
+        //test
+        val adapterActual = LastOrdersRv()
+        adapterActual.lastOrders = listOf(HistoryOfOrdersItem(R.drawable.filial_test1, "NeoCafe Toktogula", "basket, coffe, tea", "now"))
+        binding.actualOrdersRv.layoutManager = LinearLayoutManager(requireContext())
+        binding.actualOrdersRv.adapter = adapterActual
+
+        val adapterPast = LastOrdersRv()
+        adapterPast.lastOrders = TestData.lastOrders
+        binding.lastOrdersRv.layoutManager = LinearLayoutManager(requireContext())
+        binding.lastOrdersRv.adapter = adapterPast
+
+
+
     }
 
     private fun callAlertDialog(){

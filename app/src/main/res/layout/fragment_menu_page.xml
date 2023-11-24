@@ -54,7 +54,8 @@
         app:tabIndicatorFullWidth="true"
         app:tabTextAppearance="@style/TabLayoutTextStyle"
         style="@style/TabLayoutTextStyle"
-        app:tabMode="scrollable"/>
+        app:tabMode="scrollable"
+        android:layout_marginHorizontal="16dp"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"

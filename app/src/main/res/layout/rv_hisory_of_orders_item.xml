@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="18dp"
     android:background="@color/client_main_background">
 
     <androidx.cardview.widget.CardView
@@ -19,6 +20,7 @@
             android:id="@+id/imageImg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scaleType="centerCrop"
             android:src="@drawable/empty_image_icon" />
 
     </androidx.cardview.widget.CardView>
@@ -68,7 +70,7 @@
         android:layout_marginBottom="20dp"
         android:text="Сейчас"
         android:textSize="12sp"
-        android:textStyle="bold"
+        android:textStyle="normal"
         android:textColor="@color/hint_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

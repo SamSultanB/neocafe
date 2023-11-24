@@ -36,6 +36,10 @@ class MainPageFragment : Fragment() {
             findNavController().navigate(R.id.action_mainPageFragment_to_detailsFragment, bundle)
         }
 
+        binding.toNotificationsBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_mainPageFragment_to_notificationsFragment)
+        }
+
         binding.popularsRv.adapter = adapter
         binding.moreBtn.setOnClickListener {
             findNavController().navigate(R.id.action_mainPageFragment_to_menuPageFragment)

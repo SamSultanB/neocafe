@@ -1,8 +1,5 @@
 package com.neocafe.neocafe.adapters
 
-import androidx.recyclerview.widget.DiffUtil
-import com.neocafe.neocafe.utils.Test
-
 //class MenuRvDiffUtils(
 //    private val oldList: List<Test>,
 //    private val newList: List<Test>

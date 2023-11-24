@@ -26,11 +26,11 @@
         android:label="fragment_basket"
         tools:layout="@layout/fragment_basket" >
         <action
-            android:id="@+id/action_basketFragment_to_historyOfOrdersFragment"
-            app:destination="@id/historyOfOrdersFragment" />
-        <action
             android:id="@+id/action_basketFragment_to_notificationsFragment"
             app:destination="@id/notificationsFragment" />
+        <action
+            android:id="@+id/action_basketFragment_to_menuPageFragment"
+            app:destination="@id/menuPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/filialsFragment"
@@ -100,6 +100,9 @@
         <action
             android:id="@+id/action_profileEditFragment_to_notificationsFragment"
             app:destination="@id/notificationsFragment" />
+        <action
+            android:id="@+id/action_profileEditFragment_to_historyOfOrdersFragment"
+            app:destination="@id/historyOfOrdersFragment" />
     </fragment>
     <fragment
         android:id="@+id/notificationsFragment"
