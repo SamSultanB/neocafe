@@ -1,20 +1,12 @@
 package com.neocafe.neocafe.adapters
 
-import android.graphics.Color
-import android.graphics.ColorFilter
-import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.Request
-import com.bumptech.glide.request.RequestOptions
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.databinding.RvFilialItemBinding
 import com.neocafe.neocafe.utils.Filial
-import com.neocafe.neocafe.utils.Menu
 
 class FilialsRvAdapter: RecyclerView.Adapter<FilialsRvAdapter.ViewHolder>(){
 

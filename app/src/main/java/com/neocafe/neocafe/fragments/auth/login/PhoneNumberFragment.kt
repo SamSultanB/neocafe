@@ -1,5 +1,6 @@
 package com.neocafe.neocafe.fragments.auth.login
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.neocafe.neocafe.MainActivity
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.databinding.FragmentPhoneNumberBinding
 import com.neocafe.neocafe.models.api.retrofit.Resource
@@ -44,10 +46,10 @@ class PhoneNumberFragment : Fragment() {
             findNavController().navigateUp()
         }
         binding.getCodeBtn.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString("key", "login")
-            findNavController().navigate(R.id.action_phoneNumberFragment_to_otpLoginFragment, bundle)
 //            loginRequest()
+            val intent = Intent(this.activity, MainActivity::class.java)
+            startActivity(intent)
+            activity?.finish()
         }
 //        loginResponse()
     }
@@ -55,9 +57,7 @@ class PhoneNumberFragment : Fragment() {
     private fun loginResponse(){
         viewModel.loginResponse.observe(viewLifecycleOwner, Observer {
             if(it is Resource.Success){
-                val bundle = Bundle()
-                bundle.putString("key", "login")
-                findNavController().navigate(R.id.action_phoneNumberFragment_to_otpLoginFragment, bundle)
+                //
             }else if(it is Resource.Error){
                 binding.errorTxt.visibility = View.VISIBLE
                 binding.phoneNumberEditTxt.setTextColor(Color.RED)

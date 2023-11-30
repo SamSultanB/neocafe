@@ -22,9 +22,6 @@
         android:name="com.neocafe.neocafe.fragments.auth.login.PhoneNumberFragment"
         android:label="fragment_phone_number"
         tools:layout="@layout/fragment_phone_number" >
-        <action
-            android:id="@+id/action_phoneNumberFragment_to_otpLoginFragment"
-            app:destination="@id/otpLoginFragment" />
     </fragment>
     <fragment
         android:id="@+id/otpLoginFragment"

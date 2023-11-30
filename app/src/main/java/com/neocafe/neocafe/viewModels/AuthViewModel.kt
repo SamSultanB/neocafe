@@ -18,9 +18,7 @@ class AuthViewModel(private  val repository: AuthRepository): ViewModel() {
 
     val otpResponse: MutableLiveData<Resource<TokenRefresh>> = MutableLiveData()
 
-    val loginResponse: MutableLiveData<Resource<LoginForm>> = MutableLiveData()
-
-    val otpLoginResponse: MutableLiveData<Resource<TokenRefresh>> = MutableLiveData()
+    val loginResponse: MutableLiveData<Resource<TokenRefresh>> = MutableLiveData()
 
     fun registration(registrationForm: RegistrationForm){
         viewModelScope.launch {
@@ -63,21 +61,6 @@ class AuthViewModel(private  val repository: AuthRepository): ViewModel() {
             }
         }
     }
-
-    fun otpLoginCheck(otpForm: OTPForm){
-        viewModelScope.launch {
-            otpLoginResponse.postValue(Resource.Loading())
-            val response = repository.otpLoginCheck(otpForm)
-            if(response.isSuccessful){
-                response.body()?.let {
-                    otpLoginResponse.postValue(Resource.Success(it))
-                }
-            }else{
-                loginResponse.postValue(Resource.Error(response.message()))
-            }
-        }
-    }
-
 
     //validations
     fun validPhoneNumber(actualLength: Int, expectedLength: Int): String?{

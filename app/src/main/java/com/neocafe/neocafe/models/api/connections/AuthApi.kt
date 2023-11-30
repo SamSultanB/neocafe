@@ -10,16 +10,13 @@ import retrofit2.http.POST
 
 interface AuthApi {
 
-    @POST("/api-customers/register")
+    @POST("/api-customers/customers/register")
     suspend fun register(@Body registrationForm: RegistrationForm): Response<RegistrationForm>
 
-    @POST("/api-customers/otp-check")
+    @POST("/api-customers/check-verification-code")
     suspend fun otpCheck(@Body otpForm: OTPForm): Response<TokenRefresh>
 
-    @POST("api-customers/login")
-    suspend fun login(@Body loginForm: LoginForm): Response<LoginForm>
-
-    @POST("api-customers/login-otp-check")
-    suspend fun otpLoginCheck(@Body otpForm: OTPForm): Response<TokenRefresh>
+    @POST("api-customers/customer/login")
+    suspend fun login(@Body loginForm: LoginForm): Response<TokenRefresh>
 
 }

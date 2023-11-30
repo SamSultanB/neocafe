@@ -1,6 +1,5 @@
 package com.neocafe.neocafe.fragments.auth.registration
 
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,8 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.databinding.FragmentRegistrationBinding
-import com.neocafe.neocafe.models.api.retrofit.Resource
 import com.neocafe.neocafe.entities.registration.RegistrationForm
+import com.neocafe.neocafe.models.api.retrofit.Resource
 import com.neocafe.neocafe.utils.Countries
 import com.neocafe.neocafe.utils.SpinnerAdapter
 import com.neocafe.neocafe.utils.SpinnerItem
@@ -43,36 +42,38 @@ class RegistrationFragment : Fragment() {
         binding.getCodeBtn.setOnClickListener {
             registrationRequest()
         }
+
         registrationResponse()
+
         binding.arrowBackBtn.setOnClickListener { findNavController().navigateUp() }
+
+
     }
 
-    fun registrationResponse(){
+    private fun registrationResponse(){
         viewModel.registrationResponse.observe(viewLifecycleOwner, Observer {
             if(it is Resource.Success){
-                val bundle = Bundle()
-                bundle.putString("key", "register")
-                findNavController().navigate(R.id.action_registrationFragment_to_otpLoginFragment, bundle)
+                findNavController().navigate(R.id.action_registrationFragment_to_otpLoginFragment)
             }else if(it is Resource.Error){
-                Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                println(it.message)
             }
         })
     }
 
-    fun registrationRequest(){
+    private fun registrationRequest(){
         val number = binding.phoneNumberEditTxt.text.toString()
         val maskNumber = binding.phoneNumberEditTxt.maskString.toString()
         val userName = binding.userNameEditTxt.text.toString()
         if(viewModel.validPhoneNumber(number.length, maskNumber.length) == null && !userName.isEmpty()){
             val userNumber = (binding.chosenCountry.text.toString()+number).replace(" ".toRegex(), "")
-            val registrationForm = RegistrationForm(userName, userNumber, "2021-11-11")
+            val registrationForm = RegistrationForm(userName, userNumber, "2023-11-30")
             viewModel.registration(registrationForm)
         }else{
             binding.errorTxt.visibility = View.VISIBLE
         }
     }
 
-    //spinner logic
     private fun setCountryCode(){
         binding.countryCode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
