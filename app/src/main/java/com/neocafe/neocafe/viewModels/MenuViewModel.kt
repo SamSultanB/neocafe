@@ -15,32 +15,32 @@ class MenuViewModel(private val repository: MenuRepository): ViewModel()  {
 
     val getPopularsResponse: MutableLiveData<Resource<List<Menu>>> = MutableLiveData()
 
-//    fun getCategories(){
-//        viewModelScope.launch {
-//            getCategoriesResponse.postValue(Resource.Loading())
-//            val response = repository.getCategories()
-//            if(response.isSuccessful){
-//                response.body()?.let {
-//                    getCategoriesResponse.postValue(Resource.Success(it))
-//                }
-//            }else{
-//                getCategoriesResponse.postValue(Resource.Error(response.message()))
-//            }
-//        }
-//    }
+    fun getCategories(){
+        viewModelScope.launch {
+            getCategoriesResponse.postValue(Resource.Loading())
+            val response = repository.getCategories()
+            if(response.isSuccessful){
+                response.body()?.let {
+                    getCategoriesResponse.postValue(Resource.Success(it))
+                }
+            }else{
+                getCategoriesResponse.postValue(Resource.Error(response.message()))
+            }
+        }
+    }
 
-//    fun getPopulars(){
-//        viewModelScope.launch {
-//            getPopularsResponse.postValue(Resource.Loading())
-//            val response = repository.getPopulars()
-//            if(response.isSuccessful){
-//                response.body()?.let {
-//                    getPopularsResponse.postValue(Resource.Success(it))
-//                }
-//            }else(
-//                getPopularsResponse.postValue(Resource.Error(response.message()))
-//            )
-//        }
-//    }
+    fun getPopulars(){
+        viewModelScope.launch {
+            getPopularsResponse.postValue(Resource.Loading())
+            val response = repository.getPopulars()
+            if(response.isSuccessful){
+                response.body()?.let {
+                    getPopularsResponse.postValue(Resource.Success(it))
+                }
+            }else(
+                getPopularsResponse.postValue(Resource.Error(response.message()))
+            )
+        }
+    }
 
 }

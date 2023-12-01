@@ -1,4 +1,4 @@
-package com.neocafe.neocafe.fragments.auth.login
+package com.neocafe.neocafe.fragments.auth.registration
 
 import android.content.Intent
 import android.graphics.Color
@@ -11,15 +11,15 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.neocafe.neocafe.MainActivity
-import com.neocafe.neocafe.databinding.FragmentOtpLoginBinding
+import com.neocafe.neocafe.databinding.FragmentOtpVerificationBinding
 import com.neocafe.neocafe.models.api.retrofit.Resource
 import com.neocafe.neocafe.entities.login.OTPForm
 import com.neocafe.neocafe.viewModels.AuthViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class OTPLoginFragment : Fragment() {
+class OTPVerificationFragment : Fragment() {
 
-    private lateinit var binding: FragmentOtpLoginBinding
+    private lateinit var binding: FragmentOtpVerificationBinding
     private val viewModel by viewModel<AuthViewModel>()
 
     override fun onCreateView(
@@ -27,7 +27,7 @@ class OTPLoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentOtpLoginBinding.inflate(layoutInflater, container, false)
+        binding = FragmentOtpVerificationBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -35,12 +35,9 @@ class OTPLoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.arrowBackBtn.setOnClickListener { findNavController().navigateUp() }
         binding.signInBtn.setOnClickListener {
-//            otpCheckRequest()
-            val intent = Intent(this.activity, MainActivity::class.java)
-            startActivity(intent)
-            activity?.finish()
+            otpCheckRequest()
         }
-//        otpResponse()
+        otpResponse()
     }
 
     private fun otpResponse(){
@@ -59,6 +56,7 @@ class OTPLoginFragment : Fragment() {
 
     private fun otpCheckRequest(){
         val otpCode = (binding.inputCode1.text.toString() + binding.inputCode2.text.toString() + binding.inputCode3.text.toString() + binding.inputCode4.text.toString()).toInt()
+        Toast.makeText(requireContext(), otpCode.toString(), Toast.LENGTH_SHORT).show()
         viewModel.otpCheck(OTPForm(otpCode))
     }
 

@@ -8,10 +8,11 @@ import com.neocafe.neocafe.entities.login.LoginForm
 import com.neocafe.neocafe.entities.login.OTPForm
 import com.neocafe.neocafe.entities.registration.RegistrationForm
 import com.neocafe.neocafe.entities.login.TokenRefresh
+import com.neocafe.neocafe.models.api.retrofit.SessionManager
 import com.neocafe.neocafe.models.repositories.AuthRepository
 import kotlinx.coroutines.launch
 
-class AuthViewModel(private  val repository: AuthRepository): ViewModel() {
+class AuthViewModel(private  val repository: AuthRepository, private val sessionManager: SessionManager): ViewModel() {
 
 
     val registrationResponse: MutableLiveData<Resource<RegistrationForm>> = MutableLiveData()
@@ -42,6 +43,7 @@ class AuthViewModel(private  val repository: AuthRepository): ViewModel() {
                 response.body()?.let {
                     otpResponse.postValue(Resource.Success(it))
                 }
+                response.body()?.let { sessionManager.saveAuthToken(it.access) }
             }else{
                 otpResponse.postValue(Resource.Error(response.message()))
             }
@@ -56,6 +58,7 @@ class AuthViewModel(private  val repository: AuthRepository): ViewModel() {
                 response.body()?.let {
                     loginResponse.postValue(Resource.Success(it))
                 }
+                response.body()?.let { sessionManager.saveAuthToken(it.access) }
             }else{
                 loginResponse.postValue(Resource.Error(response.message()))
             }

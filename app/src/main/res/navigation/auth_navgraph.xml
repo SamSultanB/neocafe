@@ -24,10 +24,10 @@
         tools:layout="@layout/fragment_phone_number" >
     </fragment>
     <fragment
-        android:id="@+id/otpLoginFragment"
-        android:name="com.neocafe.neocafe.fragments.auth.login.OTPLoginFragment"
+        android:id="@+id/otpVerificationFragment"
+        android:name="com.neocafe.neocafe.fragments.auth.registration.OTPVerificationFragment"
         android:label="fragment_otp_login"
-        tools:layout="@layout/fragment_otp_login" />
+        tools:layout="@layout/fragment_otp_verification" />
     <fragment
         android:id="@+id/birthDateFragment"
         android:name="com.neocafe.neocafe.fragments.auth.registration.BirthDateFragment"
@@ -43,8 +43,8 @@
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" >
         <action
-            android:id="@+id/action_registrationFragment_to_otpLoginFragment"
-            app:destination="@id/otpLoginFragment" />
+            android:id="@+id/action_registrationFragment_to_otpVerificationFragment"
+            app:destination="@id/otpVerificationFragment" />
     </fragment>
 
 </navigation>

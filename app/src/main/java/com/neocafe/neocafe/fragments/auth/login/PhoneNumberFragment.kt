@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.neocafe.neocafe.MainActivity
-import com.neocafe.neocafe.R
 import com.neocafe.neocafe.databinding.FragmentPhoneNumberBinding
 import com.neocafe.neocafe.models.api.retrofit.Resource
 import com.neocafe.neocafe.entities.login.LoginForm
@@ -46,39 +45,39 @@ class PhoneNumberFragment : Fragment() {
             findNavController().navigateUp()
         }
         binding.getCodeBtn.setOnClickListener {
-//            loginRequest()
-            val intent = Intent(this.activity, MainActivity::class.java)
-            startActivity(intent)
-            activity?.finish()
+            loginRequest()
         }
-//        loginResponse()
+        loginResponse()
     }
 
     private fun loginResponse(){
         viewModel.loginResponse.observe(viewLifecycleOwner, Observer {
             if(it is Resource.Success){
-                //
+                val intent = Intent(this.activity, MainActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
             }else if(it is Resource.Error){
                 binding.errorTxt.visibility = View.VISIBLE
                 binding.phoneNumberEditTxt.setTextColor(Color.RED)
                 binding.chosenCountry.setTextColor(Color.RED)
                 binding.errorTxt.text = "Номер телефона введён неверно, попробуйте еще раз"
-                Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
             }
         })
     }
 
     private fun loginRequest(){
-        val userNumber = binding.phoneNumberEditTxt.text.toString()
+        val number = binding.phoneNumberEditTxt.text.toString()
         val maskText = binding.phoneNumberEditTxt.maskString.toString()
-        if (viewModel.validPhoneNumber(userNumber.length, maskText.length) == null){
+        if (viewModel.validPhoneNumber(number.length, maskText.length) == null){
+            val userNumber = (binding.chosenCountry.text.toString()+number).replace(" ".toRegex(), "")
             val loginForm = LoginForm(userNumber)
             viewModel.login(loginForm)
         }else{
             binding.errorTxt.visibility = View.VISIBLE
             binding.phoneNumberEditTxt.setTextColor(Color.RED)
             binding.chosenCountry.setTextColor(Color.RED)
-            binding.errorTxt.text = viewModel.validPhoneNumber(userNumber.length, maskText.length)
+            binding.errorTxt.text = viewModel.validPhoneNumber(number.length, maskText.length)
         }
     }
 

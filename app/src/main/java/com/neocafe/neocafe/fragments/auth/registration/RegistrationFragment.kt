@@ -53,7 +53,7 @@ class RegistrationFragment : Fragment() {
     private fun registrationResponse(){
         viewModel.registrationResponse.observe(viewLifecycleOwner, Observer {
             if(it is Resource.Success){
-                findNavController().navigate(R.id.action_registrationFragment_to_otpLoginFragment)
+                findNavController().navigate(R.id.action_registrationFragment_to_otpVerificationFragment)
             }else if(it is Resource.Error){
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 println(it.message)

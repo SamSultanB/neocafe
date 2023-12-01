@@ -33,16 +33,19 @@ class BirthDateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.continueBtn.setOnClickListener {
-            val birthdate = binding.birthdateEditTxt.text.toString()
-            Toast.makeText(requireContext(), birthdate, Toast.LENGTH_SHORT).show()
-            if(!isValidDate(birthdate) && !birthdate.isEmpty()){
-                binding.instructionTxt.text = "Неправильная дата рождения"
-                binding.instructionTxt.setTextColor(Color.RED)
-            }else{
-                findNavController().navigate(R.id.action_birthDateFragment_to_registrationFragment)
-            }
+            birthdate()
         }
         binding.arrowBackBtn.setOnClickListener { findNavController().navigateUp() }
+    }
+
+    private fun birthdate(){
+        val birthdate = binding.birthdateEditTxt.text.toString()
+        if(!isValidDate(birthdate) && !birthdate.isEmpty()){
+            binding.instructionTxt.text = "Неправильная дата рождения"
+            binding.instructionTxt.setTextColor(Color.RED)
+        }else{
+            findNavController().navigate(R.id.action_birthDateFragment_to_registrationFragment)
+        }
     }
 
     private fun isValidDate(date: String): Boolean {

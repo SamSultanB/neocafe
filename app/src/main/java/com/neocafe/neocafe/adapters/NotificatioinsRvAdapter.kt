@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.databinding.NotificationItemBinding
-import com.neocafe.neocafe.utils.Menu
 import com.neocafe.neocafe.utils.Notification
 
 class NotificatioinsRvAdapter: RecyclerView.Adapter<NotificatioinsRvAdapter.ViewHolder>() {

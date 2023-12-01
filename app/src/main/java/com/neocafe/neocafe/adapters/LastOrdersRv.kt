@@ -6,19 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.databinding.RvHisoryOfOrdersItemBinding
-import com.neocafe.neocafe.utils.HistoryOfOrdersItem
 
 class LastOrdersRv: RecyclerView.Adapter<LastOrdersRv.ViewHolder>() {
 
-    var lastOrders: List<HistoryOfOrdersItem> = emptyList()
+    var lastOrders: List<String> = emptyList()
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val binding = RvHisoryOfOrdersItemBinding.bind(itemView)
-        fun bind(historyOfOrdersItem: HistoryOfOrdersItem){
-            binding.addressTxt.text = historyOfOrdersItem.address
-            binding.itemsNamesTxt.text = historyOfOrdersItem.orders
-            binding.dateTxt.text = historyOfOrdersItem.date
-            binding.imageImg.setImageResource(historyOfOrdersItem.image)
+        fun bind(){
         }
     }
 
@@ -28,7 +23,7 @@ class LastOrdersRv: RecyclerView.Adapter<LastOrdersRv.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: LastOrdersRv.ViewHolder, position: Int) {
-        holder.bind(lastOrders[position])
+//        holder.bind(lastOrders[position])
     }
 
     override fun getItemCount(): Int {

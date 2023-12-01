@@ -38,7 +38,7 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(R.id.action_profileFragment_to_notificationsFragment)
         }
         binding.logoutBtn.setOnClickListener {
-            activity?.finish()
+            logoutAlertDialog()
         }
 
     }
@@ -49,6 +49,21 @@ class ProfileFragment : Fragment() {
         dialogScreen.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         val okBtn = dialogScreen.findViewById<Button>(R.id.okBtn)
         okBtn.setOnClickListener {
+            dialogScreen.dismiss()
+        }
+        dialogScreen.show()
+    }
+
+    private fun logoutAlertDialog(){
+        val dialogScreen = Dialog(requireContext())
+        dialogScreen.setContentView(R.layout.alert_dialog_quit)
+        dialogScreen.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val yesBtn = dialogScreen.findViewById<Button>(R.id.yesBtn)
+        val noBtn = dialogScreen.findViewById<Button>(R.id.noBtn)
+        yesBtn.setOnClickListener {
+            activity?.finish()
+        }
+        noBtn.setOnClickListener {
             dialogScreen.dismiss()
         }
         dialogScreen.show()

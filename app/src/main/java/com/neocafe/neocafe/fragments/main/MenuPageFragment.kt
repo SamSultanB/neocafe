@@ -8,10 +8,13 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.databinding.FragmentMenuPageBinding
+import com.neocafe.neocafe.viewModels.MenuViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MenuPageFragment : Fragment() {
 
     private lateinit var binding: FragmentMenuPageBinding
+    private val viewModel by viewModel<MenuViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

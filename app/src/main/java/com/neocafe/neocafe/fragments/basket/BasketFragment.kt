@@ -5,19 +5,14 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.ContextMenu
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.neocafe.neocafe.R
-import com.neocafe.neocafe.adapters.MenuRvAdapter
 import com.neocafe.neocafe.databinding.FragmentBasketBinding
-import com.neocafe.neocafe.utils.Basket
 
 class BasketFragment : Fragment() {
 
@@ -39,25 +34,9 @@ class BasketFragment : Fragment() {
             findNavController().navigate(R.id.action_basketFragment_to_notificationsFragment)
         }
 
-        if(Basket.basket.isEmpty()){
-            binding.ordersListScreen.root.visibility = View.GONE
-            binding.emptyScreen.root.visibility = View.VISIBLE
-        }else{
-            binding.ordersListScreen.root.visibility = View.VISIBLE
-            binding.emptyScreen.root.visibility = View.GONE
-        }
-
         binding.emptyScreen.toMenuBtn.setOnClickListener {
             findNavController().navigate(R.id.action_basketFragment_to_menuPageFragment)
         }
-
-        //test
-        val adapter = MenuRvAdapter()
-        adapter.setMenuList(Basket.basket)
-        binding.ordersListScreen.basketRv.layoutManager = LinearLayoutManager(requireContext())
-        binding.ordersListScreen.basketRv.adapter = adapter
-
-
         binding.ordersListScreen.fullPriceTxt.paintFlags = binding.ordersListScreen.fullPriceTxt.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         binding.ordersListScreen.orderBtn.setOnClickListener {
             callAlertDialog()

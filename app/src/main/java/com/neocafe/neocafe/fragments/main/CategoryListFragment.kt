@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.neocafe.neocafe.databinding.FragmentCategoryListBinding
+import com.neocafe.neocafe.viewModels.MenuViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CategoryListFragment : Fragment() {
 
     private lateinit var binding: FragmentCategoryListBinding
+    private val viewModel by viewModel<MenuViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

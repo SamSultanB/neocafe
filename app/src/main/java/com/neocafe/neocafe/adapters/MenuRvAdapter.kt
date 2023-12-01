@@ -3,12 +3,12 @@ package com.neocafe.neocafe.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.databinding.RvMenuItemBinding
-import com.neocafe.neocafe.utils.Basket
-import com.neocafe.neocafe.utils.Menu
+import com.neocafe.neocafe.entities.menu.Menu
 
 class MenuRvAdapter: RecyclerView.Adapter<MenuRvAdapter.ViewHolder>() {
 
@@ -20,30 +20,8 @@ class MenuRvAdapter: RecyclerView.Adapter<MenuRvAdapter.ViewHolder>() {
         fun bind(menu: Menu){
             Glide.with(binding.image).load(menu.image).into(binding.image)
             binding.nameTxt.text = menu.name
-            binding.categoryTxt.text = menu.category
-            binding.priceTxt.text = menu.price.toString()
-            binding.amountTxt.text = menu.amount.toString()
-            if(menu.amount != 0){
-                binding.amountTxt.visibility = View.VISIBLE
-                binding.decrementBtn.visibility = View.VISIBLE
-            }
-            binding.incrementBtn.setOnClickListener {
-                if(menu.amount == 1){
-                    Basket.basket += menu
-                }
-                binding.decrementBtn.visibility = View.VISIBLE
-                binding.amountTxt.visibility = View.VISIBLE
-                if(menu.amount < 9){
-                    menu.amount++
-                }
-                binding.amountTxt.text = menu.amount.toString()
-            }
-            binding.decrementBtn.setOnClickListener {
-                if(menu.amount > 0){
-                    menu.amount--;
-                }
-                binding.amountTxt.text = menu.amount.toString()
-            }
+            binding.categoryTxt.text = menu.slug
+            binding.priceTxt.text = menu.price
         }
     }
 
@@ -63,7 +41,10 @@ class MenuRvAdapter: RecyclerView.Adapter<MenuRvAdapter.ViewHolder>() {
 
 
     fun setMenuList(newList: List<Menu>){
-        menuList = newList
+        val diffUtil = MenuRvDiffUtils(menuList, newList)
+        val diffUtilResult = DiffUtil.calculateDiff(diffUtil)
+        this.menuList = newList
+        diffUtilResult.dispatchUpdatesTo(this)
     }
 
 }
