@@ -39,7 +39,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/fromTxt"
+            android:id="@+id/scheduleTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -52,19 +52,6 @@
             app:layout_constraintStart_toEndOf="@+id/today"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tillTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
-            android:text="до 22:00"
-            android:singleLine="true"
-            android:ellipsize="end"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/fromTxt"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/toMapBtn"
@@ -76,7 +63,7 @@
             android:background="#00000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/tillTxt"
+            app:layout_constraintStart_toEndOf="@+id/scheduleTxt"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/filials_paper_plane_icon" />
 

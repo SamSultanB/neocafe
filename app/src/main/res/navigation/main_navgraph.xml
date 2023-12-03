@@ -59,11 +59,11 @@
         android:label="fragment_menu_page"
         tools:layout="@layout/fragment_menu_page" >
         <action
-            android:id="@+id/action_menuPageFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
-        <action
             android:id="@+id/action_menuPageFragment_to_notificationsFragment"
             app:destination="@id/notificationsFragment" />
+        <action
+            android:id="@+id/action_menuPageFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"

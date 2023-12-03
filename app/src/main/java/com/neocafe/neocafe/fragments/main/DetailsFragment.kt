@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.databinding.FragmentDetailsBinding
@@ -28,6 +29,18 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView?.visibility = View.GONE
+
+        val data = arguments?.getSerializable("key") as Menu
+
+        Glide.with(binding.imageImg).load(data.image).into(binding.imageImg)
+        binding.nameTxt.text = data.name
+        binding.descriptionTxt.text = data.description
+
+        binding.arrowBackBtn.setOnClickListener {
+            findNavController().navigateUp()
+            bottomNavigationView?.visibility = View.VISIBLE
+
+        }
     }
 
 }

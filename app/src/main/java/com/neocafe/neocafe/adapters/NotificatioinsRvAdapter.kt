@@ -3,14 +3,17 @@ package com.neocafe.neocafe.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.databinding.NotificationItemBinding
+import com.neocafe.neocafe.entities.branches.Branche
 import com.neocafe.neocafe.utils.Notification
 
 class NotificatioinsRvAdapter: RecyclerView.Adapter<NotificatioinsRvAdapter.ViewHolder>() {
 
-    private var notificationsList: List<Notification> = emptyList()
+    var notificationsList: MutableList<Notification> = mutableListOf()
+//    var clickToDelete: ((Notification)->Unit)? = null
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
         val binding = NotificationItemBinding.bind(itemView)
@@ -29,6 +32,7 @@ class NotificatioinsRvAdapter: RecyclerView.Adapter<NotificatioinsRvAdapter.View
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(notificationsList[position])
+//        holder.binding.root.setOnClickListener{clickToDelete?.invoke(notificationsList[position])}
     }
 
     override fun getItemCount(): Int {
@@ -36,6 +40,15 @@ class NotificatioinsRvAdapter: RecyclerView.Adapter<NotificatioinsRvAdapter.View
     }
 
     fun setList(newNotificatioins: List<Notification>){
-        notificationsList = newNotificatioins
+        val diffUtil = NotificationsRvDiffUtils(notificationsList, newNotificatioins)
+        val diffUtilResult = DiffUtil.calculateDiff(diffUtil)
+        this.notificationsList = newNotificatioins.toMutableList()
+        diffUtilResult.dispatchUpdatesTo(this)
     }
+
+    fun delete(position: Int){
+        notificationsList.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
 }

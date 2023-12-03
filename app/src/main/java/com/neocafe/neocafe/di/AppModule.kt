@@ -1,14 +1,19 @@
 package com.neocafe.neocafe.di
 
 import android.content.Context
+import com.neocafe.neocafe.adapters.FilialsRvAdapter
+import com.neocafe.neocafe.adapters.MenuRvAdapter
 import com.neocafe.neocafe.models.api.connections.AuthApi
+import com.neocafe.neocafe.models.api.connections.BranchesApi
 import com.neocafe.neocafe.models.api.connections.MenuApi
 import com.neocafe.neocafe.models.api.retrofit.SessionManager
 import com.neocafe.neocafe.models.api.retrofit.TokenInterceptor
 import com.neocafe.neocafe.models.repositories.AuthRepository
+import com.neocafe.neocafe.models.repositories.BranchesRepository
 import com.neocafe.neocafe.models.repositories.MenuRepository
 import com.neocafe.neocafe.utils.Constants
 import com.neocafe.neocafe.viewModels.AuthViewModel
+import com.neocafe.neocafe.viewModels.BranchesViewModel
 import com.neocafe.neocafe.viewModels.MenuViewModel
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
@@ -25,6 +30,10 @@ val retrofitModule = module {
     single { getOkHttpClient(get()) }
     single { getAuthApi(get()) }
     single { getMenuApi(get()) }
+    single{ getBranchesApi(get()) }
+    factory { MenuRvAdapter() }
+    single { FilialsRvAdapter() }
+    single { BranchesRepository(get()) }
     factory { MenuRepository(get()) }
     factory { AuthRepository(get())}
 }
@@ -32,6 +41,7 @@ val retrofitModule = module {
 val viewModule = module {
     viewModel { MenuViewModel(get()) }
     viewModel { AuthViewModel(get(), get()) }
+    viewModel { BranchesViewModel(get())}
 }
 
 fun getRetrofit(okHttpClient: OkHttpClient): Retrofit{
@@ -54,6 +64,10 @@ fun getAuthApi(retrofit: Retrofit): AuthApi{
 
 fun getMenuApi(retrofit: Retrofit): MenuApi{
     return retrofit.create(MenuApi::class.java)
+}
+
+fun getBranchesApi(retrofit: Retrofit): BranchesApi{
+    return retrofit.create(BranchesApi::class.java)
 }
 
 fun getInterceptor(sessionManager: SessionManager): TokenInterceptor{

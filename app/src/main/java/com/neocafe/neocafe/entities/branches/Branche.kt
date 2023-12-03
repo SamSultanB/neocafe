@@ -1,3 +1,11 @@
 package com.neocafe.neocafe.entities.branches
 
-data class Branche(val name: String)
+import java.io.Serializable
+
+data class Branche(
+    val name: String,
+    val address: String,
+    val phone_number: String,
+    val work_schedule: String,
+    val image: String
+): Serializable

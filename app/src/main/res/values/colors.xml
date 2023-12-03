@@ -14,4 +14,5 @@
     <color name="category_text_rv">#5B5B70</color>
     <color name="items_names">#AAAAAA</color>
     <color name="under_line_edit_text">#FFA580</color>
+    <color name="delete_color">#FF7777</color>
 </resources>

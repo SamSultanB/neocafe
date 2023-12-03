@@ -8,4 +8,6 @@ class MenuRepository(private val menuApi: MenuApi) {
 
     suspend fun getPopulars() = menuApi.getPopulars()
 
+    suspend fun getMenu(slug: String) = menuApi.getMenu(slug)
+
 }

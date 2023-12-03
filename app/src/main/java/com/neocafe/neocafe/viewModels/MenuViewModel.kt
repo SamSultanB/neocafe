@@ -15,6 +15,8 @@ class MenuViewModel(private val repository: MenuRepository): ViewModel()  {
 
     val getPopularsResponse: MutableLiveData<Resource<List<Menu>>> = MutableLiveData()
 
+    val getMenuResponse: MutableLiveData<Resource<List<Menu>>> = MutableLiveData()
+
     fun getCategories(){
         viewModelScope.launch {
             getCategoriesResponse.postValue(Resource.Loading())
@@ -37,9 +39,23 @@ class MenuViewModel(private val repository: MenuRepository): ViewModel()  {
                 response.body()?.let {
                     getPopularsResponse.postValue(Resource.Success(it))
                 }
-            }else(
+            }else {
                 getPopularsResponse.postValue(Resource.Error(response.message()))
-            )
+            }
+        }
+    }
+
+    fun getMenu(slug: String){
+        viewModelScope.launch {
+            getPopularsResponse.postValue(Resource.Loading())
+            val response = repository.getMenu(slug)
+            if(response.isSuccessful){
+                response.body()?.let {
+                    getMenuResponse.postValue(Resource.Success(it))
+                }
+            }else {
+                getMenuResponse.postValue(Resource.Error(response.message()))
+            }
         }
     }
 
