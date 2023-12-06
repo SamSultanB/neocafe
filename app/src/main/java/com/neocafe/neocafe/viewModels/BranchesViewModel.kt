@@ -20,9 +20,7 @@ class BranchesViewModel(private val repository: BranchesRepository): ViewModel()
                     getAllBranchesResponse.postValue(Resource.Success(it))
                 }
             }else{
-//                getAllBranchesResponse.postValue(Resource.Error(response.message()))
-                val error = response.errorBody()?.string()
-                getAllBranchesResponse.postValue(error?.let { Resource.Error(it) })
+                getAllBranchesResponse.postValue(Resource.Error(response.message()))
             }
         }
     }

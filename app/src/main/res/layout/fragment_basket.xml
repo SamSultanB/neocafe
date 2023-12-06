@@ -35,11 +35,11 @@
 
     <include
         android:id="@+id/emptyScreen"
-        layout="@layout/basket_empty_screen"
-        android:visibility="gone"/>
+        layout="@layout/basket_empty_screen" />
     <include
         android:id="@+id/ordersListScreen"
-        layout="@layout/basket_orders_list_screen" />
+        layout="@layout/basket_orders_list_screen"
+        android:visibility="gone"/>
 
 
 </LinearLayout>

@@ -1,5 +1,7 @@
 package com.neocafe.neocafe.adapters
 
+import android.graphics.Color
+import android.graphics.LightingColorFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +23,8 @@ class FilialsRvAdapter: RecyclerView.Adapter<FilialsRvAdapter.ViewHolder>(){
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val binding = RvFilialItemBinding.bind(itemView)
         fun bind(branche: Branche){
+            val colorFilter = LightingColorFilter(Color.rgb(153, 143, 166), 0)
+            binding.filialImg.colorFilter = colorFilter
             Glide.with(binding.filialImg).load(branche.image).into(binding.filialImg)
             binding.filialNameTxt.text = branche.name
             binding.addressTxt.text = branche.address

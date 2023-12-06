@@ -10,4 +10,8 @@ class MenuRepository(private val menuApi: MenuApi) {
 
     suspend fun getMenu(slug: String) = menuApi.getMenu(slug)
 
+    suspend fun getAllBranches() = menuApi.getAllBranches()
+
+    suspend fun chooseBranche(id: Int) = menuApi.chooseBranch(id)
+
 }

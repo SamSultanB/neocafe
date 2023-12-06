@@ -34,6 +34,7 @@ class MenuPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val position = arguments?.getInt("key")
         adapterVp = MenuVpAdapter(childFragmentManager, lifecycle)
         binding.toNotificationsBtn.setOnClickListener {
             findNavController().navigate(R.id.action_menuPageFragment_to_notificationsFragment)

@@ -10,9 +10,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.neocafe.neocafe.R
+import com.neocafe.neocafe.adapters.MenuRvAdapter
 import com.neocafe.neocafe.databinding.FragmentBasketBinding
+import com.neocafe.neocafe.entities.order.Basket
 
 class BasketFragment : Fragment() {
 
@@ -29,6 +33,13 @@ class BasketFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.ordersListScreen.basketRv.layoutManager = LinearLayoutManager(requireContext())
+        val adapter = MenuRvAdapter()
+        adapter.setMenuList(Basket.order.values.toList())
+        binding.ordersListScreen.basketRv.adapter = adapter
+
+
+        setScreen()
 
         binding.notificationsBtn.setOnClickListener {
             findNavController().navigate(R.id.action_basketFragment_to_notificationsFragment)
@@ -41,6 +52,26 @@ class BasketFragment : Fragment() {
         binding.ordersListScreen.orderBtn.setOnClickListener {
             callAlertDialog()
         }
+
+        binding.ordersListScreen.priceWithDiscountTxt.text = Basket.totalPrice.toString() + " c"
+
+        binding.ordersListScreen.takeAwayBtn.setOnClickListener {
+            binding.ordersListScreen.takeAwayBtn.backgroundTintList = resources.getColorStateList(R.color.button_background)
+            binding.ordersListScreen.takeAwayBtn.setTextColor(resources.getColorStateList(R.color.white))
+            binding.ordersListScreen.inShopBtn.backgroundTintList = resources.getColorStateList(R.color.edit_text_background)
+            binding.ordersListScreen.inShopBtn.setTextColor(resources.getColorStateList(R.color.black))
+        }
+        binding.ordersListScreen.inShopBtn.setOnClickListener {
+            binding.ordersListScreen.takeAwayBtn.backgroundTintList = resources.getColorStateList(R.color.edit_text_background)
+            binding.ordersListScreen.takeAwayBtn.setTextColor(resources.getColorStateList(R.color.black))
+            binding.ordersListScreen.inShopBtn.backgroundTintList = resources.getColorStateList(R.color.button_background)
+            binding.ordersListScreen.inShopBtn.setTextColor(resources.getColorStateList(R.color.white))
+        }
+        binding.ordersListScreen.addMoreBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_basketFragment_to_menuPageFragment)
+        }
+
+
     }
 
     private fun callAlertDialog(){
@@ -78,6 +109,16 @@ class BasketFragment : Fragment() {
         }
 
         dialogScreen.show()
+    }
+
+    private fun setScreen(){
+        if(!Basket.order.isEmpty()){
+            binding.emptyScreen.root.isVisible = false
+            binding.ordersListScreen.root.isVisible = true
+        }else{
+            binding.emptyScreen.root.isVisible = true
+            binding.ordersListScreen.root.isVisible = false
+        }
     }
 
 }

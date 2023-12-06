@@ -46,6 +46,7 @@
     <string name="bonus_helper_txt">У вас есть 100 бонусов, хотите использовать их?</string>
     <string name="using_bonus">Списание бонусов</string>
     <string name="neocafe">neocafe</string>
+    <string name="choose_branch">Выберите филиал</string>
     <string-array name="country">
         <item>KG</item>
         <item>USA</item>

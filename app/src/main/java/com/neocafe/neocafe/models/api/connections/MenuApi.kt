@@ -1,5 +1,6 @@
 package com.neocafe.neocafe.models.api.connections
 
+import com.neocafe.neocafe.entities.branches.Branche
 import com.neocafe.neocafe.entities.categories.Category
 import com.neocafe.neocafe.entities.menu.Menu
 import retrofit2.Response
@@ -16,5 +17,11 @@ interface MenuApi {
 
     @GET("/api-menu/menu-list/{category_slug}/")
     suspend fun getMenu(@Path("category_slug") category: String): Response<List<Menu>>
+
+    @GET("/api-branches/list-branches/")
+    suspend fun getAllBranches(): Response<List<Branche>>
+
+    @GET("/api-branches/detail/branches/{id}/")
+    suspend fun chooseBranch(@Path("id") id: Int): Response<Branche>
 
 }

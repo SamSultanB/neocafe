@@ -1,8 +1,10 @@
 package com.neocafe.neocafe.fragments.filial
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -45,7 +47,7 @@ class FilialsFragment : Fragment() {
         getAllFilialsResponse()
 
         filialsAdapter.clickToMaps = { callAlertDialogToMaps() }
-        filialsAdapter.clickToPhone = { }
+        filialsAdapter.clickToPhone = { callAction(it.phone_number) }
 
         binding.notificationsBtn.setOnClickListener {
             findNavController().navigate(R.id.action_filialsFragment_to_notificationsFragment)
@@ -72,7 +74,8 @@ class FilialsFragment : Fragment() {
         val stayBtn = dialogScreen.findViewById<Button>(R.id.stayBtn)
 
         goToBtn.setOnClickListener {
-            Toast.makeText(requireContext(), "Go to maps", Toast.LENGTH_SHORT).show()
+            val mapsIntent = Intent(Intent.ACTION_VIEW)
+            startActivity(mapsIntent)
         }
         stayBtn.setOnClickListener {
             dialogScreen.dismiss()
@@ -80,8 +83,9 @@ class FilialsFragment : Fragment() {
         dialogScreen.show()
     }
 
-    private fun callAlertDialogToCall(){
-
+    private fun callAction(number: String){
+        val dialIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$number"))
+        startActivity(dialIntent)
     }
 
 }

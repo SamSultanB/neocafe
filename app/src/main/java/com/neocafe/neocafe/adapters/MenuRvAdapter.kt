@@ -3,12 +3,14 @@ package com.neocafe.neocafe.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.databinding.RvMenuItemBinding
 import com.neocafe.neocafe.entities.menu.Menu
+import com.neocafe.neocafe.entities.order.Basket
 
 class MenuRvAdapter: RecyclerView.Adapter<MenuRvAdapter.ViewHolder>() {
 
@@ -22,6 +24,25 @@ class MenuRvAdapter: RecyclerView.Adapter<MenuRvAdapter.ViewHolder>() {
             binding.nameTxt.text = menu.name
             binding.categoryTxt.text = menu.slug
             binding.priceTxt.text = menu.price
+            binding.amountTxt.text = Basket.getAmount(menu).toString()
+            if(Basket.getAmount(menu) != 0){
+                binding.decrementBtn.visibility = View.VISIBLE
+                binding.amountTxt.visibility = View.VISIBLE
+            }
+            binding.incrementBtn.setOnClickListener {
+                binding.decrementBtn.visibility = View.VISIBLE
+                binding.amountTxt.visibility = View.VISIBLE
+                if(Basket.getAmount(menu) < 9){
+                    Basket.addMenu(menu)
+                    binding.amountTxt.text = Basket.getAmount(menu).toString()
+                }
+            }
+            binding.decrementBtn.setOnClickListener {
+                if(Basket.getAmount(menu) > 0){
+                    Basket.delete(menu)
+                    binding.amountTxt.text = Basket.getAmount(menu).toString()
+                }
+            }
         }
     }
 
