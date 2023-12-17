@@ -123,7 +123,6 @@ class MainPageFragment : Fragment() {
         viewModel.getAllBranchesResponse.observe(viewLifecycleOwner, Observer{
             if(it is Resource.Success){
                 it.data?.let { it1 -> adapter.setList(it1) }
-                Toast.makeText(requireContext(), "Filials are here!", Toast.LENGTH_SHORT).show()
             }else if(it is Resource.Error){
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
             }

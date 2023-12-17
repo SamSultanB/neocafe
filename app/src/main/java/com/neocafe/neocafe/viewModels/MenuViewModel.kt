@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neocafe.neocafe.entities.branches.Branche
 import com.neocafe.neocafe.entities.categories.Category
-import com.neocafe.neocafe.entities.menu.Menu
+import com.neocafe.neocafe.entities.menu.responses.Menu
 import com.neocafe.neocafe.models.api.retrofit.Resource
 import com.neocafe.neocafe.models.repositories.MenuRepository
 import kotlinx.coroutines.launch

@@ -30,7 +30,10 @@ class AuthViewModel(private  val repository: AuthRepository, private val session
                     registrationResponse.postValue(Resource.Success(it))
                 }
             }else{
-                registrationResponse.postValue(Resource.Error(response.message()))
+//                registrationResponse.postValue(Resource.Error(response.message()))
+                val error = response.errorBody()
+                registrationResponse.postValue(Resource.Error(error!!.string()))
+
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.neocafe.neocafe.entities.order
+package com.neocafe.neocafe.entities.order.requests
 
 import java.io.Serializable
 

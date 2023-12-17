@@ -1,6 +1,6 @@
 package com.neocafe.neocafe.entities.order
 
-import com.neocafe.neocafe.entities.menu.Menu
+import com.neocafe.neocafe.entities.menu.responses.Menu
 import kotlin.math.roundToInt
 
 object Basket {

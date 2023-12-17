@@ -2,7 +2,7 @@ package com.neocafe.neocafe.models.api.connections
 
 import com.neocafe.neocafe.entities.branches.Branche
 import com.neocafe.neocafe.entities.categories.Category
-import com.neocafe.neocafe.entities.menu.Menu
+import com.neocafe.neocafe.entities.menu.responses.Menu
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

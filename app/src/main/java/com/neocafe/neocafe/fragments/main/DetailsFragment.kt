@@ -14,7 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.adapters.MenuRvAdapter
 import com.neocafe.neocafe.databinding.FragmentDetailsBinding
-import com.neocafe.neocafe.entities.menu.Menu
+import com.neocafe.neocafe.entities.menu.responses.Menu
 import com.neocafe.neocafe.entities.order.Basket
 import com.neocafe.neocafe.models.api.retrofit.Resource
 import com.neocafe.neocafe.viewModels.MenuViewModel
