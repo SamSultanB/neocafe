@@ -39,7 +39,7 @@
     <string name="bonus">Бонусы</string>
     <string name="about_bonus">Накапливайте бонусы и совершайте выгодные для Вас заказы! 1 бонус = 1 сом</string>
     <string name="ok">Хорошо</string>
-    <string name="aboutChanging">Изменения не сохранены</string>
+    <string name="aboutChanging">Изменения сохранены</string>
     <string name="wantToLeave">Хотите покинуть страницу редактирования?</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>

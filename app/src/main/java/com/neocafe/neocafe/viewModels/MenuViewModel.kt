@@ -8,6 +8,7 @@ import com.neocafe.neocafe.entities.categories.Category
 import com.neocafe.neocafe.entities.menu.responses.Menu
 import com.neocafe.neocafe.models.api.retrofit.Resource
 import com.neocafe.neocafe.models.repositories.MenuRepository
+import com.neocafe.neocafe.utils.Constants
 import kotlinx.coroutines.launch
 
 class MenuViewModel(private val repository: MenuRepository): ViewModel()  {
@@ -20,12 +21,10 @@ class MenuViewModel(private val repository: MenuRepository): ViewModel()  {
 
     val getAllBranchesResponse: MutableLiveData<Resource<List<Branche>>> = MutableLiveData()
 
-    val chooseBrancheResponse: MutableLiveData<Resource<Branche>> = MutableLiveData()
-
-    fun getCategories(){
+    fun getCategories(id: Int){
         viewModelScope.launch {
             getCategoriesResponse.postValue(Resource.Loading())
-            val response = repository.getCategories()
+            val response = repository.getCategories(id)
             if(response.isSuccessful){
                 response.body()?.let {
                     getCategoriesResponse.postValue(Resource.Success(it))
@@ -36,10 +35,10 @@ class MenuViewModel(private val repository: MenuRepository): ViewModel()  {
         }
     }
 
-    fun getPopulars(){
+    fun getPopulars(id: Int){
         viewModelScope.launch {
             getPopularsResponse.postValue(Resource.Loading())
-            val response = repository.getPopulars()
+            val response = repository.getPopulars(id)
             if(response.isSuccessful){
                 response.body()?.let {
                     getPopularsResponse.postValue(Resource.Success(it))
@@ -50,10 +49,10 @@ class MenuViewModel(private val repository: MenuRepository): ViewModel()  {
         }
     }
 
-    fun getMenu(slug: String){
+    fun getMenu(slug: String, id: Int){
         viewModelScope.launch {
             getPopularsResponse.postValue(Resource.Loading())
-            val response = repository.getMenu(slug)
+            val response = repository.getMenu(slug, id)
             if(response.isSuccessful){
                 response.body()?.let {
                     getMenuResponse.postValue(Resource.Success(it))
@@ -74,20 +73,6 @@ class MenuViewModel(private val repository: MenuRepository): ViewModel()  {
                 }
             }else{
                 getAllBranchesResponse.postValue(Resource.Error(response.message()))
-            }
-        }
-    }
-
-    fun chooseBranche(id: Int){
-        viewModelScope.launch {
-            chooseBrancheResponse.postValue(Resource.Loading())
-            val response = repository.chooseBranche(id)
-            if(response.isSuccessful){
-                response.body()?.let {
-                    chooseBrancheResponse.postValue(Resource.Success(it))
-                }
-            }else{
-                chooseBrancheResponse.postValue(Resource.Error(response.message()))
             }
         }
     }

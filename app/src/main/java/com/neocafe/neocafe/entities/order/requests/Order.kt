@@ -1,17 +1,14 @@
 package com.neocafe.neocafe.entities.order.requests
 
+import com.neocafe.neocafe.entities.order.responses.OrderBranch
 import java.io.Serializable
 
 data class Order(
-    val status: String? = null,
+    val id: Int,
+    val status: String,
     val user: Int? = null,
-    val menu: List<MenuItem>,
-    val extra_products: List<OrderExtraItem>,
+    val branch: OrderBranch,
     val items: List<OrderItem>,
-    val bonuses_writen_off: String,
-    val cashback: String,
     val created: String,
-    val updated: String,
-    val branch: Int,
     val get_total_cost: String
 ): Serializable

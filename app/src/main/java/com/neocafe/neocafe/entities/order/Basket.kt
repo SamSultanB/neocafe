@@ -28,6 +28,7 @@ object Basket {
         if(menuInOrders != null){
             if(menuInOrders.amount == 1){
                 order.remove(menu.name)
+                totalPrice = 0
             }else{
                 menuInOrders.amount --
                 val decimal = menu.price.toDouble()

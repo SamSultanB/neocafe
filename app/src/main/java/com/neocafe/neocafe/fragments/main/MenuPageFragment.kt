@@ -14,6 +14,7 @@ import com.neocafe.neocafe.adapters.MenuRvAdapter
 import com.neocafe.neocafe.adapters.MenuVpAdapter
 import com.neocafe.neocafe.databinding.FragmentMenuPageBinding
 import com.neocafe.neocafe.models.api.retrofit.Resource
+import com.neocafe.neocafe.utils.Constants
 import com.neocafe.neocafe.viewModels.MenuViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -43,13 +44,13 @@ class MenuPageFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        viewModel.getCategories()
+        viewModel.getCategories(Constants.brancheId)
+        getCategoriesResponse(position!!)
 
-        getCategoriesResponse()
     }
 
 
-    private fun getCategoriesResponse(){
+    private fun getCategoriesResponse(pos: Int){
         val tablayout = binding.categoriesTab
         viewModel.getCategoriesResponse.observe(viewLifecycleOwner, Observer {
             if(it is Resource.Success){
@@ -58,8 +59,10 @@ class MenuPageFragment : Fragment() {
                     binding.viewPager.adapter = adapterVp
                     TabLayoutMediator(tablayout, binding.viewPager){tab, position ->
                         tab.text = it1[position].name
-                        viewModel.getMenu(it1[position].slug)
+                        viewModel.getMenu(it1[position].slug, Constants.brancheId)
                     }.attach()
+
+                    binding.categoriesTab.getTabAt(pos)?.select()
                 }
             }else if(it is Resource.Error){
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()

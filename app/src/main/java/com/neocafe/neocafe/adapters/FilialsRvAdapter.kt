@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.databinding.RvFilialItemBinding
 import com.neocafe.neocafe.entities.branches.Branche
+import java.time.DayOfWeek
+import java.time.LocalDate
 
 class FilialsRvAdapter: RecyclerView.Adapter<FilialsRvAdapter.ViewHolder>(){
 
@@ -22,6 +24,9 @@ class FilialsRvAdapter: RecyclerView.Adapter<FilialsRvAdapter.ViewHolder>(){
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val binding = RvFilialItemBinding.bind(itemView)
+        val currentDate = LocalDate.now()
+        // Get the day of the week as an enum (DayOfWeek)
+        val dayOfWeekEnum: DayOfWeek = currentDate.dayOfWeek
         fun bind(branche: Branche){
             val colorFilter = LightingColorFilter(Color.rgb(153, 143, 166), 0)
             binding.filialImg.colorFilter = colorFilter
@@ -29,7 +34,15 @@ class FilialsRvAdapter: RecyclerView.Adapter<FilialsRvAdapter.ViewHolder>(){
             binding.filialNameTxt.text = branche.name
             binding.addressTxt.text = branche.address
             binding.phoneNumberTxt.text = branche.phone_number
-            binding.scheduleTxt.text = branche.work_schedule
+            when(dayOfWeekEnum){
+                DayOfWeek.MONDAY -> binding.scheduleTxt.text = branche.monday
+                DayOfWeek.TUESDAY -> binding.scheduleTxt.text = branche.tuesday
+                DayOfWeek.WEDNESDAY -> binding.scheduleTxt.text = branche.wednesday
+                DayOfWeek.THURSDAY -> binding.scheduleTxt.text = branche.thursday
+                DayOfWeek.FRIDAY -> binding.scheduleTxt.text = branche.friday
+                DayOfWeek.SATURDAY -> binding.scheduleTxt.text = branche.saturday
+                DayOfWeek.SUNDAY -> binding.scheduleTxt.text = branche.sunday
+            }
         }
     }
 

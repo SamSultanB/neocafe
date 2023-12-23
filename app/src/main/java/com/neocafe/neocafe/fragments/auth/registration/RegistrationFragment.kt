@@ -37,10 +37,15 @@ class RegistrationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val birthdate = arguments?.getString("key")
         spinnerCountryCode()
         setCountryCode()
         binding.getCodeBtn.setOnClickListener {
-            registrationRequest()
+            if (birthdate != null) {
+                registrationRequest(birthdate)
+            }else{
+                registrationRequest()
+            }
         }
 
         registrationResponse()
@@ -61,13 +66,13 @@ class RegistrationFragment : Fragment() {
         })
     }
 
-    private fun registrationRequest(){
+    private fun registrationRequest(birthdate: String? = null){
         val number = binding.phoneNumberEditTxt.text.toString()
         val maskNumber = binding.phoneNumberEditTxt.maskString.toString()
         val userName = binding.userNameEditTxt.text.toString()
         if(viewModel.validPhoneNumber(number.length, maskNumber.length) == null && !userName.isEmpty()){
             val userNumber = (binding.chosenCountry.text.toString()+number).replace(" ".toRegex(), "")
-            val registrationForm = RegistrationForm(userName, userNumber, "2023-11-30")
+            val registrationForm = RegistrationForm(userName, userNumber, birthdate)
             viewModel.registration(registrationForm)
         }else{
             binding.errorTxt.visibility = View.VISIBLE

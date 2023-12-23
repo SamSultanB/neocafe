@@ -49,14 +49,17 @@ class OTPVerificationFragment : Fragment() {
             }else if(it is Resource.Error){
                 binding.todoTxt.text = "Код введен неверно, попробуйте еще раз"
                 binding.todoTxt.setTextColor(Color.RED)
-                Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                binding.inputCode1.setTextColor(Color.RED)
+                binding.inputCode2.setTextColor(Color.RED)
+                binding.inputCode3.setTextColor(Color.RED)
+                binding.inputCode4.setTextColor(Color.RED)
+//                Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
             }
         })
     }
 
     private fun otpCheckRequest(){
         val otpCode = (binding.inputCode1.text.toString() + binding.inputCode2.text.toString() + binding.inputCode3.text.toString() + binding.inputCode4.text.toString()).toInt()
-        Toast.makeText(requireContext(), otpCode.toString(), Toast.LENGTH_SHORT).show()
         viewModel.otpCheck(OTPForm(otpCode))
     }
 

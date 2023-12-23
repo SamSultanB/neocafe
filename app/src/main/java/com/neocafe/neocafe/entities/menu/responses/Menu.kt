@@ -1,7 +1,7 @@
 package com.neocafe.neocafe.entities.menu.responses
 
+import com.neocafe.neocafe.entities.order.requests.ExtraItem
 import java.io.Serializable
-import java.time.temporal.TemporalAmount
 
 data class Menu(
     val id: Int,
@@ -12,6 +12,6 @@ data class Menu(
     val image: String?,
     val price: String,
     val available: Boolean,
-    val extra_product: List<String>,
+    val extra_product: List<ExtraItem>,
     var amount: Int = 0
 ): Serializable

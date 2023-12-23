@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -17,6 +18,7 @@ import com.neocafe.neocafe.databinding.FragmentDetailsBinding
 import com.neocafe.neocafe.entities.menu.responses.Menu
 import com.neocafe.neocafe.entities.order.Basket
 import com.neocafe.neocafe.models.api.retrofit.Resource
+import com.neocafe.neocafe.utils.Constants
 import com.neocafe.neocafe.viewModels.MenuViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -41,7 +43,7 @@ class DetailsFragment : Fragment() {
         bottomNavigationView?.visibility = View.GONE
         binding.additionsRv.layoutManager = LinearLayoutManager(requireContext())
         binding.additionsRv.adapter = popularsAdapter
-        viewModel.getPopulars()
+        viewModel.getPopulars(Constants.brancheId)
         getPopularsResponse()
 
         val data = arguments?.getSerializable("key") as Menu
@@ -51,6 +53,28 @@ class DetailsFragment : Fragment() {
         Glide.with(binding.imageImg).load(data.image).into(binding.imageImg)
         binding.nameTxt.text = data.name
         binding.descriptionTxt.text = data.description
+        if(data.extra_product.isEmpty()){
+            binding.coffeOptions.visibility = View.GONE
+        }else{
+
+        }
+
+        binding.radioMilkGroup.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.radioMilk1 -> {
+                    binding.radioMilk2.isChecked = false
+                    binding.radioMilk3.isChecked = false
+                }
+                R.id.radioMilk2 -> {
+                    binding.radioMilk1.isChecked = false
+                    binding.radioMilk3.isChecked = false
+                }
+                R.id.radioMilk3 -> {
+                    binding.radioMilk1.isChecked = false
+                    binding.radioMilk2.isChecked = false
+                }
+            }
+        }
 
         binding.arrowBackBtn.setOnClickListener {
             findNavController().navigateUp()

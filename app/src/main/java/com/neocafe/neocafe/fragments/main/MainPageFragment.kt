@@ -1,26 +1,23 @@
 package com.neocafe.neocafe.fragments.main
 
-import android.app.Dialog
-import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.adapters.MenuRvAdapter
-import com.neocafe.neocafe.adapters.SelectBranchRvAdapter
 import com.neocafe.neocafe.databinding.FragmentMainPageBinding
+import com.neocafe.neocafe.entities.branches.Branche
 import com.neocafe.neocafe.models.api.retrofit.Resource
+import com.neocafe.neocafe.utils.Constants
+import com.neocafe.neocafe.utils.SpinnerBranchesAdapter
 import com.neocafe.neocafe.viewModels.MenuViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -30,6 +27,7 @@ class MainPageFragment : Fragment() {
     private lateinit var binding: FragmentMainPageBinding
     private val viewModel by viewModel<MenuViewModel>()
     private val menuAdapter by inject<MenuRvAdapter>()
+    private lateinit var spinnerAdapter: SpinnerBranchesAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,6 +40,8 @@ class MainPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.getAllBranches()
+        branchesResponse()
         binding.popularsRv.layoutManager = LinearLayoutManager(requireContext())
         binding.popularsRv.adapter = menuAdapter
 
@@ -51,18 +51,18 @@ class MainPageFragment : Fragment() {
             findNavController().navigate(R.id.action_mainPageFragment_to_detailsFragment, bundle)
         }
 
-        viewModel.getPopulars()
+        viewModel.getPopulars(Constants.brancheId)
         getPopularsResponse()
-        viewModel.getCategories()
-        getCategoriesResponse()
-
         navigateToCategories()
+
 
         binding.toNotificationsBtn.setOnClickListener {
             findNavController().navigate(R.id.action_mainPageFragment_to_notificationsFragment)
         }
         binding.moreBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_mainPageFragment_to_menuPageFragment)
+            val bundle = Bundle()
+            bundle.putInt("key", 0)
+            findNavController().navigate(R.id.action_mainPageFragment_to_menuPageFragment, bundle)
         }
     }
 
@@ -103,40 +103,63 @@ class MainPageFragment : Fragment() {
 
     private fun navigateToCategories(){
         binding.category1Img.setOnClickListener {
-            findNavController().navigate(R.id.action_mainPageFragment_to_menuPageFragment)
+            val bundle = Bundle()
+            bundle.putInt("key", 0)
+            findNavController().navigate(R.id.action_mainPageFragment_to_menuPageFragment, bundle)
         }
         binding.category2Img.setOnClickListener {
-            findNavController().navigate(R.id.action_mainPageFragment_to_menuPageFragment)
+            val bundle = Bundle()
+            bundle.putInt("key", 1)
+            findNavController().navigate(R.id.action_mainPageFragment_to_menuPageFragment, bundle)
         }
         binding.category3Img.setOnClickListener {
-            findNavController().navigate(R.id.action_mainPageFragment_to_menuPageFragment)
+            val bundle = Bundle()
+            bundle.putInt("key", 2)
+            findNavController().navigate(R.id.action_mainPageFragment_to_menuPageFragment, bundle)
         }
         binding.category4Img.setOnClickListener {
-            findNavController().navigate(R.id.action_mainPageFragment_to_menuPageFragment)
+            val bundle = Bundle()
+            bundle.putInt("key", 3)
+            findNavController().navigate(R.id.action_mainPageFragment_to_menuPageFragment, bundle)
         }
         binding.category5Img.setOnClickListener {
-            findNavController().navigate(R.id.action_mainPageFragment_to_menuPageFragment)
+            val bundle = Bundle()
+            bundle.putInt("key", 4)
+            findNavController().navigate(R.id.action_mainPageFragment_to_menuPageFragment, bundle)
         }
     }
 
-    private fun branchesResponse(adapter: SelectBranchRvAdapter){
+    private fun branchesResponse(){
         viewModel.getAllBranchesResponse.observe(viewLifecycleOwner, Observer{
             if(it is Resource.Success){
-                it.data?.let { it1 -> adapter.setList(it1) }
+                it.data?.let { it1 ->
+                    spinnerBranches(it1)
+                    selectBranche()
+                }
             }else if(it is Resource.Error){
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
             }
         })
     }
 
-    private fun chosenResponse(){
-        viewModel.chooseBrancheResponse.observe(viewLifecycleOwner, Observer{
-            if(it is Resource.Success){
-                Toast.makeText(requireContext(), "Choosen!", Toast.LENGTH_SHORT).show()
-            }else if(it is Resource.Error){
-                Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+    private fun selectBranche(){
+        binding.spinnerBranches.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
+                val selectedValue: Branche = parentView?.getItemAtPosition(position) as Branche
+                Constants.brancheId = selectedValue.id
+                Constants.selectedItemPosition = position
+                viewModel.getCategories(Constants.brancheId)
+                getCategoriesResponse()
             }
-        })
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
+    }
+
+    private fun spinnerBranches(branches: List<Branche>) {
+        spinnerAdapter = SpinnerBranchesAdapter(requireContext(), branches)
+        binding.spinnerBranches.adapter = spinnerAdapter
+        binding.spinnerBranches.setSelection(Constants.selectedItemPosition)
     }
 
 }

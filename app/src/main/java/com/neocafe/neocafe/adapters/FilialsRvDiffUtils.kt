@@ -25,7 +25,13 @@ class FilialsRvDiffUtils(
             oldList[oldItemPosition].image != newList[newItemPosition].image -> false
             oldList[oldItemPosition].address != newList[newItemPosition].address -> false
             oldList[oldItemPosition].phone_number != newList[newItemPosition].phone_number -> false
-            oldList[oldItemPosition].work_schedule != newList[newItemPosition].work_schedule -> false
+            oldList[oldItemPosition].monday != newList[newItemPosition].monday -> false
+            oldList[oldItemPosition].tuesday != newList[newItemPosition].tuesday -> false
+            oldList[oldItemPosition].wednesday != newList[newItemPosition].wednesday -> false
+            oldList[oldItemPosition].thursday != newList[newItemPosition].thursday -> false
+            oldList[oldItemPosition].friday != newList[newItemPosition].friday -> false
+            oldList[oldItemPosition].saturday != newList[newItemPosition].saturday -> false
+            oldList[oldItemPosition].sunday != newList[newItemPosition].sunday -> false
             else -> true
         }
     }

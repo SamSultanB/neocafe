@@ -46,7 +46,9 @@ class BasketFragment : Fragment() {
         }
 
         binding.emptyScreen.toMenuBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_basketFragment_to_menuPageFragment)
+            val bundle = Bundle()
+            bundle.putInt("key", 0)
+            findNavController().navigate(R.id.action_basketFragment_to_menuPageFragment, bundle)
         }
         binding.ordersListScreen.fullPriceTxt.paintFlags = binding.ordersListScreen.fullPriceTxt.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         binding.ordersListScreen.orderBtn.setOnClickListener {
@@ -68,7 +70,9 @@ class BasketFragment : Fragment() {
             binding.ordersListScreen.inShopBtn.setTextColor(resources.getColorStateList(R.color.white))
         }
         binding.ordersListScreen.addMoreBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_basketFragment_to_menuPageFragment)
+            val bundle = Bundle()
+            bundle.putInt("key", 0)
+            findNavController().navigate(R.id.action_basketFragment_to_menuPageFragment, bundle)
         }
 
 

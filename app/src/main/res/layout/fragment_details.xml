@@ -74,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -90,30 +90,88 @@
                         android:textColor="@color/client_main"
                         android:textStyle="bold"/>
 
-                    <RadioButton
-                        android:id="@+id/cowMilk"
-                        android:layout_width="wrap_content"
+                    <RadioGroup
+                        android:id="@+id/radioMilkGroup"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="@string/cowMilk"
-                        android:textSize="18sp"
-                        android:textColor="@color/client_main"/>
+                        android:orientation="vertical">
 
-                    <RadioButton
-                        android:id="@+id/sheepMilk"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/sheepMilk"
-                        android:textSize="18sp"
-                        android:textColor="@color/client_main"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-                    <RadioButton
-                        android:id="@+id/soyaMilk"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/SoyaMilk"
-                        android:textSize="18sp"
-                        android:textColor="@color/client_main"/>
+                            <RadioButton
+                                android:id="@+id/radioMilk1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="false"
+                                android:text="@string/cowMilk"
+                                android:textSize="18sp"
+                                android:textColor="@color/client_main"/>
+
+                            <TextView
+                                android:id="@+id/radioMilk1Price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:text="0 c"
+                                android:textSize="18sp"
+                                android:textColor="@color/client_second"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/radioMilk2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="false"
+                                android:text="@string/cowMilk"
+                                android:textSize="18sp"
+                                android:textColor="@color/client_main"/>
+
+                            <TextView
+                                android:id="@+id/radioMilk2Price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:text="0 c"
+                                android:textSize="18sp"
+                                android:textColor="@color/client_second"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/radioMilk3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="false"
+                                android:text="@string/cowMilk"
+                                android:textSize="18sp"
+                                android:textColor="@color/client_main"/>
+
+                            <TextView
+                                android:id="@+id/radioMilk3Price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:text="0 c"
+                                android:textSize="18sp"
+                                android:textColor="@color/client_second"/>
+
+                        </LinearLayout>
+
+                    </RadioGroup>
 
                 </LinearLayout>
 
@@ -130,22 +188,79 @@
                         android:textColor="@color/client_main"
                         android:textSize="22sp"/>
 
-                    <CheckBox
-                        android:id="@+id/strawberryChBox"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="Клубничный"
-                        android:textSize="18sp"
-                        android:textColor="@color/client_main"/>
+                        android:orientation="horizontal">
 
-                    <CheckBox
-                        android:id="@+id/caramelChBox"
-                        android:layout_width="wrap_content"
+                        <CheckBox
+                            android:id="@+id/checkbox1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="Клубничный"
+                            android:textSize="18sp"
+                            android:textColor="@color/client_main"/>
+
+                        <TextView
+                            android:id="@+id/checkbox1Price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:text="0 c"
+                            android:textSize="18sp"
+                            android:textColor="@color/client_second"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/caramel"
-                        android:textSize="18sp"
-                        android:textColor="@color/client_main"/>
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/checkbox2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/caramel"
+                            android:textSize="18sp"
+                            android:textColor="@color/client_main"/>
+
+                        <TextView
+                            android:id="@+id/checkbox2Price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:text="0 c"
+                            android:textSize="18sp"
+                            android:textColor="@color/client_second"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/checkbox3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/caramel"
+                            android:textSize="18sp"
+                            android:textColor="@color/client_main"/>
+
+                        <TextView
+                            android:id="@+id/checkbox3Price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:text="0 c"
+                            android:textSize="18sp"
+                            android:textColor="@color/client_second"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

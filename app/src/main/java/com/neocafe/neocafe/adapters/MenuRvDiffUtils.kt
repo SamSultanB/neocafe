@@ -25,7 +25,7 @@ class MenuRvDiffUtils(
             oldList[oldItemPosition].name != newList[newItemPosition].name -> false
             oldList[oldItemPosition].image != newList[newItemPosition].image -> false
             oldList[oldItemPosition].available != newList[newItemPosition].available -> false
-            oldList[oldItemPosition].popular != newList[newItemPosition].popular -> false
+            oldList[oldItemPosition].extra_product != newList[newItemPosition].extra_product -> false
             oldList[oldItemPosition].category != newList[newItemPosition].category -> false
             oldList[oldItemPosition].slug != newList[newItemPosition].slug -> false
             oldList[oldItemPosition].description != newList[newItemPosition].description -> false

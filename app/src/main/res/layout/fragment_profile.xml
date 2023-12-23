@@ -55,9 +55,10 @@
             android:layout_marginTop="11dp">
 
             <TextView
+                android:id="@+id/userNameTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Себастьян"
+                android:text=""
                 android:textColor="@color/client_main"
                 android:textStyle="bold"
                 android:textSize="24sp"/>

@@ -14,6 +14,7 @@ import com.neocafe.neocafe.adapters.MenuRvAdapter
 import com.neocafe.neocafe.databinding.FragmentCategoryListBinding
 import com.neocafe.neocafe.entities.categories.Category
 import com.neocafe.neocafe.models.api.retrofit.Resource
+import com.neocafe.neocafe.utils.Constants
 import com.neocafe.neocafe.viewModels.MenuViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -41,7 +42,7 @@ class CategoryListFragment : Fragment() {
         val data = arguments?.getSerializable("key") as Category
         binding.categoryTxt.text = data.name
 
-        viewModel.getMenu(data.slug)
+        viewModel.getMenu(data.slug, Constants.brancheId)
         getMenuResponse()
 
         menuRvAdapter.clickToDetails = {
