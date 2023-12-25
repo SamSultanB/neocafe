@@ -10,17 +10,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.adapters.MenuRvAdapter
 import com.neocafe.neocafe.databinding.FragmentBasketBinding
 import com.neocafe.neocafe.entities.order.Basket
+import com.neocafe.neocafe.entities.order.requests.MenuItem
+import com.neocafe.neocafe.entities.order.requests.OrderItem
+import com.neocafe.neocafe.entities.order.responses.OrderExtraItem
+import com.neocafe.neocafe.entities.order.responses.OrderMenu
+import com.neocafe.neocafe.models.api.retrofit.Resource
+import com.neocafe.neocafe.viewModels.BasketViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BasketFragment : Fragment() {
 
     private lateinit var binding: FragmentBasketBinding
+    private val viewModel by viewModel<BasketViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,7 +85,20 @@ class BasketFragment : Fragment() {
             findNavController().navigate(R.id.action_basketFragment_to_menuPageFragment, bundle)
         }
 
+        orderResponse()
 
+
+    }
+
+    private fun orderResponse(){
+        viewModel.orderResponse.observe(viewLifecycleOwner, Observer{
+            if(it is Resource.Success){
+                Toast.makeText(requireContext(), "Order made!!", Toast.LENGTH_SHORT).show()
+            }else if(it is Resource.Error){
+                println(it.message)
+                Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun callAlertDialog(){
@@ -105,10 +128,12 @@ class BasketFragment : Fragment() {
         val cancelBtn = dialogScreen.findViewById<Button>(R.id.noBtn)
 
          cancelBtn.setOnClickListener {
-            dialogScreen.dismiss()
+             viewModel.order(OrderItem(0, MenuItem("cappucino", "199"), 1, OrderExtraItem("moloko", "10"), 1, "0"))
+             dialogScreen.dismiss()
         }
 
         writeOFFBtn.setOnClickListener {
+            viewModel.order(OrderItem(0, MenuItem("cappucino", "199"), 1, OrderExtraItem("moloko", "10"), 1, "0"))
             dialogScreen.dismiss()
         }
 

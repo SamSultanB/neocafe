@@ -24,6 +24,8 @@ class ProfileViewModel(private val repository: ProfileRepository): ViewModel() {
                     getProfileResponse.postValue(Resource.Success(it))
                 }
             }else{
+//                val error = response.errorBody()
+//                getProfileResponse.postValue(Resource.Error(error!!.string()))
                 getProfileResponse.postValue(Resource.Error(response.message()))
             }
         }

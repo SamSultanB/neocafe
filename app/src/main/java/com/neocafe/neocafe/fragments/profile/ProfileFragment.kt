@@ -61,6 +61,7 @@ class ProfileFragment : Fragment() {
                 profile = Profile(it.data?.first_name.toString(), it.data?.phone_number.toString(), it.data?.date_of_birth.toString(), it.data?.bonuses.toString(), it.data?.active_orders!!, it.data?.completed_orders!!)
                 binding.userNameTxt.text = it.data?.first_name
             }else if(it is Resource.Error){
+//                println(it.message)
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
             }
         })

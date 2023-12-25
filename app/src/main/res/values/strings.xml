@@ -47,6 +47,8 @@
     <string name="using_bonus">Списание бонусов</string>
     <string name="neocafe">neocafe</string>
     <string name="choose_branch">Выберите филиал</string>
+    <string name="something_went_wrong">Упс, что-то пошло не так</string>
+    <string name="repeat">Повторить</string>
     <string-array name="country">
         <item>KG</item>
         <item>USA</item>

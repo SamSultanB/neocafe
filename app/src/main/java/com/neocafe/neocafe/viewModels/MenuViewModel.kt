@@ -21,6 +21,8 @@ class MenuViewModel(private val repository: MenuRepository): ViewModel()  {
 
     val getAllBranchesResponse: MutableLiveData<Resource<List<Branche>>> = MutableLiveData()
 
+    val getAllMenuResponse: MutableLiveData<Resource<List<Menu>>> = MutableLiveData()
+
     fun getCategories(id: Int){
         viewModelScope.launch {
             getCategoriesResponse.postValue(Resource.Loading())
@@ -73,6 +75,20 @@ class MenuViewModel(private val repository: MenuRepository): ViewModel()  {
                 }
             }else{
                 getAllBranchesResponse.postValue(Resource.Error(response.message()))
+            }
+        }
+    }
+
+    fun getAllMenu(id: Int){
+        viewModelScope.launch {
+            getAllMenuResponse.postValue(Resource.Loading())
+            val response = repository.getAllMenu(id)
+            if(response.isSuccessful){
+                response.body()?.let {
+                    getAllMenuResponse.postValue(Resource.Success(it))
+                }
+            }else{
+                getAllMenuResponse.postValue(Resource.Error(response.message()))
             }
         }
     }

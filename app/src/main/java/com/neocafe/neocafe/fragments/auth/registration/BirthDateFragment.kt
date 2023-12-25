@@ -44,7 +44,7 @@ class BirthDateFragment : Fragment() {
         if(!isValidDate(birthdate) && !birthdate.isEmpty()){
             binding.instructionTxt.text = "Неправильная дата рождения"
             binding.instructionTxt.setTextColor(Color.RED)
-        }else if(isValidDate(birthdate) && birthdate.isEmpty()){
+        }else if(isValidDate(birthdate) && !birthdate.isEmpty()){
             val bundle = Bundle()
             bundle.putString("key", convertDateFormatTo(binding.birthdateEditTxt.text.toString()))
             findNavController().navigate(R.id.action_birthDateFragment_to_registrationFragment, bundle)

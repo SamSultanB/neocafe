@@ -4,17 +4,20 @@ import android.content.Context
 import com.neocafe.neocafe.adapters.FilialsRvAdapter
 import com.neocafe.neocafe.adapters.MenuRvAdapter
 import com.neocafe.neocafe.models.api.connections.AuthApi
+import com.neocafe.neocafe.models.api.connections.BasketApi
 import com.neocafe.neocafe.models.api.connections.BranchesApi
 import com.neocafe.neocafe.models.api.connections.MenuApi
 import com.neocafe.neocafe.models.api.connections.ProfileApi
 import com.neocafe.neocafe.models.api.retrofit.SessionManager
 import com.neocafe.neocafe.models.api.retrofit.TokenInterceptor
 import com.neocafe.neocafe.models.repositories.AuthRepository
+import com.neocafe.neocafe.models.repositories.BasketRepository
 import com.neocafe.neocafe.models.repositories.BranchesRepository
 import com.neocafe.neocafe.models.repositories.MenuRepository
 import com.neocafe.neocafe.models.repositories.ProfileRepository
 import com.neocafe.neocafe.utils.Constants
 import com.neocafe.neocafe.viewModels.AuthViewModel
+import com.neocafe.neocafe.viewModels.BasketViewModel
 import com.neocafe.neocafe.viewModels.BranchesViewModel
 import com.neocafe.neocafe.viewModels.MenuViewModel
 import com.neocafe.neocafe.viewModels.ProfileViewModel
@@ -24,6 +27,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 
 val retrofitModule = module {
     single { getSessionManager(context = androidContext()) }
@@ -32,10 +36,12 @@ val retrofitModule = module {
     single { getOkHttpClient(get()) }
     single { getAuthApi(get()) }
     single { getMenuApi(get()) }
+    single { getBasketApi(get()) }
     single { getProfileApi(get()) }
     single{ getBranchesApi(get()) }
     factory { MenuRvAdapter() }
     single { FilialsRvAdapter() }
+    single { BasketRepository(get()) }
     single { BranchesRepository(get()) }
     single { ProfileRepository(get()) }
     factory { MenuRepository(get()) }
@@ -47,6 +53,7 @@ val viewModule = module {
     viewModel { AuthViewModel(get(), get()) }
     viewModel { BranchesViewModel(get())}
     viewModel { ProfileViewModel(get()) }
+    viewModel { BasketViewModel( get()) }
 }
 
 fun getRetrofit(okHttpClient: OkHttpClient): Retrofit{
@@ -77,6 +84,10 @@ fun getBranchesApi(retrofit: Retrofit): BranchesApi{
 
 fun getProfileApi(retrofit: Retrofit): ProfileApi{
     return retrofit.create(ProfileApi::class.java)
+}
+
+fun getBasketApi(retrofit: Retrofit): BasketApi{
+    return retrofit.create(BasketApi::class.java)
 }
 
 fun getInterceptor(sessionManager: SessionManager): TokenInterceptor{

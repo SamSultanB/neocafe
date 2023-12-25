@@ -21,4 +21,7 @@ interface MenuApi {
     @GET("/api-branches/list-branches/")
     suspend fun getAllBranches(): Response<List<Branche>>
 
+    @GET("/api-menu/list-menu/{branch_id}/")
+    suspend fun getAllMenu(@Path("branch_id") id: Int): Response<List<Menu>>
+
 }
