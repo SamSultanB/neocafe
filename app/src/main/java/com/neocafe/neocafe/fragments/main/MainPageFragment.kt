@@ -1,12 +1,13 @@
 package com.neocafe.neocafe.fragments.main
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +29,9 @@ class MainPageFragment : Fragment() {
     private val viewModel by viewModel<MenuViewModel>()
     private val menuAdapter by inject<MenuRvAdapter>()
     private lateinit var spinnerAdapter: SpinnerBranchesAdapter
+    private val searchViewAdapter by inject<MenuRvAdapter>()
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,6 +43,14 @@ class MainPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if(Constants.menu.isEmpty()){
+            viewModel.getAllMenu(Constants.brancheId)
+            getAllMenuResponse()
+        }
+        binding.searchMenuRv.layoutManager = LinearLayoutManager(requireContext())
+        binding.searchMenuRv.adapter = searchViewAdapter
+
+        setUpSearch()
 
         viewModel.getAllBranches()
         branchesResponse()
@@ -160,6 +172,37 @@ class MainPageFragment : Fragment() {
         spinnerAdapter = SpinnerBranchesAdapter(requireContext(), branches)
         binding.spinnerBranches.adapter = spinnerAdapter
         binding.spinnerBranches.setSelection(Constants.selectedItemPosition)
+    }
+
+    private fun setUpSearch(){
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+            override fun onQueryTextChange(newText: String): Boolean {
+                var filteredList = Constants.menu.filter { it.name.contains(newText, ignoreCase = true) || it.slug.contains(newText, ignoreCase = true) }
+                if(newText.isEmpty()){
+                    binding.searchMenuRv.visibility = View.GONE
+                    binding.mainContent.visibility = View.VISIBLE
+                    binding.searchView.clearFocus()
+                }else{
+                    binding.searchMenuRv.visibility = View.VISIBLE
+                    binding.mainContent.visibility = View.GONE
+                    searchViewAdapter.setMenuList(filteredList)
+                }
+                return false
+            }
+        })
+    }
+
+    private fun getAllMenuResponse(){
+        viewModel.getAllMenuResponse.observe(viewLifecycleOwner, Observer{
+            if(it is Resource.Success){
+                it.data?.let { it1 -> Constants.menu = it1 }
+            }else if(it is Resource.Error){
+                Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
 }

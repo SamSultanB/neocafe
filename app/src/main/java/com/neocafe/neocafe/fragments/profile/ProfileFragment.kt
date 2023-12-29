@@ -12,7 +12,9 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.neocafe.neocafe.R
+import com.neocafe.neocafe.adapters.LastOrdersRv
 import com.neocafe.neocafe.databinding.FragmentProfileBinding
 import com.neocafe.neocafe.entities.profile.responses.Profile
 import com.neocafe.neocafe.models.api.retrofit.Resource
@@ -24,6 +26,9 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private val viewModel by viewModel<ProfileViewModel>()
     private lateinit var profile: Profile
+    private val actualAdapter = LastOrdersRv()
+    private val lastOrders = LastOrdersRv()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +41,9 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.actualOrdersRv.layoutManager = LinearLayoutManager(requireContext())
+        binding.lastOrdersRv.layoutManager = LinearLayoutManager(requireContext())
+
         viewModel.getProfile()
         getProfileResponse()
         binding.bonusImg.setOnClickListener {
@@ -60,6 +68,10 @@ class ProfileFragment : Fragment() {
             if(it is Resource.Success){
                 profile = Profile(it.data?.first_name.toString(), it.data?.phone_number.toString(), it.data?.date_of_birth.toString(), it.data?.bonuses.toString(), it.data?.active_orders!!, it.data?.completed_orders!!)
                 binding.userNameTxt.text = it.data?.first_name
+                actualAdapter.setItems(profile.active_orders)
+                lastOrders.setItems(profile.completed_orders)
+                binding.actualOrdersRv.adapter = actualAdapter
+                binding.lastOrdersRv.adapter = lastOrders
             }else if(it is Resource.Error){
 //                println(it.message)
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()

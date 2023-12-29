@@ -1,11 +1,16 @@
 package com.neocafe.neocafe.entities.order.responses
 
+import com.neocafe.neocafe.entities.order.requests.MTO
+
 data class OrderItemResponse(
-    val order: Int,
-    val menu: OrderMenu,
-    val menu_quantity: Int,
-    val extra_product: OrderExtraItem,
-    val extra_product_quantity: Int,
-    val bonuses_used: String,
-    val cashback: String
+    val id: Int,
+    val order_type: String,
+    val status: String,
+    val branch: Int,
+    val user: Int? = null,
+    val bonuses_used: Int,
+    val created: String,
+    val total_price: Int,
+    val cashback: String,
+    val items: List<MTO>
 )

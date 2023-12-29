@@ -1,5 +1,6 @@
 package com.neocafe.neocafe.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ class MenuRvAdapter: RecyclerView.Adapter<MenuRvAdapter.ViewHolder>() {
         val binding = RvMenuItemBinding.bind(itemView)
         fun bind(menu: Menu){
             Glide.with(binding.image).load(menu.image).into(binding.image)
+
             binding.nameTxt.text = menu.name
             binding.categoryTxt.text = menu.slug
             binding.priceTxt.text = menu.price

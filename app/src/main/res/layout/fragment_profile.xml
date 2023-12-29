@@ -109,6 +109,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/actualOrdersRv"
+                android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -119,11 +120,11 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_marginTop="32dp"
-                android:layout_marginBottom="24dp"
                 android:textColor="@color/client_main"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/lastOrdersRv"
+                android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 

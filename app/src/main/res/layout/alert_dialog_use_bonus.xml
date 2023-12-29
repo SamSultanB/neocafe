@@ -11,18 +11,34 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/bonusTxt"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ваши бонусы: 100"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textAlignment="center"
+            android:orientation="horizontal"
             android:layout_gravity="center"
             android:layout_marginHorizontal="74dp"
-            android:layout_marginTop="24dp"/>
+            android:layout_marginTop="24dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ваши бонусы: "
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/bonusTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="110"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textAlignment="center" />
+
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/helpTxt"
@@ -46,7 +62,7 @@
             android:background="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/bonuxEditTxt"
+                android:id="@+id/bonusEditTxt"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:inputType="number"

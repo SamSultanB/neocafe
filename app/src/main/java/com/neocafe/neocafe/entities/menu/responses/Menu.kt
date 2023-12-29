@@ -1,6 +1,5 @@
 package com.neocafe.neocafe.entities.menu.responses
 
-import com.neocafe.neocafe.entities.order.requests.ExtraItem
 import java.io.Serializable
 
 data class Menu(

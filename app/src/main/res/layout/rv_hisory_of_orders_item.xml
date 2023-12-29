@@ -1,79 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="18dp"
-    android:background="@color/client_main_background">
+    android:layout_marginVertical="9dp"
+    app:cardElevation="0dp"
+    android:backgroundTint="@color/last_orders_background"
+    app:cardCornerRadius="4dp">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
-        android:layout_width="89dp"
-        android:layout_height="89dp"
-        app:cardCornerRadius="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/imageImg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/empty_image_icon" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="24dp"
+            android:layout_margin="1dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.cardview.widget.CardView>
+            <ImageView
+                android:id="@+id/imageImg"
+                android:layout_width="89dp"
+                android:layout_height="89dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/empty_image_icon" />
 
-    <TextView
-        android:id="@+id/addressTxt"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:singleLine="true"
-        android:text="NeoCafe Dzerzhinka"
-        android:textSize="16sp"
-        android:textColor="@color/client_main"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/cardView2"
-        app:layout_constraintTop_toTopOf="parent" />
+        </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/itemsNamesTxt"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="20dp"
-        android:text="Латте, Капучино, Латте, Капучино, Латте, Капучино"
-        android:textStyle="bold"
-        android:textColor="@color/items_names"
-        android:textSize="12sp"
-        android:singleLine="true"
-        android:ellipsize="end"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/dateTxt"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/addressTxt"
-        app:layout_constraintTop_toBottomOf="@+id/addressTxt"
-        app:layout_constraintVertical_bias="1.0" />
+        <TextView
+            android:id="@+id/addressTxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:singleLine="true"
+            android:text="NeoCafe Dzerzhinka"
+            android:textSize="16sp"
+            android:textColor="@color/client_main"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/cardView2"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/dateTxt"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="20dp"
-        android:text="Сейчас"
-        android:textSize="12sp"
-        android:textStyle="normal"
-        android:textColor="@color/hint_color"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:id="@+id/itemsNamesTxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="20dp"
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="@color/items_names"
+            android:textSize="12sp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/dateTxt"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/addressTxt"
+            app:layout_constraintTop_toBottomOf="@+id/addressTxt"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/dateTxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            android:text="Сейчас"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:textColor="@color/hint_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,8 +1,6 @@
 package com.neocafe.neocafe.entities.profile.responses
 
-import com.neocafe.neocafe.entities.order.requests.Order
-import com.neocafe.neocafe.entities.order.responses.OrderResponse
-import java.io.Serial
+import com.neocafe.neocafe.entities.order.responses.Order
 import java.io.Serializable
 
 data class Profile(

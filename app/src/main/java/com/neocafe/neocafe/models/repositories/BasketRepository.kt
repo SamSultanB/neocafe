@@ -7,4 +7,6 @@ class BasketRepository(private val basketApi: BasketApi) {
 
     suspend fun order(orderItem: OrderItem) = basketApi.order(orderItem)
 
+    suspend fun profile() = basketApi.getProfile()
+
 }

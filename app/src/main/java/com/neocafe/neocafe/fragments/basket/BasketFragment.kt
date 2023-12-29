@@ -10,20 +10,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.textfield.TextInputEditText
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.adapters.MenuRvAdapter
 import com.neocafe.neocafe.databinding.FragmentBasketBinding
 import com.neocafe.neocafe.entities.order.Basket
-import com.neocafe.neocafe.entities.order.requests.MenuItem
+import com.neocafe.neocafe.entities.order.requests.ExtraProductDetails
+import com.neocafe.neocafe.entities.order.requests.MTO
+import com.neocafe.neocafe.entities.order.requests.MenuDetails
 import com.neocafe.neocafe.entities.order.requests.OrderItem
-import com.neocafe.neocafe.entities.order.responses.OrderExtraItem
-import com.neocafe.neocafe.entities.order.responses.OrderMenu
+import com.neocafe.neocafe.entities.profile.responses.Profile
 import com.neocafe.neocafe.models.api.retrofit.Resource
+import com.neocafe.neocafe.utils.Constants
 import com.neocafe.neocafe.viewModels.BasketViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -43,6 +47,8 @@ class BasketFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.profile()
+        getProfileResponse()
         binding.ordersListScreen.basketRv.layoutManager = LinearLayoutManager(requireContext())
         val adapter = MenuRvAdapter()
         adapter.setMenuList(Basket.order.values.toList())
@@ -101,6 +107,16 @@ class BasketFragment : Fragment() {
         })
     }
 
+    private fun getProfileResponse(){
+        viewModel.profileResponse.observe(viewLifecycleOwner, Observer{
+            if(it is Resource.Success){
+                Constants.bonuse = it.data?.bonuses!!.toBigDecimal().toInt()
+            }else if(it is Resource.Error){
+//                println(it.message)
+                Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
     private fun callAlertDialog(){
 
         val dialogScreen = Dialog(requireContext())
@@ -124,20 +140,34 @@ class BasketFragment : Fragment() {
         val dialogScreen = Dialog(requireContext())
         dialogScreen.setContentView(R.layout.alert_dialog_use_bonus)
         dialogScreen.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val editText = dialogScreen.findViewById<TextInputEditText>(R.id.bonusEditTxt)
+        val bonus = dialogScreen.findViewById<TextView>(R.id.bonusTxt)
+        bonus.text = Constants.bonuse.toString()
         val writeOFFBtn = dialogScreen.findViewById<Button>(R.id.yesBtn)
         val cancelBtn = dialogScreen.findViewById<Button>(R.id.noBtn)
 
+        Basket.order.values
+
          cancelBtn.setOnClickListener {
-             viewModel.order(OrderItem(0, MenuItem("cappucino", "199"), 1, OrderExtraItem("moloko", "10"), 1, "0"))
+             order("0")
              dialogScreen.dismiss()
         }
 
         writeOFFBtn.setOnClickListener {
-            viewModel.order(OrderItem(0, MenuItem("cappucino", "199"), 1, OrderExtraItem("moloko", "10"), 1, "0"))
+            if(editText.text!!.isEmpty()){
+                order("0")
+            }else{
+                order(editText.text.toString())
+            }
             dialogScreen.dismiss()
         }
 
         dialogScreen.show()
+    }
+
+    private fun order(usedBonuses: String){
+        val order = OrderItem("takeaway", "new", Constants.brancheId, null, usedBonuses, Basket.totalPrice.toString(), Basket.orderForRequest.values.toList())
+        viewModel.order(order)
     }
 
     private fun setScreen(){
