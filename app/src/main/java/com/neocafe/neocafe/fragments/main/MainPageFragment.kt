@@ -43,6 +43,9 @@ class MainPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.getAllBranches()
+        branchesResponse()
+
         if(Constants.menu.isEmpty()){
             viewModel.getAllMenu(Constants.brancheId)
             getAllMenuResponse()
@@ -52,8 +55,6 @@ class MainPageFragment : Fragment() {
 
         setUpSearch()
 
-        viewModel.getAllBranches()
-        branchesResponse()
         binding.popularsRv.layoutManager = LinearLayoutManager(requireContext())
         binding.popularsRv.adapter = menuAdapter
 
@@ -63,8 +64,12 @@ class MainPageFragment : Fragment() {
             findNavController().navigate(R.id.action_mainPageFragment_to_detailsFragment, bundle)
         }
 
-        viewModel.getPopulars(Constants.brancheId)
-        getPopularsResponse()
+        searchViewAdapter.clickToDetails = {
+            val bundle = Bundle()
+            bundle.putSerializable("key", it)
+            findNavController().navigate(R.id.action_mainPageFragment_to_detailsFragment, bundle)
+        }
+
         navigateToCategories()
 
 
@@ -161,6 +166,8 @@ class MainPageFragment : Fragment() {
                 Constants.brancheId = selectedValue.id
                 Constants.selectedItemPosition = position
                 viewModel.getCategories(Constants.brancheId)
+                viewModel.getPopulars(Constants.brancheId)
+                getPopularsResponse()
                 getCategoriesResponse()
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {

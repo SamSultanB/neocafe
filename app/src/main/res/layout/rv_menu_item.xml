@@ -12,6 +12,7 @@
         android:layout_width="89dp"
         android:layout_height="89dp"
         app:cardCornerRadius="24dp"
+        app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -50,6 +51,7 @@
         android:textColor="@color/category_text_rv"
         android:textSize="14sp"
         android:singleLine="true"
+        android:ellipsize="end"
         app:layout_constraintEnd_toEndOf="@+id/nameTxt"
         app:layout_constraintStart_toStartOf="@+id/nameTxt"
         app:layout_constraintTop_toBottomOf="@+id/nameTxt" />

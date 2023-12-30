@@ -12,5 +12,6 @@ data class Menu(
     val price: String,
     val available: Boolean,
     val extra_product: List<ExtraItem>,
-    var amount: Int = 0
+    var amount: Int = 0,
+    var extraProduct: ExtraItem? = null
 ): Serializable

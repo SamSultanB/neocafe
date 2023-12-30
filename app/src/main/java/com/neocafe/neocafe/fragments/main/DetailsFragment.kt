@@ -5,8 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
+import androidx.core.view.get
+import androidx.core.view.marginTop
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,8 +19,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.adapters.MenuRvAdapter
 import com.neocafe.neocafe.databinding.FragmentDetailsBinding
+import com.neocafe.neocafe.entities.menu.responses.ExtraItem
 import com.neocafe.neocafe.entities.menu.responses.Menu
 import com.neocafe.neocafe.entities.order.Basket
+import com.neocafe.neocafe.entities.order.requests.MTO
 import com.neocafe.neocafe.models.api.retrofit.Resource
 import com.neocafe.neocafe.utils.Constants
 import com.neocafe.neocafe.viewModels.MenuViewModel
@@ -52,28 +58,41 @@ class DetailsFragment : Fragment() {
 
         Glide.with(binding.imageImg).load(data.image).into(binding.imageImg)
         binding.nameTxt.text = data.name
+        binding.amountTxt.text = data.amount.toString()
         binding.descriptionTxt.text = data.description
+        binding.totalPriceTxt.text = data.price
         if(data.extra_product.isEmpty()){
             binding.coffeOptions.visibility = View.GONE
         }else{
-
+            binding.coffeOptions.visibility = View.VISIBLE
         }
 
-        binding.radioMilkGroup.setOnCheckedChangeListener { _, checkedId ->
-            when (checkedId) {
-                R.id.radioMilk1 -> {
-                    binding.radioMilk2.isChecked = false
-                    binding.radioMilk3.isChecked = false
-                }
-                R.id.radioMilk2 -> {
-                    binding.radioMilk1.isChecked = false
-                    binding.radioMilk3.isChecked = false
-                }
-                R.id.radioMilk3 -> {
-                    binding.radioMilk1.isChecked = false
-                    binding.radioMilk2.isChecked = false
-                }
-            }
+        //Test
+        val milks = data.extra_product.filter { it.type_extra_product.contains("Milk", ignoreCase = true)}
+        val sirops = data.extra_product.filter { it.type_extra_product.contains("Syrop", ignoreCase = true)}
+
+        val params = RadioGroup.LayoutParams(
+            RadioGroup.LayoutParams.WRAP_CONTENT,
+            RadioGroup.LayoutParams.WRAP_CONTENT
+        ).apply {
+            // Set margins (adjust values as needed)
+            setMargins(0, 8, 0, 8) // Left, Top, Right, Bottom
+        }
+        for (milk in milks) {
+            val radioButton = RadioButton(requireContext())
+            radioButton.text = milk.name + "  " + milk.price.replace(".00", "") + " с"
+            radioButton.layoutParams = params
+            radioButton.tag = milk
+            binding.radioMilkGroup.addView(radioButton)
+            println(milk.type_extra_product)
+        }
+
+        for (sirop in sirops) {
+            val checkBox = CheckBox(requireContext())
+            checkBox.text = sirop.name + "  " + sirop.price.replace(".00", "") + " c"
+            checkBox.layoutParams = params
+            checkBox.tag = sirop
+            binding.sirposContainer.addView(checkBox)
         }
 
         binding.arrowBackBtn.setOnClickListener {
@@ -109,7 +128,12 @@ class DetailsFragment : Fragment() {
         }
 
         binding.addBtn.setOnClickListener {
-            Basket.addMenu(menu)
+            val selectedMilkRadioButton = binding.radioMilkGroup.findViewById<RadioButton>(binding.radioMilkGroup.checkedRadioButtonId)
+
+            val menuMilk = selectedMilkRadioButton?.tag as ExtraItem
+            menu.extraProduct = menuMilk
+
+            Basket.addMenuWithExtra(menu)
         }
 
     }

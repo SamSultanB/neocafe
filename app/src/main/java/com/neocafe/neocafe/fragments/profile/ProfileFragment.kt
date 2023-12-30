@@ -61,6 +61,18 @@ class ProfileFragment : Fragment() {
             logoutAlertDialog()
         }
 
+        actualAdapter.clickToDetails = {
+            val bundle = Bundle()
+            bundle.putSerializable("key", it)
+            findNavController().navigate(R.id.action_profileFragment_to_historyDetailsFragment, bundle)
+        }
+
+        lastOrders.clickToDetails = {
+            val bundle = Bundle()
+            bundle.putSerializable("key", it)
+            findNavController().navigate(R.id.action_profileFragment_to_historyDetailsFragment, bundle)
+        }
+
     }
 
     private fun getProfileResponse(){

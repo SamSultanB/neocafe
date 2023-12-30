@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.databinding.RvMenuItemBinding
+import com.neocafe.neocafe.entities.menu.responses.ExtraItem
 import com.neocafe.neocafe.entities.menu.responses.Menu
 import com.neocafe.neocafe.entities.order.Basket
 

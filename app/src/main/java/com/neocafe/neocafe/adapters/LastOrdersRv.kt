@@ -1,6 +1,5 @@
 package com.neocafe.neocafe.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,14 +16,20 @@ import java.util.Locale
 class LastOrdersRv: RecyclerView.Adapter<LastOrdersRv.ViewHolder>() {
 
     private var lastOrders: List<Order> = emptyList()
+    var clickToDetails: ((Order)->Unit)? = null
+
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val binding = RvHisoryOfOrdersItemBinding.bind(itemView)
         fun bind(item: Order){
             Glide.with(binding.imageImg).load(item.branch.image).into(binding.imageImg)
-            Log.i("test", item.branch.image)
+//            Log.i("test", item.branch.image)
             binding.addressTxt.text = item.branch.name
             binding.dateTxt.text = convertToCustomFormat(item.created)
+            for (i in item.items){
+                binding.itemsNamesTxt.append(i.menu_detail.name)
+                binding.itemsNamesTxt.append(", ")
+            }
         }
     }
 
@@ -35,6 +40,9 @@ class LastOrdersRv: RecyclerView.Adapter<LastOrdersRv.ViewHolder>() {
 
     override fun onBindViewHolder(holder: LastOrdersRv.ViewHolder, position: Int) {
         holder.bind(lastOrders[position])
+        holder.binding.addressTxt.setOnClickListener {
+            clickToDetails?.invoke(lastOrders[position])
+        }
     }
 
     override fun getItemCount(): Int {
@@ -49,9 +57,8 @@ class LastOrdersRv: RecyclerView.Adapter<LastOrdersRv.ViewHolder>() {
         val dateTime2 = LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
         val formatter = DateTimeFormatter.ofPattern("d MMMM", Locale("ru"))
 
-        // Convert to a custom format
         return dateTime2.atOffset(ZoneOffset.UTC)
-            .atZoneSameInstant(ZoneOffset.ofHours(6))  // Adjust to the desired time zone
+            .atZoneSameInstant(ZoneOffset.ofHours(6))
             .format(formatter)
     }
 }

@@ -36,6 +36,9 @@ class BasketFragment : Fragment() {
     private lateinit var binding: FragmentBasketBinding
     private val viewModel by viewModel<BasketViewModel>()
 
+    private var takeaway = false
+    private var inPlace = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -72,14 +75,20 @@ class BasketFragment : Fragment() {
         }
 
         binding.ordersListScreen.priceWithDiscountTxt.text = Basket.totalPrice.toString() + " c"
+        binding.ordersListScreen.fullPriceTxt.text = Basket.totalPrice.toString() + " c"
+        binding.ordersListScreen.fullPriceTxt.isVisible = true
 
         binding.ordersListScreen.takeAwayBtn.setOnClickListener {
+            takeaway = true
+            inPlace = false
             binding.ordersListScreen.takeAwayBtn.backgroundTintList = resources.getColorStateList(R.color.button_background)
             binding.ordersListScreen.takeAwayBtn.setTextColor(resources.getColorStateList(R.color.white))
             binding.ordersListScreen.inShopBtn.backgroundTintList = resources.getColorStateList(R.color.edit_text_background)
             binding.ordersListScreen.inShopBtn.setTextColor(resources.getColorStateList(R.color.black))
         }
         binding.ordersListScreen.inShopBtn.setOnClickListener {
+            takeaway = false
+            inPlace = true
             binding.ordersListScreen.takeAwayBtn.backgroundTintList = resources.getColorStateList(R.color.edit_text_background)
             binding.ordersListScreen.takeAwayBtn.setTextColor(resources.getColorStateList(R.color.black))
             binding.ordersListScreen.inShopBtn.backgroundTintList = resources.getColorStateList(R.color.button_background)
@@ -100,8 +109,9 @@ class BasketFragment : Fragment() {
         viewModel.orderResponse.observe(viewLifecycleOwner, Observer{
             if(it is Resource.Success){
                 Toast.makeText(requireContext(), "Order made!!", Toast.LENGTH_SHORT).show()
+                Basket.order.clear()
+                Basket.orderForRequest.clear()
             }else if(it is Resource.Error){
-                println(it.message)
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
             }
         })
@@ -112,7 +122,6 @@ class BasketFragment : Fragment() {
             if(it is Resource.Success){
                 Constants.bonuse = it.data?.bonuses!!.toBigDecimal().toInt()
             }else if(it is Resource.Error){
-//                println(it.message)
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
             }
         })
@@ -146,8 +155,6 @@ class BasketFragment : Fragment() {
         val writeOFFBtn = dialogScreen.findViewById<Button>(R.id.yesBtn)
         val cancelBtn = dialogScreen.findViewById<Button>(R.id.noBtn)
 
-        Basket.order.values
-
          cancelBtn.setOnClickListener {
              order("0")
              dialogScreen.dismiss()
@@ -166,7 +173,13 @@ class BasketFragment : Fragment() {
     }
 
     private fun order(usedBonuses: String){
-        val order = OrderItem("takeaway", "new", Constants.brancheId, null, usedBonuses, Basket.totalPrice.toString(), Basket.orderForRequest.values.toList())
+        var orderType = ""
+        if(takeaway == true){
+            orderType = "takeaway"
+        }else if(inPlace == true){
+            orderType = "inplace"
+        }
+        val order = OrderItem(orderType, "new", Constants.brancheId, null, usedBonuses, Basket.totalPrice.toString(), Basket.orderForRequest.values.toList())
         viewModel.order(order)
     }
 

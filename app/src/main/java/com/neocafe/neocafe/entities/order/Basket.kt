@@ -1,6 +1,5 @@
 package com.neocafe.neocafe.entities.order
 
-import com.neocafe.neocafe.entities.menu.responses.ExtraItem
 import com.neocafe.neocafe.entities.menu.responses.Menu
 import com.neocafe.neocafe.entities.order.requests.ExtraProductDetails
 import com.neocafe.neocafe.entities.order.requests.MTO
@@ -19,6 +18,11 @@ object Basket {
         val menuInOrders = order.get(menu.name)
         val orderMenu = orderForRequest.get(menu.id)
         if(menuInOrders != null){
+            if(menuInOrders.extraProduct != null){
+                orderMenu!!.extra_product_quantity ++
+                val decimal = menuInOrders.extraProduct?.price!!.toDouble()
+                totalPrice += decimal.roundToInt()
+            }
             menuInOrders.amount ++
             orderMenu!!.menu_quantity ++
             val decimal = menu.price.toDouble()
@@ -27,11 +31,21 @@ object Basket {
             menu.amount ++
             order.put(menu.name, menu)
             val menuDetails = MenuDetails(menu.image, menu.name, menu.description, menu.price)
+            orderForRequest.put(menu.id, MTO(menu.id, menuDetails, menu.amount, null ,ExtraProductDetails("", "0"), 0))
 
-            orderForRequest.put(menu.id, MTO(menu.id,menuDetails, menu.amount, 1 ,ExtraProductDetails("", ""), menu.amount))
             val decimal = menu.price.toDouble()
             totalPrice += decimal.roundToInt()
         }
+    }
+
+    fun addMenuWithExtra(menu: Menu){
+        order.put(menu.name, menu)
+        val menuDetails = MenuDetails(menu.image, menu.name, menu.description, menu.price)
+        orderForRequest.put(menu.id, MTO(menu.id, menuDetails, menu.amount, menu.extraProduct?.id ,ExtraProductDetails(menu.extraProduct?.name, menu.extraProduct?.price), menu.amount))
+        val decimal = menu.price.toDouble()
+        val extraPrice = menu.extraProduct?.price?.toDouble()
+        totalPrice += extraPrice?.roundToInt()!!*menu.amount
+        totalPrice += decimal.roundToInt()*menu.amount
     }
 
     fun delete(menu: Menu){
@@ -43,8 +57,14 @@ object Basket {
                 orderForRequest.remove(menu.id)
                 totalPrice = 0
             }else{
+                if(menuInOrders.extraProduct != null){
+                    val decimal = menuInOrders.extraProduct?.price!!.toDouble()
+                    orderMenu!!.extra_product_quantity --
+                    totalPrice -= decimal.roundToInt()
+                }
                 menuInOrders.amount --
                 orderMenu!!.menu_quantity --
+                orderMenu.extra_product_quantity --
                 val decimal = menu.price.toDouble()
                 totalPrice -= decimal.roundToInt()
             }
