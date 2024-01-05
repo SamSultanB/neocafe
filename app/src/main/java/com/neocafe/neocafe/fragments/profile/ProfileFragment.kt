@@ -4,12 +4,12 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -84,6 +84,7 @@ class ProfileFragment : Fragment() {
                 lastOrders.setItems(profile.completed_orders)
                 binding.actualOrdersRv.adapter = actualAdapter
                 binding.lastOrdersRv.adapter = lastOrders
+                binding.bonusTxt.text = profile.bonuses
             }else if(it is Resource.Error){
 //                println(it.message)
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
