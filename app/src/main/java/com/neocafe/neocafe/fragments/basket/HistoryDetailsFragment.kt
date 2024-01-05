@@ -145,7 +145,6 @@ class HistoryDetailsFragment : Fragment() {
             findNavController().navigateUp()
         }
         dialogScreen.show()
-
     }
 
     fun convertToCustomFormat(dateTime: String): String {

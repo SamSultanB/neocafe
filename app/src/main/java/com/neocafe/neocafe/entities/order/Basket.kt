@@ -37,7 +37,7 @@ object Basket {
             orderForRequest.put(menu.id, MTO(menu.id, menuDetails, menu.amount, null ,ExtraProductDetails("", "0"), 0))
 
             val decimal = menu.price.toDouble()
-            totalPrice += decimal.roundToInt()
+            totalPrice += decimal.roundToInt()*menu.amount
             totalPriceInBasket.postValue(totalPrice)
         }
     }

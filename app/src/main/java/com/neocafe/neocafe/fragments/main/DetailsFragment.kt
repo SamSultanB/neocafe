@@ -1,9 +1,13 @@
 package com.neocafe.neocafe.fragments.main
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.RadioButton
 import android.widget.RadioGroup
@@ -132,11 +136,31 @@ class DetailsFragment : Fragment() {
         binding.addBtn.setOnClickListener {
             val selectedMilkRadioButton = binding.radioMilkGroup.findViewById<RadioButton>(binding.radioMilkGroup.checkedRadioButtonId)
 
-            val menuMilk = selectedMilkRadioButton?.tag as ExtraItem
-            menu.extraProduct = menuMilk
-
-            Basket.addMenuWithExtra(menu)
+            val menuMilk = selectedMilkRadioButton?.tag as? ExtraItem
+            if(menuMilk == null){
+                Basket.addMenu(menu)
+            }else{
+                menu.extraProduct = menuMilk
+                Basket.addMenuWithExtra(menu)
+            }
+            addedToBasket()
         }
+
+    }
+
+    private fun addedToBasket(){
+        val dialogScreen = Dialog(requireContext())
+        dialogScreen.setContentView(R.layout.alert_dialog_added_to_basket)
+        dialogScreen.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val okBtn = dialogScreen.findViewById<Button>(R.id.okBtn)
+
+        okBtn.setOnClickListener {
+            dialogScreen.dismiss()
+            findNavController().navigateUp()
+            val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+            bottomNavigationView?.visibility = View.VISIBLE
+        }
+        dialogScreen.show()
 
     }
 

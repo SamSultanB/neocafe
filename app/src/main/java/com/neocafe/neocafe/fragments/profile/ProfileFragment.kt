@@ -84,7 +84,7 @@ class ProfileFragment : Fragment() {
                 lastOrders.setItems(profile.completed_orders)
                 binding.actualOrdersRv.adapter = actualAdapter
                 binding.lastOrdersRv.adapter = lastOrders
-                binding.bonusTxt.text = profile.bonuses
+                binding.bonusTxt.text = profile.bonuses.replaceAfter(".", "").replace(".", "")
             }else if(it is Resource.Error){
 //                println(it.message)
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
