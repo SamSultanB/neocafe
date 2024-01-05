@@ -44,7 +44,7 @@ class MenuPageFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        viewModel.getCategories(Constants.brancheId)
+        viewModel.getCategories()
         getCategoriesResponse(position!!)
 
     }

@@ -13,6 +13,8 @@ import com.neocafe.neocafe.entities.order.requests.MTO
 class LastOrdersDetailsRv: RecyclerView.Adapter<LastOrdersDetailsRv.ViewHolder>() {
 
     private var lastOrders: List<MTO> = emptyList()
+    var clickToIncreament: ((Int)->Unit)? = null
+    var clickToDecreament: ((Int)->Unit)? = null
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val binding = RvMenuItemBinding.bind(itemView)
@@ -24,16 +26,6 @@ class LastOrdersDetailsRv: RecyclerView.Adapter<LastOrdersDetailsRv.ViewHolder>(
             binding.amountTxt.text = mto.menu_quantity.toString()
             binding.decrementBtn.isVisible = true
             binding.amountTxt.isVisible = true
-            binding.incrementBtn.setOnClickListener {
-                if(mto.menu_quantity < 9){
-                    mto.menu_quantity++
-                }
-            }
-            binding.decrementBtn.setOnClickListener {
-                if(mto.menu_quantity > 0){
-                    mto.menu_quantity--
-                }
-            }
         }
     }
 
@@ -47,6 +39,15 @@ class LastOrdersDetailsRv: RecyclerView.Adapter<LastOrdersDetailsRv.ViewHolder>(
 
     override fun onBindViewHolder(holder: LastOrdersDetailsRv.ViewHolder, position: Int) {
         holder.bind(lastOrders[position])
+        holder.binding.incrementBtn.setOnClickListener {
+            clickToIncreament?.invoke(position)
+            holder.binding.amountTxt.text = lastOrders[position].menu_quantity.toString()
+        }
+        holder.binding.decrementBtn.setOnClickListener {
+            clickToDecreament?.invoke(position)
+            holder.binding.amountTxt.text = lastOrders[position].menu_quantity.toString()
+        }
+
     }
 
     override fun getItemCount(): Int {

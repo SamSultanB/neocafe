@@ -88,6 +88,7 @@ class MainPageFragment : Fragment() {
             if(it is Resource.Success){
                 it.data?.let { it1 -> menuAdapter.setMenuList(it1) }
             }else if(it is Resource.Error){
+                println(it.message)
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
             }
         })
@@ -113,7 +114,7 @@ class MainPageFragment : Fragment() {
                     binding.category5Txt.text = it1[4].name
                 }
             }else if (it is Resource.Error){
-                Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "categories", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -165,7 +166,7 @@ class MainPageFragment : Fragment() {
                 val selectedValue: Branche = parentView?.getItemAtPosition(position) as Branche
                 Constants.brancheId = selectedValue.id
                 Constants.selectedItemPosition = position
-                viewModel.getCategories(Constants.brancheId)
+                viewModel.getCategories()
                 viewModel.getPopulars(Constants.brancheId)
                 getPopularsResponse()
                 getCategoriesResponse()
@@ -187,7 +188,7 @@ class MainPageFragment : Fragment() {
                 return false
             }
             override fun onQueryTextChange(newText: String): Boolean {
-                var filteredList = Constants.menu.filter { it.name.contains(newText, ignoreCase = true) || it.slug.contains(newText, ignoreCase = true) }
+                var filteredList = Constants.menu.filter { it.name.contains(newText, ignoreCase = true) || it.description.contains(newText, ignoreCase = true) }
                 if(newText.isEmpty()){
                     binding.searchMenuRv.visibility = View.GONE
                     binding.mainContent.visibility = View.VISIBLE

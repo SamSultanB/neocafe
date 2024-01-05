@@ -49,6 +49,7 @@
     <string name="choose_branch">Выберите филиал</string>
     <string name="something_went_wrong">Упс, что-то пошло не так</string>
     <string name="repeat">Повторить</string>
+    <string name="okay">Хорошо</string>
     <string-array name="country">
         <item>KG</item>
         <item>USA</item>

@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,11 +21,7 @@ import com.neocafe.neocafe.R
 import com.neocafe.neocafe.adapters.MenuRvAdapter
 import com.neocafe.neocafe.databinding.FragmentBasketBinding
 import com.neocafe.neocafe.entities.order.Basket
-import com.neocafe.neocafe.entities.order.requests.ExtraProductDetails
-import com.neocafe.neocafe.entities.order.requests.MTO
-import com.neocafe.neocafe.entities.order.requests.MenuDetails
 import com.neocafe.neocafe.entities.order.requests.OrderItem
-import com.neocafe.neocafe.entities.profile.responses.Profile
 import com.neocafe.neocafe.models.api.retrofit.Resource
 import com.neocafe.neocafe.utils.Constants
 import com.neocafe.neocafe.viewModels.BasketViewModel
@@ -36,8 +32,9 @@ class BasketFragment : Fragment() {
     private lateinit var binding: FragmentBasketBinding
     private val viewModel by viewModel<BasketViewModel>()
 
-    private var takeaway = false
-    private var inPlace = false
+    private var takeaway = true
+    private var orderBtnCycle = 1
+    private var usedBonuses = "0"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,16 +68,26 @@ class BasketFragment : Fragment() {
         }
         binding.ordersListScreen.fullPriceTxt.paintFlags = binding.ordersListScreen.fullPriceTxt.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         binding.ordersListScreen.orderBtn.setOnClickListener {
-            callAlertDialog()
+            if(orderBtnCycle == 1){
+                callAlertDialog()
+                orderBtnCycle = 2
+            }else if(orderBtnCycle == 2){
+                order(usedBonuses)
+                orderBtnCycle = 1
+            }
         }
 
-        binding.ordersListScreen.priceWithDiscountTxt.text = Basket.totalPrice.toString() + " c"
-        binding.ordersListScreen.fullPriceTxt.text = Basket.totalPrice.toString() + " c"
+        Basket.totalPriceInBasket.observe(viewLifecycleOwner, Observer {
+
+            binding.ordersListScreen.priceWithDiscountTxt.text = "$it c"
+            binding.ordersListScreen.fullPriceTxt.text = "$it c"
+
+        })
+
         binding.ordersListScreen.fullPriceTxt.isVisible = true
 
         binding.ordersListScreen.takeAwayBtn.setOnClickListener {
             takeaway = true
-            inPlace = false
             binding.ordersListScreen.takeAwayBtn.backgroundTintList = resources.getColorStateList(R.color.button_background)
             binding.ordersListScreen.takeAwayBtn.setTextColor(resources.getColorStateList(R.color.white))
             binding.ordersListScreen.inShopBtn.backgroundTintList = resources.getColorStateList(R.color.edit_text_background)
@@ -88,7 +95,6 @@ class BasketFragment : Fragment() {
         }
         binding.ordersListScreen.inShopBtn.setOnClickListener {
             takeaway = false
-            inPlace = true
             binding.ordersListScreen.takeAwayBtn.backgroundTintList = resources.getColorStateList(R.color.edit_text_background)
             binding.ordersListScreen.takeAwayBtn.setTextColor(resources.getColorStateList(R.color.black))
             binding.ordersListScreen.inShopBtn.backgroundTintList = resources.getColorStateList(R.color.button_background)
@@ -108,10 +114,9 @@ class BasketFragment : Fragment() {
     private fun orderResponse(){
         viewModel.orderResponse.observe(viewLifecycleOwner, Observer{
             if(it is Resource.Success){
-                Toast.makeText(requireContext(), "Order made!!", Toast.LENGTH_SHORT).show()
-                Basket.order.clear()
-                Basket.orderForRequest.clear()
+                successfullOrder()
             }else if(it is Resource.Error){
+                println(it.message)
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
             }
         })
@@ -162,9 +167,10 @@ class BasketFragment : Fragment() {
 
         writeOFFBtn.setOnClickListener {
             if(editText.text!!.isEmpty()){
-                order("0")
+                usedBonuses = "0"
             }else{
-                order(editText.text.toString())
+                usedBonuses = editText.text.toString()
+                binding.ordersListScreen.priceWithDiscountTxt.text = (Basket.totalPrice - usedBonuses.toInt()).toString()
             }
             dialogScreen.dismiss()
         }
@@ -172,14 +178,33 @@ class BasketFragment : Fragment() {
         dialogScreen.show()
     }
 
+    private fun successfullOrder(){
+        val dialogScreen = Dialog(requireContext())
+        dialogScreen.setContentView(R.layout.alert_dialog_successfull_order)
+        dialogScreen.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val okBtn = dialogScreen.findViewById<Button>(R.id.okBtn)
+
+        okBtn.setOnClickListener {
+            dialogScreen.dismiss()
+            viewModel.orderResponse.postValue(Resource.Loading())
+            Basket.totalPrice = 0
+            Basket.order.clear()
+            Basket.orderForRequest.clear()
+            binding.ordersListScreen.root.isVisible = false
+            binding.emptyScreen.root.isVisible = true
+        }
+        dialogScreen.show()
+
+    }
+
     private fun order(usedBonuses: String){
         var orderType = ""
         if(takeaway == true){
             orderType = "takeaway"
-        }else if(inPlace == true){
+        }else{
             orderType = "inplace"
         }
-        val order = OrderItem(orderType, "new", Constants.brancheId, null, usedBonuses, Basket.totalPrice.toString(), Basket.orderForRequest.values.toList())
+        val order = OrderItem(orderType, "new", Constants.brancheId, null, usedBonuses.replace(".00",""), (Basket.totalPrice - usedBonuses.toInt()).toString(), Basket.orderForRequest.values.toList())
         viewModel.order(order)
     }
 

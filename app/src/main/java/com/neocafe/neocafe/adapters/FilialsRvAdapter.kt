@@ -35,13 +35,55 @@ class FilialsRvAdapter: RecyclerView.Adapter<FilialsRvAdapter.ViewHolder>(){
             binding.addressTxt.text = branche.address
             binding.phoneNumberTxt.text = branche.phone_number
             when(dayOfWeekEnum){
-                DayOfWeek.MONDAY -> binding.scheduleTxt.text = "c " + branche.monday_start_time.substring(0, 5) + " до " + branche.monday_end_time.substring(0, 5)
-                DayOfWeek.TUESDAY -> binding.scheduleTxt.text = "c " + branche.tuesday_start_time.substring(0, 5) + " до " + branche.tuesday_end_time.substring(0, 5)
-                DayOfWeek.WEDNESDAY -> binding.scheduleTxt.text = "c " + branche.wednesday_start_time.substring(0, 5) + " до " + branche.wednesday_end_time.substring(0, 5)
-                DayOfWeek.THURSDAY -> binding.scheduleTxt.text = "c " + branche.thursday_start_time.substring(0, 5) + " до " + branche.thursday_end_time.substring(0, 5)
-                DayOfWeek.FRIDAY -> binding.scheduleTxt.text = "c " + branche.friday_start_time.substring(0, 5) + " до " + branche.friday_end_time.substring(0, 5)
-                DayOfWeek.SATURDAY -> binding.scheduleTxt.text = "c " + branche.saturday_start_time.substring(0, 5) + " до " + branche.saturday_end_time.substring(0, 5)
-                DayOfWeek.SUNDAY -> binding.scheduleTxt.text = "c " + branche.sunday_start_time.substring(0, 5) + " до " + branche.sunday_end_time.substring(0, 5)
+                DayOfWeek.MONDAY -> {
+                    if (branche.monday_start_time == null || branche.monday_end_time == null){
+                        binding.scheduleTxt.text = "Выходной"
+                    }else{
+                        binding.scheduleTxt.text = "c " + branche.monday_start_time.substring(0, 5) + " до " + branche.monday_end_time.substring(0, 5)
+                    }
+                }
+                DayOfWeek.TUESDAY -> {
+                    if (branche.tuesday_start_time == null || branche.tuesday_end_time == null){
+                        binding.scheduleTxt.text = "Выходной"
+                    }else{
+                        binding.scheduleTxt.text = "c " + branche.tuesday_start_time.substring(0, 5) + " до " + branche.tuesday_end_time.substring(0, 5)
+                    }
+                }
+                DayOfWeek.WEDNESDAY -> {
+                    if (branche.wednesday_start_time == null || branche.wednesday_end_time == null){
+                        binding.scheduleTxt.text = "Выходной"
+                    }else{
+                        binding.scheduleTxt.text = "c " + branche.wednesday_start_time.substring(0, 5) + " до " + branche.wednesday_end_time.substring(0, 5)
+                    }
+                }
+                DayOfWeek.THURSDAY -> {
+                    if (branche.thursday_start_time == null || branche.thursday_end_time == null){
+                        binding.scheduleTxt.text = "Выходной"
+                    }else{
+                        binding.scheduleTxt.text = "c " + branche.thursday_start_time.substring(0, 5) + " до " + branche.thursday_end_time.substring(0, 5)
+                    }
+                }
+                DayOfWeek.FRIDAY -> {
+                    if (branche.friday_start_time == null || branche.friday_end_time == null){
+                        binding.scheduleTxt.text = "Выходной"
+                    }else{
+                        binding.scheduleTxt.text = "c " + branche.friday_start_time.substring(0, 5) + " до " + branche.friday_end_time.substring(0, 5)
+                    }
+                }
+                DayOfWeek.SATURDAY -> {
+                    if (branche.saturday_start_time == null || branche.saturday_end_time == null){
+                        binding.scheduleTxt.text = "Выходной"
+                    }else{
+                        binding.scheduleTxt.text = "c " + branche.saturday_start_time.substring(0, 5) + " до " + branche.saturday_end_time.substring(0, 5)
+                    }
+                }
+                DayOfWeek.SUNDAY -> {
+                    if (branche.sunday_start_time == null || branche.sunday_end_time == null){
+                        binding.scheduleTxt.text = "Выходной"
+                    }else{
+                        binding.scheduleTxt.text = "c " + branche.sunday_start_time.substring(0, 5) + " до " + branche.sunday_end_time.substring(0, 5)
+                    }
+                }
             }
         }
     }

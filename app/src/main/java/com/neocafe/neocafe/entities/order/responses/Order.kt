@@ -6,5 +6,6 @@ import java.io.Serializable
 data class Order(
     val branch: OrderBranch,
     val created: String,
-    val items: List<MTO>
+    val items: List<MTO>,
+    val bonuses_used: String
 ): Serializable

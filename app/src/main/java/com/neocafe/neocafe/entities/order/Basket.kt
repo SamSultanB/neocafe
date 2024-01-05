@@ -1,5 +1,6 @@
 package com.neocafe.neocafe.entities.order
 
+import androidx.lifecycle.MutableLiveData
 import com.neocafe.neocafe.entities.menu.responses.Menu
 import com.neocafe.neocafe.entities.order.requests.ExtraProductDetails
 import com.neocafe.neocafe.entities.order.requests.MTO
@@ -13,6 +14,7 @@ object Basket {
     val orderForRequest: MutableMap<Int, MTO> = mutableMapOf()
 
     var totalPrice: Int = 0
+    val totalPriceInBasket: MutableLiveData<Int> = MutableLiveData()
 
     fun addMenu(menu: Menu){
         val menuInOrders = order.get(menu.name)
@@ -27,6 +29,7 @@ object Basket {
             orderMenu!!.menu_quantity ++
             val decimal = menu.price.toDouble()
             totalPrice += decimal.roundToInt()
+            totalPriceInBasket.postValue(totalPrice)
         }else{
             menu.amount ++
             order.put(menu.name, menu)
@@ -35,6 +38,7 @@ object Basket {
 
             val decimal = menu.price.toDouble()
             totalPrice += decimal.roundToInt()
+            totalPriceInBasket.postValue(totalPrice)
         }
     }
 
@@ -46,6 +50,7 @@ object Basket {
         val extraPrice = menu.extraProduct?.price?.toDouble()
         totalPrice += extraPrice?.roundToInt()!!*menu.amount
         totalPrice += decimal.roundToInt()*menu.amount
+        totalPriceInBasket.postValue(totalPrice)
     }
 
     fun delete(menu: Menu){
@@ -55,7 +60,9 @@ object Basket {
             if(menuInOrders.amount == 1){
                 order.remove(menu.name)
                 orderForRequest.remove(menu.id)
-                totalPrice = 0
+                val decimal = menu.price.toDouble()
+                totalPrice -= decimal.roundToInt()
+                totalPriceInBasket.postValue(totalPrice)
             }else{
                 if(menuInOrders.extraProduct != null){
                     val decimal = menuInOrders.extraProduct?.price!!.toDouble()
@@ -67,6 +74,8 @@ object Basket {
                 orderMenu.extra_product_quantity --
                 val decimal = menu.price.toDouble()
                 totalPrice -= decimal.roundToInt()
+                totalPriceInBasket.postValue(totalPrice)
+
             }
         }
     }

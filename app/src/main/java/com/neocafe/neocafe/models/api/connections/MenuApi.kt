@@ -9,19 +9,19 @@ import retrofit2.http.Path
 
 interface MenuApi {
 
-    @GET("/api-menu/list-category/{branch_id}/")
-    suspend fun getCategory(@Path("branch_id") id: Int): Response<List<Category>>
+    @GET("/api-menu/list-category/")
+    suspend fun getCategory(): Response<List<Category>>
 
-    @GET("/api-menu/populars/{branch_id}/")
-    suspend fun getPopulars(@Path("branch_id") id: Int): Response<List<Menu>>
+    @GET("/api-menu/populars/")
+    suspend fun getPopulars(): Response<List<Menu>>
 
-    @GET("/api-menu/menu-list/{category_slug}{branch_id}/")
-    suspend fun getMenu(@Path("category_slug") category: String, @Path("branch_id") id: Int): Response<List<Menu>>
+    @GET("/api-menu/menu-list/{category_slug}/")
+    suspend fun getMenu(@Path("category_slug") category: String): Response<List<Menu>>
 
     @GET("/api-branches/list-branches/")
     suspend fun getAllBranches(): Response<List<Branche>>
 
-    @GET("/api-menu/list-menu/{branch_id}/")
-    suspend fun getAllMenu(@Path("branch_id") id: Int): Response<List<Menu>>
+    @GET("/api-menu/list-menu/")
+    suspend fun getAllMenu(): Response<List<Menu>>
 
 }

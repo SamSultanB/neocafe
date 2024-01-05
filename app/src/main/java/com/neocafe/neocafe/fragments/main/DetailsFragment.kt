@@ -1,7 +1,6 @@
 package com.neocafe.neocafe.fragments.main
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +8,8 @@ import android.widget.CheckBox
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
-import androidx.core.view.get
-import androidx.core.view.marginTop
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +21,6 @@ import com.neocafe.neocafe.databinding.FragmentDetailsBinding
 import com.neocafe.neocafe.entities.menu.responses.ExtraItem
 import com.neocafe.neocafe.entities.menu.responses.Menu
 import com.neocafe.neocafe.entities.order.Basket
-import com.neocafe.neocafe.entities.order.requests.MTO
 import com.neocafe.neocafe.models.api.retrofit.Resource
 import com.neocafe.neocafe.utils.Constants
 import com.neocafe.neocafe.viewModels.MenuViewModel
@@ -60,7 +58,7 @@ class DetailsFragment : Fragment() {
         binding.nameTxt.text = data.name
         binding.amountTxt.text = data.amount.toString()
         binding.descriptionTxt.text = data.description
-        binding.totalPriceTxt.text = data.price
+        binding.totalPriceTxt.text = data.price.replace(".00", "") + " c"
         if(data.extra_product.isEmpty()){
             binding.coffeOptions.visibility = View.GONE
         }else{
@@ -81,6 +79,8 @@ class DetailsFragment : Fragment() {
         for (milk in milks) {
             val radioButton = RadioButton(requireContext())
             radioButton.text = milk.name + "  " + milk.price.replace(".00", "") + " с"
+            radioButton.textSize = 16F
+            radioButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.client_main))
             radioButton.layoutParams = params
             radioButton.tag = milk
             binding.radioMilkGroup.addView(radioButton)
@@ -91,6 +91,8 @@ class DetailsFragment : Fragment() {
             val checkBox = CheckBox(requireContext())
             checkBox.text = sirop.name + "  " + sirop.price.replace(".00", "") + " c"
             checkBox.layoutParams = params
+            checkBox.textSize = 16F
+            checkBox.setTextColor(ContextCompat.getColor(requireContext(), R.color.client_main))
             checkBox.tag = sirop
             binding.sirposContainer.addView(checkBox)
         }
@@ -137,7 +139,6 @@ class DetailsFragment : Fragment() {
         }
 
     }
-
 
 
 }

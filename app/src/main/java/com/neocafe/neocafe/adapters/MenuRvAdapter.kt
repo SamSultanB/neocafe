@@ -1,6 +1,5 @@
 package com.neocafe.neocafe.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.neocafe.neocafe.R
 import com.neocafe.neocafe.databinding.RvMenuItemBinding
-import com.neocafe.neocafe.entities.menu.responses.ExtraItem
 import com.neocafe.neocafe.entities.menu.responses.Menu
 import com.neocafe.neocafe.entities.order.Basket
 
@@ -24,8 +22,8 @@ class MenuRvAdapter: RecyclerView.Adapter<MenuRvAdapter.ViewHolder>() {
             Glide.with(binding.image).load(menu.image).into(binding.image)
 
             binding.nameTxt.text = menu.name
-            binding.categoryTxt.text = menu.slug
-            binding.priceTxt.text = menu.price
+            binding.categoryTxt.text = menu.description
+            binding.priceTxt.text = menu.price.replace(".00", "") + " c"
             binding.amountTxt.text = Basket.getAmount(menu).toString()
             if(Basket.getAmount(menu) != 0){
                 binding.decrementBtn.visibility = View.VISIBLE

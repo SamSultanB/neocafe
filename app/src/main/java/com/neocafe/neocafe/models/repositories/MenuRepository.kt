@@ -4,14 +4,14 @@ import com.neocafe.neocafe.models.api.connections.MenuApi
 
 class MenuRepository(private val menuApi: MenuApi) {
 
-    suspend fun getCategories(id: Int) = menuApi.getCategory(id)
+    suspend fun getCategories() = menuApi.getCategory()
 
-    suspend fun getPopulars(id: Int) = menuApi.getPopulars(id)
+    suspend fun getPopulars() = menuApi.getPopulars()
 
-    suspend fun getMenu(slug: String, id: Int) = menuApi.getMenu(slug, id)
+    suspend fun getMenu(slug: String) = menuApi.getMenu(slug)
 
     suspend fun getAllBranches() = menuApi.getAllBranches()
 
-    suspend fun getAllMenu(id: Int) = menuApi.getAllMenu(id)
+    suspend fun getAllMenu() = menuApi.getAllMenu()
 
 }

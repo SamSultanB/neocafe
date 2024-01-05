@@ -6,12 +6,12 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,7 +46,7 @@ class FilialsFragment : Fragment() {
         viewModel.getAllBranches()
         getAllFilialsResponse()
 
-        filialsAdapter.clickToMaps = { callAlertDialogToMaps() }
+        filialsAdapter.clickToMaps = { callAlertDialogToMaps(it.map_link) }
         filialsAdapter.clickToPhone = { callAction(it.phone_number) }
 
         binding.notificationsBtn.setOnClickListener {
@@ -65,7 +65,7 @@ class FilialsFragment : Fragment() {
     }
 
 
-    private fun callAlertDialogToMaps(){
+    private fun callAlertDialogToMaps(map: String){
 
         val dialogScreen = Dialog(requireContext())
         dialogScreen.setContentView(R.layout.alert_dialog_to_maps)
@@ -74,7 +74,8 @@ class FilialsFragment : Fragment() {
         val stayBtn = dialogScreen.findViewById<Button>(R.id.stayBtn)
 
         goToBtn.setOnClickListener {
-            val mapsIntent = Intent(Intent.ACTION_VIEW)
+            val mapsIntent = Intent(Intent.ACTION_VIEW, Uri.parse(map))
+            mapsIntent.setPackage("ru.dublgis.dgismobile")
             startActivity(mapsIntent)
         }
         stayBtn.setOnClickListener {

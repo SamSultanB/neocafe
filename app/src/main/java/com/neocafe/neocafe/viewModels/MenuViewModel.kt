@@ -23,16 +23,18 @@ class MenuViewModel(private val repository: MenuRepository): ViewModel()  {
 
     val getAllMenuResponse: MutableLiveData<Resource<List<Menu>>> = MutableLiveData()
 
-    fun getCategories(id: Int){
+    fun getCategories(){
         viewModelScope.launch {
             getCategoriesResponse.postValue(Resource.Loading())
-            val response = repository.getCategories(id)
+            val response = repository.getCategories()
             if(response.isSuccessful){
                 response.body()?.let {
                     getCategoriesResponse.postValue(Resource.Success(it))
                 }
             }else{
-                getCategoriesResponse.postValue(Resource.Error(response.message()))
+//                getCategoriesResponse.postValue(Resource.Error(response.message()))
+                val error = response.errorBody()
+                getCategoriesResponse.postValue(Resource.Error(error!!.string()))
             }
         }
     }
@@ -40,13 +42,15 @@ class MenuViewModel(private val repository: MenuRepository): ViewModel()  {
     fun getPopulars(id: Int){
         viewModelScope.launch {
             getPopularsResponse.postValue(Resource.Loading())
-            val response = repository.getPopulars(id)
+            val response = repository.getPopulars()
             if(response.isSuccessful){
                 response.body()?.let {
                     getPopularsResponse.postValue(Resource.Success(it))
                 }
             }else {
-                getPopularsResponse.postValue(Resource.Error(response.message()))
+//                getPopularsResponse.postValue(Resource.Error(response.message()))
+                val error = response.errorBody()
+                getPopularsResponse.postValue(Resource.Error(error!!.string()))
             }
         }
     }
@@ -54,7 +58,7 @@ class MenuViewModel(private val repository: MenuRepository): ViewModel()  {
     fun getMenu(slug: String, id: Int){
         viewModelScope.launch {
             getPopularsResponse.postValue(Resource.Loading())
-            val response = repository.getMenu(slug, id)
+            val response = repository.getMenu(slug)
             if(response.isSuccessful){
                 response.body()?.let {
                     getMenuResponse.postValue(Resource.Success(it))
@@ -82,13 +86,15 @@ class MenuViewModel(private val repository: MenuRepository): ViewModel()  {
     fun getAllMenu(id: Int){
         viewModelScope.launch {
             getAllMenuResponse.postValue(Resource.Loading())
-            val response = repository.getAllMenu(id)
+            val response = repository.getAllMenu()
             if(response.isSuccessful){
                 response.body()?.let {
                     getAllMenuResponse.postValue(Resource.Success(it))
                 }
             }else{
-                getAllMenuResponse.postValue(Resource.Error(response.message()))
+//                getAllMenuResponse.postValue(Resource.Error(response.message()))
+                val error = response.errorBody()
+                getAllMenuResponse.postValue(Resource.Error(error!!.string()))
             }
         }
     }
