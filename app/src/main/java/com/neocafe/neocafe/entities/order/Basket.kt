@@ -33,9 +33,12 @@ object Basket {
         }else{
             menu.amount ++
             order.put(menu.name, menu)
+            if(menu.extraProduct != null){
+                val decimal = menu.extraProduct?.price!!.toDouble()
+                totalPrice += decimal.roundToInt()
+            }
             val menuDetails = MenuDetails(menu.image, menu.name, menu.description, menu.price)
             orderForRequest.put(menu.id, MTO(menu.id, menuDetails, menu.amount, null ,ExtraProductDetails("", "0"), 0))
-
             val decimal = menu.price.toDouble()
             totalPrice += decimal.roundToInt()*menu.amount
             totalPriceInBasket.postValue(totalPrice)
@@ -58,8 +61,15 @@ object Basket {
         val orderMenu = orderForRequest.get(menu.id)
         if(menuInOrders != null){
             if(menuInOrders.amount == 1){
+                menuInOrders.amount --
+                orderMenu!!.menu_quantity --
                 order.remove(menu.name)
                 orderForRequest.remove(menu.id)
+                if(menuInOrders.extraProduct != null){
+                    val decimal = menuInOrders.extraProduct?.price!!.toDouble()
+                    orderMenu.extra_product_quantity --
+                    totalPrice -= decimal.roundToInt()
+                }
                 val decimal = menu.price.toDouble()
                 totalPrice -= decimal.roundToInt()
                 totalPriceInBasket.postValue(totalPrice)
